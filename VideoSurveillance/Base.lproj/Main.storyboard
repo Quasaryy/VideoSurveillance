@@ -8,6 +8,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Circle-Light.otf">
+            <string>Circe-Light</string>
+        </array>
         <array key="Circle-Regular.otf">
             <string>Circe-Regular</string>
         </array>
@@ -40,18 +43,22 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="hiV-Vh-zAU">
                                 <rect key="frame" x="20" y="106" width="374" height="44"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Камеры" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5TV-22-H0r">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i5-Na-RXm">
                                         <rect key="frame" x="0.0" y="0.0" width="172" height="44"/>
-                                        <fontDescription key="fontDescription" name="Circe-Regular" family="Circe" pointSize="17"/>
-                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Двери" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdF-wL-7Ke">
+                                        <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Камеры">
+                                            <fontDescription key="titleFontDescription" name="Circe-Regular" family="Circe" pointSize="17"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsg-NP-s9w">
                                         <rect key="frame" x="202" y="0.0" width="172" height="44"/>
-                                        <fontDescription key="fontDescription" name="Circe-Regular" family="Circe" pointSize="17"/>
-                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                        <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Двери">
+                                            <fontDescription key="titleFontDescription" name="Circe-Regular" family="Circe" pointSize="17"/>
+                                        </buttonConfiguration>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="p0X-me-4RO"/>
@@ -74,6 +81,16 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гостиная" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LID-XG-nQu">
+                                <rect key="frame" x="21" y="166" width="82" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="TbY-KP-qnK"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="82" id="vJi-g2-qhu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Circe-Light" family="Circe" pointSize="21"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -82,12 +99,15 @@
                             <constraint firstItem="x9o-zq-ybF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ag1-b3-Lna"/>
                             <constraint firstItem="xmx-C7-cdW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BR5-y6-O6P"/>
                             <constraint firstItem="hiV-Vh-zAU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Uex-K3-vlu"/>
+                            <constraint firstItem="LID-XG-nQu" firstAttribute="top" secondItem="xmx-C7-cdW" secondAttribute="bottom" constant="16" id="XPG-DH-8rY"/>
                             <constraint firstItem="YGe-dr-wCT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ayh-vU-8Dm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hiV-Vh-zAU" secondAttribute="trailing" id="bec-1O-1F2"/>
                             <constraint firstItem="xmx-C7-cdW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="drT-cQ-tOc"/>
+                            <constraint firstItem="LID-XG-nQu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="21" id="fVw-jW-Nbb"/>
                             <constraint firstAttribute="trailing" secondItem="xmx-C7-cdW" secondAttribute="trailing" id="idF-VF-KGW"/>
                             <constraint firstItem="YGe-dr-wCT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="okx-uR-5h3"/>
                             <constraint firstAttribute="trailing" secondItem="x9o-zq-ybF" secondAttribute="trailing" id="ole-EU-1DV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LID-XG-nQu" secondAttribute="trailing" symbolic="YES" id="tPH-Re-ISY"/>
                             <constraint firstItem="x9o-zq-ybF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="147" id="yWh-ET-hTF"/>
                         </constraints>
                     </view>
