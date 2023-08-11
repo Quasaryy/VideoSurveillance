@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A5E2A86856B00E5D94A /* AppDelegate.swift */; };
 		D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A602A86856B00E5D94A /* SceneDelegate.swift */; };
-		D2027A632A86856B00E5D94A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A622A86856B00E5D94A /* ViewController.swift */; };
+		D2027A632A86856B00E5D94A /* CamScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A622A86856B00E5D94A /* CamScreenViewController.swift */; };
 		D2027A662A86856B00E5D94A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A642A86856B00E5D94A /* Main.storyboard */; };
 		D2027A682A86856D00E5D94A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2027A672A86856D00E5D94A /* Assets.xcassets */; };
 		D2027A6B2A86856D00E5D94A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */; };
+		D28A1BE62A86BBEF002BCEEC /* Circel-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */; };
+		D28A1BE72A86BBEF002BCEEC /* Circe-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */; };
+		D28A1BE82A86BBEF002BCEEC /* Circle-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */; };
+		D28A1BE92A86BBEF002BCEEC /* Circe-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE42A86BBEF002BCEEC /* Circe-ExtraBold.otf */; };
+		D28A1BEA2A86BBEF002BCEEC /* Circle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D2027A5B2A86856B00E5D94A /* VideoSurveillance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoSurveillance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2027A5E2A86856B00E5D94A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2027A602A86856B00E5D94A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D2027A622A86856B00E5D94A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D2027A622A86856B00E5D94A /* CamScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamScreenViewController.swift; sourceTree = "<group>"; };
 		D2027A652A86856B00E5D94A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2027A672A86856D00E5D94A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2027A6A2A86856D00E5D94A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2027A6C2A86856D00E5D94A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circel-ExtraLight.otf"; sourceTree = "<group>"; };
+		D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-Bold.otf"; sourceTree = "<group>"; };
+		D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Light.otf"; sourceTree = "<group>"; };
+		D28A1BE42A86BBEF002BCEEC /* Circe-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-ExtraBold.otf"; sourceTree = "<group>"; };
+		D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +68,26 @@
 			children = (
 				D2027A5E2A86856B00E5D94A /* AppDelegate.swift */,
 				D2027A602A86856B00E5D94A /* SceneDelegate.swift */,
-				D2027A622A86856B00E5D94A /* ViewController.swift */,
+				D2027A622A86856B00E5D94A /* CamScreenViewController.swift */,
 				D2027A642A86856B00E5D94A /* Main.storyboard */,
+				D28A1BEB2A86BC0C002BCEEC /* Fonts */,
 				D2027A672A86856D00E5D94A /* Assets.xcassets */,
 				D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */,
 				D2027A6C2A86856D00E5D94A /* Info.plist */,
 			);
 			path = VideoSurveillance;
+			sourceTree = "<group>";
+		};
+		D28A1BEB2A86BC0C002BCEEC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */,
+				D28A1BE42A86BBEF002BCEEC /* Circe-ExtraBold.otf */,
+				D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */,
+				D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */,
+				D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +148,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28A1BE72A86BBEF002BCEEC /* Circe-Bold.otf in Resources */,
 				D2027A6B2A86856D00E5D94A /* LaunchScreen.storyboard in Resources */,
+				D28A1BEA2A86BBEF002BCEEC /* Circle-Regular.otf in Resources */,
+				D28A1BE92A86BBEF002BCEEC /* Circe-ExtraBold.otf in Resources */,
+				D28A1BE82A86BBEF002BCEEC /* Circle-Light.otf in Resources */,
 				D2027A682A86856D00E5D94A /* Assets.xcassets in Resources */,
 				D2027A662A86856B00E5D94A /* Main.storyboard in Resources */,
+				D28A1BE62A86BBEF002BCEEC /* Circel-ExtraLight.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2027A632A86856B00E5D94A /* ViewController.swift in Sources */,
+				D2027A632A86856B00E5D94A /* CamScreenViewController.swift in Sources */,
 				D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */,
 				D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */,
 			);
@@ -287,13 +315,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H993X64HVL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoSurveillance/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -301,9 +330,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Yury-Lebedev.VideoSurveillance";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -314,13 +346,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H993X64HVL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoSurveillance/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,9 +361,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Yury-Lebedev.VideoSurveillance";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

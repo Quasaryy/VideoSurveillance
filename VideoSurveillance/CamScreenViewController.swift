@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CamScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -21,5 +21,13 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Circe-Bold.otf</string>
+		<string>Circe-ExtraBold.otf</string>
+		<string>Circel-ExtraLight.otf</string>
+		<string>Circle-Light.otf</string>
+		<string>Circle-Regular.otf</string>
+	</array>
 </dict>
 </plist>
