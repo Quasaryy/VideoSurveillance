@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -40,18 +39,8 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гостиная" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LID-XG-nQu">
-                                <rect key="frame" x="21" y="166" width="82" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="TbY-KP-qnK"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="82" id="vJi-g2-qhu"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Circe-Light" family="Circe" pointSize="21"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DfQ-Dd-eu7">
-                                <rect key="frame" x="0.0" y="100" width="414" height="49"/>
+                                <rect key="frame" x="0.0" y="98" width="414" height="49"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="UDC-ho-xTy"/>
                                 </constraints>
@@ -63,37 +52,103 @@
                                     <action selector="segmentedControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="gwt-Hl-8Bz"/>
                                 </connections>
                             </segmentedControl>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="U9c-Mw-UNn">
+                                <rect key="frame" x="0.0" y="166" width="414" height="696"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гостиная" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LID-XG-nQu">
+                                        <rect key="frame" x="21" y="0.0" width="372" height="31"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="TbY-KP-qnK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Circe-Light" family="Circe" pointSize="21"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="279" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4yB-Hy-cYN">
+                                        <rect key="frame" x="0.0" y="51" width="414" height="645"/>
+                                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="camsCell" id="LNJ-bs-7OA" customClass="CamsTableViewCell" customModule="VideoSurveillance" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="55.5" width="374" height="279"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LNJ-bs-7OA" id="TF9-ZO-5Xr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="279"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="videoCamera" translatesAutoresizingMaskIntoConstraints="NO" id="L0G-KL-qKD">
+                                                            <rect key="frame" x="0.0" y="0.0" width="374" height="207"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="207" id="z9K-hl-MXQ"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Камера 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzf-lU-Z5t">
+                                                            <rect key="frame" x="28" y="229" width="71" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="Coy-f5-O6v"/>
+                                                                <constraint firstAttribute="height" constant="30" id="XUt-4V-xGf"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Circe-Light" family="Circe" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="xzf-lU-Z5t" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leadingMargin" constant="8" id="1Uc-0K-g1D"/>
+                                                        <constraint firstItem="xzf-lU-Z5t" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" constant="229" id="64h-XN-aSd"/>
+                                                        <constraint firstItem="L0G-KL-qKD" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leading" id="DbS-b4-x7G"/>
+                                                        <constraint firstAttribute="trailing" secondItem="L0G-KL-qKD" secondAttribute="trailing" id="Th5-ia-SzY"/>
+                                                        <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="xzf-lU-Z5t" secondAttribute="trailing" constant="255" id="UkY-0N-Leu"/>
+                                                        <constraint firstItem="L0G-KL-qKD" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" id="zpQ-NX-UWl"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="camLabel" destination="xzf-lU-Z5t" id="rve-O3-yJc"/>
+                                                    <outlet property="videoCam" destination="L0G-KL-qKD" id="7jQ-fS-MVK"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <sections/>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="LID-XG-nQu" firstAttribute="leading" secondItem="U9c-Mw-UNn" secondAttribute="leading" constant="21" id="3oC-JW-g0s"/>
+                                    <constraint firstAttribute="bottom" secondItem="4yB-Hy-cYN" secondAttribute="bottom" id="SRa-B1-nQb"/>
+                                    <constraint firstAttribute="trailing" secondItem="4yB-Hy-cYN" secondAttribute="trailing" id="SlZ-BJ-Zkm"/>
+                                    <constraint firstItem="4yB-Hy-cYN" firstAttribute="leading" secondItem="U9c-Mw-UNn" secondAttribute="leading" id="gbk-JA-rX1"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="U9c-Mw-UNn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="9wY-pV-VOH"/>
                             <constraint firstItem="xmx-C7-cdW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BR5-y6-O6P"/>
-                            <constraint firstItem="LID-XG-nQu" firstAttribute="top" secondItem="xmx-C7-cdW" secondAttribute="bottom" constant="16" id="XPG-DH-8rY"/>
                             <constraint firstItem="YGe-dr-wCT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ayh-vU-8Dm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="U9c-Mw-UNn" secondAttribute="bottom" id="cUu-Bu-0G5"/>
                             <constraint firstItem="xmx-C7-cdW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="drT-cQ-tOc"/>
-                            <constraint firstItem="LID-XG-nQu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="21" id="fVw-jW-Nbb"/>
+                            <constraint firstAttribute="trailing" secondItem="U9c-Mw-UNn" secondAttribute="trailing" id="gb8-TV-y9d"/>
+                            <constraint firstItem="U9c-Mw-UNn" firstAttribute="top" secondItem="xmx-C7-cdW" secondAttribute="bottom" constant="16" id="hG9-iR-jZX"/>
                             <constraint firstAttribute="trailing" secondItem="xmx-C7-cdW" secondAttribute="trailing" id="idF-VF-KGW"/>
-                            <constraint firstItem="DfQ-Dd-eu7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="100" id="ohY-xA-lXJ"/>
+                            <constraint firstItem="DfQ-Dd-eu7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="98" id="ohY-xA-lXJ"/>
                             <constraint firstItem="YGe-dr-wCT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="okx-uR-5h3"/>
                             <constraint firstAttribute="trailing" secondItem="DfQ-Dd-eu7" secondAttribute="trailing" id="r9a-2L-AHk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LID-XG-nQu" secondAttribute="trailing" symbolic="YES" id="tPH-Re-ISY"/>
                             <constraint firstItem="DfQ-Dd-eu7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vws-Ae-Ghx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YBp-70-yoE"/>
                     <connections>
                         <outlet property="segmentedControl" destination="DfQ-Dd-eu7" id="4fp-Pr-MtF"/>
+                        <outlet property="tableView" destination="4yB-Hy-cYN" id="uvm-lU-hX8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="229" y="-133"/>
+            <point key="canvasLocation" x="228.98550724637684" y="-133.25892857142856"/>
         </scene>
     </scenes>
     <resources>
         <image name="background-top" width="375" height="154"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="videoCamera" width="333" height="207"/>
     </resources>
 </document>
