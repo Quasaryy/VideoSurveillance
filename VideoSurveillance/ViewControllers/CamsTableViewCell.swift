@@ -10,6 +10,7 @@ import UIKit
 class CamsTableViewCell: UITableViewCell {
 
     
+    @IBOutlet weak var cameraRecorded: UIImageView!
     @IBOutlet weak var camLabel: UILabel!
     @IBOutlet weak var videoCam: UIImageView!
     @IBOutlet weak var favoriteStar: UIImageView!
