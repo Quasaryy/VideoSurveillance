@@ -18,6 +18,8 @@
 		D28A1BE82A86BBEF002BCEEC /* Circle-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */; };
 		D28A1BE92A86BBEF002BCEEC /* Circe-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE42A86BBEF002BCEEC /* Circe-ExtraBold.otf */; };
 		D28A1BEA2A86BBEF002BCEEC /* Circle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */; };
+		D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D43AC62A87610D00C4E477 /* UISegmentedControl+extensions.swift */; };
+		D2EC65172A877B89005D597F /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC65162A877B88005D597F /* UIImage+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Light.otf"; sourceTree = "<group>"; };
 		D28A1BE42A86BBEF002BCEEC /* Circe-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-ExtraBold.otf"; sourceTree = "<group>"; };
 		D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Regular.otf"; sourceTree = "<group>"; };
+		D2D43AC62A87610D00C4E477 /* UISegmentedControl+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+extensions.swift"; sourceTree = "<group>"; };
+		D2EC65162A877B88005D597F /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,11 +73,11 @@
 				D2027A5E2A86856B00E5D94A /* AppDelegate.swift */,
 				D2027A602A86856B00E5D94A /* SceneDelegate.swift */,
 				D2027A622A86856B00E5D94A /* CamScreenViewController.swift */,
-				D2027A642A86856B00E5D94A /* Main.storyboard */,
+				D2EC65192A877C05005D597F /* Storyboards */,
 				D28A1BEB2A86BC0C002BCEEC /* Fonts */,
-				D2027A672A86856D00E5D94A /* Assets.xcassets */,
-				D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */,
+				D2EC65182A877B9D005D597F /* Extensions */,
 				D2027A6C2A86856D00E5D94A /* Info.plist */,
+				D2027A672A86856D00E5D94A /* Assets.xcassets */,
 			);
 			path = VideoSurveillance;
 			sourceTree = "<group>";
@@ -88,6 +92,24 @@
 				D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		D2EC65182A877B9D005D597F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D2D43AC62A87610D00C4E477 /* UISegmentedControl+extensions.swift */,
+				D2EC65162A877B88005D597F /* UIImage+extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D2EC65192A877C05005D597F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D2027A642A86856B00E5D94A /* Main.storyboard */,
+				D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +191,8 @@
 				D2027A632A86856B00E5D94A /* CamScreenViewController.swift in Sources */,
 				D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */,
 				D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */,
+				D2EC65172A877B89005D597F /* UIImage+extension.swift in Sources */,
+				D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

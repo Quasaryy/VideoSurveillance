@@ -40,47 +40,6 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="hiV-Vh-zAU">
-                                <rect key="frame" x="20" y="106" width="374" height="44"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4i5-Na-RXm">
-                                        <rect key="frame" x="0.0" y="0.0" width="172" height="44"/>
-                                        <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Камеры">
-                                            <fontDescription key="titleFontDescription" name="Circe-Regular" family="Circe" pointSize="17"/>
-                                        </buttonConfiguration>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lsg-NP-s9w">
-                                        <rect key="frame" x="202" y="0.0" width="172" height="44"/>
-                                        <color key="tintColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Двери">
-                                            <fontDescription key="titleFontDescription" name="Circe-Regular" family="Circe" pointSize="17"/>
-                                        </buttonConfiguration>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="p0X-me-4RO"/>
-                                </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="x9o-zq-ybF">
-                                <rect key="frame" x="0.0" y="147" width="414" height="2"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab-signifier" translatesAutoresizingMaskIntoConstraints="NO" id="KJ2-8g-wjg" userLabel="tab signifier left">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="2"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="Gkj-m1-CLh"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tab-signifier" translatesAutoresizingMaskIntoConstraints="NO" id="AYg-8F-px6" userLabel="tab signifier right">
-                                        <rect key="frame" x="226" y="0.0" width="188" height="2"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="hzj-QS-My7"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гостиная" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LID-XG-nQu">
                                 <rect key="frame" x="21" y="166" width="82" height="31"/>
                                 <constraints>
@@ -91,36 +50,48 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DfQ-Dd-eu7">
+                                <rect key="frame" x="0.0" y="100" width="414" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="UDC-ho-xTy"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Камеры"/>
+                                    <segment title="Двери"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="gwt-Hl-8Bz"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hiV-Vh-zAU" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="106" id="3U4-FA-pX2"/>
-                            <constraint firstItem="x9o-zq-ybF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ag1-b3-Lna"/>
                             <constraint firstItem="xmx-C7-cdW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BR5-y6-O6P"/>
-                            <constraint firstItem="hiV-Vh-zAU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Uex-K3-vlu"/>
                             <constraint firstItem="LID-XG-nQu" firstAttribute="top" secondItem="xmx-C7-cdW" secondAttribute="bottom" constant="16" id="XPG-DH-8rY"/>
                             <constraint firstItem="YGe-dr-wCT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ayh-vU-8Dm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hiV-Vh-zAU" secondAttribute="trailing" id="bec-1O-1F2"/>
                             <constraint firstItem="xmx-C7-cdW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="drT-cQ-tOc"/>
                             <constraint firstItem="LID-XG-nQu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="21" id="fVw-jW-Nbb"/>
                             <constraint firstAttribute="trailing" secondItem="xmx-C7-cdW" secondAttribute="trailing" id="idF-VF-KGW"/>
+                            <constraint firstItem="DfQ-Dd-eu7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="100" id="ohY-xA-lXJ"/>
                             <constraint firstItem="YGe-dr-wCT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="60" id="okx-uR-5h3"/>
-                            <constraint firstAttribute="trailing" secondItem="x9o-zq-ybF" secondAttribute="trailing" id="ole-EU-1DV"/>
+                            <constraint firstAttribute="trailing" secondItem="DfQ-Dd-eu7" secondAttribute="trailing" id="r9a-2L-AHk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LID-XG-nQu" secondAttribute="trailing" symbolic="YES" id="tPH-Re-ISY"/>
-                            <constraint firstItem="x9o-zq-ybF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="147" id="yWh-ET-hTF"/>
+                            <constraint firstItem="DfQ-Dd-eu7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vws-Ae-Ghx"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YBp-70-yoE"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="DfQ-Dd-eu7" id="4fp-Pr-MtF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="250" y="-8"/>
+            <point key="canvasLocation" x="229" y="-133"/>
         </scene>
     </scenes>
     <resources>
         <image name="background-top" width="375" height="154"/>
-        <image name="tab-signifier" width="188" height="2"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

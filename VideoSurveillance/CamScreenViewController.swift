@@ -8,12 +8,22 @@
 import UIKit
 
 class CamScreenViewController: UIViewController {
-
+    
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        segmentedControl.addUnderlineForSelectedSegment()
+        
     }
 
 
+    @IBAction func segmentedControl(_ sender: UISegmentedControl) {
+        segmentedControl.changeUnderlinePosition()
+    }
 }
+
+
 
