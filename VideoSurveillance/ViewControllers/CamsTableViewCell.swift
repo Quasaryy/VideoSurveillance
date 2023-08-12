@@ -12,6 +12,7 @@ class CamsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var camLabel: UILabel!
     @IBOutlet weak var videoCam: UIImageView!
+    @IBOutlet weak var favoriteStar: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

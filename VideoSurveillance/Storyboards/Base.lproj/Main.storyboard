@@ -91,18 +91,29 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="Wg5-AR-wml">
+                                                            <rect key="frame" x="347" y="3" width="24" height="24"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="24" id="Pq5-IB-hWh"/>
+                                                                <constraint firstAttribute="width" constant="24" id="RiD-Vz-s2s"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="xzf-lU-Z5t" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leadingMargin" constant="8" id="1Uc-0K-g1D"/>
                                                         <constraint firstItem="xzf-lU-Z5t" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" constant="229" id="64h-XN-aSd"/>
                                                         <constraint firstItem="L0G-KL-qKD" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leading" id="DbS-b4-x7G"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Wg5-AR-wml" secondAttribute="trailing" constant="3" id="KNk-5L-Bka"/>
                                                         <constraint firstAttribute="trailing" secondItem="L0G-KL-qKD" secondAttribute="trailing" id="Th5-ia-SzY"/>
                                                         <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="xzf-lU-Z5t" secondAttribute="trailing" constant="255" id="UkY-0N-Leu"/>
+                                                        <constraint firstItem="Wg5-AR-wml" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" constant="3" id="wnL-jI-aES"/>
                                                         <constraint firstItem="L0G-KL-qKD" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" id="zpQ-NX-UWl"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <outlet property="camLabel" destination="xzf-lU-Z5t" id="rve-O3-yJc"/>
+                                                    <outlet property="favoriteStar" destination="Wg5-AR-wml" id="6ny-sW-Yw2"/>
                                                     <outlet property="videoCam" destination="L0G-KL-qKD" id="7jQ-fS-MVK"/>
                                                 </connections>
                                             </tableViewCell>
@@ -149,6 +160,7 @@
     </scenes>
     <resources>
         <image name="background-top" width="375" height="154"/>
+        <image name="favoriteStar" width="24" height="24"/>
         <image name="videoCamera" width="333" height="207"/>
     </resources>
 </document>
