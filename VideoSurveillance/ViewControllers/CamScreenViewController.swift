@@ -29,7 +29,7 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
         
         segmentedControl.addUnderlineForSelectedSegment() // Adding underline for segmentedControl
         
-        getData()
+        getDataFromRemoteServer()
     }
     
     // MARK: - IB Actions
@@ -61,6 +61,7 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
         // Временнный костыль чтобы разделить ячейки за счет секций
         switch indexPath.section {
         case 0:
+            cell.configCamsCellVideoImage(model: newData, indexPath: indexPath, tableView: tableView)
             cell.camLabel.text = newData.data.cameras[indexPath.row].name
             cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row].favorites
             cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row].rec
@@ -69,16 +70,19 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.camLabel.text = newData.data.cameras[indexPath.row + 1].name
             cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row + 1].favorites
             cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row + 1].rec
+            cell.configCamsCellVideoImage(model: newData, indexPath: indexPath, tableView: tableView)
             return cell
         case 2:
             cell.camLabel.text = newData.data.cameras[indexPath.row + 2].name
             cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row + 2].favorites
             cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row + 2].rec
+            cell.configCamsCellVideoImage(model: newData, indexPath: indexPath, tableView: tableView)
             return cell
         default:
             cell.camLabel.text = newData.data.cameras[indexPath.row + 3].name
             cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row + 3].favorites
             cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row + 3].rec
+            cell.configCamsCellVideoImage(model: newData, indexPath: indexPath, tableView: tableView)
             return cell
         }
         
@@ -140,8 +144,8 @@ extension CamScreenViewController {
         let isFavorite = newData.data.cameras[indexPath.row].favorites
         let favorites = UIContextualAction(style: .normal, title: "") { _, _, completion in
             self.newData.data.cameras[indexPath.row].favorites = isFavorite ? false : true
-            if let customCell = self.tableView.cellForRow(at: indexPath) as? CamsTableViewCell {
-                customCell.favoriteStar.isHidden = self.newData.data.cameras[indexPath.row].favorites
+            if let customCamsCell = self.tableView.cellForRow(at: indexPath) as? CamsTableViewCell {
+                customCamsCell.favoriteStar.isHidden = self.newData.data.cameras[indexPath.row].favorites
             }
             completion(true)
         }
@@ -152,7 +156,7 @@ extension CamScreenViewController {
     }
     
     // MARK: Network request
-    private func getData() {
+    private func getDataFromRemoteServer() {
         guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             

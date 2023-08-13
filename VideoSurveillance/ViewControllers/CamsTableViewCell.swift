@@ -30,3 +30,19 @@ class CamsTableViewCell: UITableViewCell {
 
 
 }
+
+extension CamsTableViewCell {
+    func configCamsCellVideoImage(model: Cameras, indexPath: IndexPath, tableView: UITableView) {
+                        
+            guard let url = URL(string: model.data.cameras[indexPath.row].snapshot) else { return }
+            URLSession.shared.dataTask(with: url) { data, _, _ in
+                
+                guard let dataSource = data else { return }
+                let imageSource = UIImage(data: dataSource)
+                DispatchQueue.main.async {
+                    self.videoCam.image = imageSource
+                }
+            }.resume()
+            
+    }
+}

@@ -14,7 +14,6 @@
 		D2027A682A86856D00E5D94A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2027A672A86856D00E5D94A /* Assets.xcassets */; };
 		D2027A6B2A86856D00E5D94A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */; };
 		D211C4572A87A2B2001DF7C6 /* CamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D211C4562A87A2B2001DF7C6 /* CamsTableViewCell.swift */; };
-		D263906D2A881F7300D81059 /* CamsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D263906C2A881F7300D81059 /* CamsModel.swift */; };
 		D28A1BE62A86BBEF002BCEEC /* Circel-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */; };
 		D28A1BE72A86BBEF002BCEEC /* Circe-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */; };
 		D28A1BE82A86BBEF002BCEEC /* Circle-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */; };
@@ -36,7 +35,6 @@
 		D2027A6A2A86856D00E5D94A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2027A6C2A86856D00E5D94A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D211C4562A87A2B2001DF7C6 /* CamsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamsTableViewCell.swift; sourceTree = "<group>"; };
-		D263906C2A881F7300D81059 /* CamsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamsModel.swift; sourceTree = "<group>"; };
 		D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circel-ExtraLight.otf"; sourceTree = "<group>"; };
 		D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-Bold.otf"; sourceTree = "<group>"; };
 		D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Light.otf"; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 			children = (
 				D2D2167C2A87F08B00068D5C /* Cams.swift */,
 				D2D2167F2A87F10A00068D5C /* Doors.swift */,
-				D263906C2A881F7300D81059 /* CamsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -219,7 +216,6 @@
 				D2D2167D2A87F08B00068D5C /* Cams.swift in Sources */,
 				D2027A632A86856B00E5D94A /* CamScreenViewController.swift in Sources */,
 				D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */,
-				D263906D2A881F7300D81059 /* CamsModel.swift in Sources */,
 				D2D216802A87F10A00068D5C /* Doors.swift in Sources */,
 				D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */,
 				D2EC65172A877B89005D597F /* UIImage+extension.swift in Sources */,
