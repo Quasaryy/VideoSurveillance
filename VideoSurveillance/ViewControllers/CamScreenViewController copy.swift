@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CamScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
     @IBOutlet weak var roomNameLabel: UILabel!
@@ -33,17 +33,34 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     // MARK: - IB Actions
-    @IBAction func segmentedControl(_ sender: UISegmentedControl) {
+    @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
         segmentedControl.changeUnderlinePosition()
         
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            let asdadsasd = "awdadw"
+            let sdsddgs = "sdfsdfdf"
         case 1:
-            let asdadasd = "adawdadw"
+            performSegue(withIdentifier: "toTheDoors", sender: nil)
         default:
             return
         }
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "toTheDoors" {
+                if let destinationViewController = segue.destination as? DoorsScreenViewController {
+                    // Устанавливаем анимацию закрытия на false
+                    destinationViewController.modalTransitionStyle = .crossDissolve
+                }
+            }
+        }
+    
+    
+    @IBAction func unwindSegueToCamers(segue: UIStoryboardSegue) {
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.changeUnderlinePosition()
+        
     }
     
     // MARK: - TableView Delegate
@@ -56,6 +73,7 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
                 let cell = tableView.dequeueReusableCell(withIdentifier: "camsCell", for: indexPath) as! CamsTableViewCell
         
 
@@ -100,7 +118,7 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
 
 
 // MARK: - Private Methods
-extension CamScreenViewController {
+extension CamsScreenViewController {
     
     // Add to favorites cams for trailing swipe
     private func addToFavorites(at indexPath: IndexPath) -> UIContextualAction {

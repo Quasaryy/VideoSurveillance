@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A5E2A86856B00E5D94A /* AppDelegate.swift */; };
 		D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A602A86856B00E5D94A /* SceneDelegate.swift */; };
-		D2027A632A86856B00E5D94A /* CamScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A622A86856B00E5D94A /* CamScreenViewController.swift */; };
+		D2027A632A86856B00E5D94A /* DoorsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A622A86856B00E5D94A /* DoorsScreenViewController.swift */; };
 		D2027A662A86856B00E5D94A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A642A86856B00E5D94A /* Main.storyboard */; };
 		D2027A682A86856D00E5D94A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2027A672A86856D00E5D94A /* Assets.xcassets */; };
 		D2027A6B2A86856D00E5D94A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */; };
 		D211C4572A87A2B2001DF7C6 /* CamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D211C4562A87A2B2001DF7C6 /* CamsTableViewCell.swift */; };
+		D26390712A89040B00D81059 /* CamScreenViewController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26390702A89040B00D81059 /* CamScreenViewController copy.swift */; };
 		D28A1BE62A86BBEF002BCEEC /* Circel-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */; };
 		D28A1BE72A86BBEF002BCEEC /* Circe-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */; };
 		D28A1BE82A86BBEF002BCEEC /* Circle-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */; };
@@ -29,12 +30,13 @@
 		D2027A5B2A86856B00E5D94A /* VideoSurveillance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoSurveillance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2027A5E2A86856B00E5D94A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2027A602A86856B00E5D94A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D2027A622A86856B00E5D94A /* CamScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamScreenViewController.swift; sourceTree = "<group>"; };
+		D2027A622A86856B00E5D94A /* DoorsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorsScreenViewController.swift; sourceTree = "<group>"; };
 		D2027A652A86856B00E5D94A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2027A672A86856D00E5D94A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2027A6A2A86856D00E5D94A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2027A6C2A86856D00E5D94A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D211C4562A87A2B2001DF7C6 /* CamsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamsTableViewCell.swift; sourceTree = "<group>"; };
+		D26390702A89040B00D81059 /* CamScreenViewController copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CamScreenViewController copy.swift"; sourceTree = "<group>"; };
 		D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circel-ExtraLight.otf"; sourceTree = "<group>"; };
 		D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-Bold.otf"; sourceTree = "<group>"; };
 		D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Light.otf"; sourceTree = "<group>"; };
@@ -131,7 +133,8 @@
 		D2EC651A2A877E1D005D597F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2027A622A86856B00E5D94A /* CamScreenViewController.swift */,
+				D2027A622A86856B00E5D94A /* DoorsScreenViewController.swift */,
+				D26390702A89040B00D81059 /* CamScreenViewController copy.swift */,
 				D211C4562A87A2B2001DF7C6 /* CamsTableViewCell.swift */,
 			);
 			path = ViewControllers;
@@ -214,12 +217,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2D2167D2A87F08B00068D5C /* Cams.swift in Sources */,
-				D2027A632A86856B00E5D94A /* CamScreenViewController.swift in Sources */,
+				D2027A632A86856B00E5D94A /* DoorsScreenViewController.swift in Sources */,
 				D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */,
 				D2D216802A87F10A00068D5C /* Doors.swift in Sources */,
 				D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */,
 				D2EC65172A877B89005D597F /* UIImage+extension.swift in Sources */,
 				D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */,
+				D26390712A89040B00D81059 /* CamScreenViewController copy.swift in Sources */,
 				D211C4572A87A2B2001DF7C6 /* CamsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

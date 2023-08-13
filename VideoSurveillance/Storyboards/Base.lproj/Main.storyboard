@@ -15,10 +15,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Cam Screen View Controller-->
+        <!--Cams Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CamScreenViewController" customModule="VideoSurveillance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CamsScreenViewController" customModule="VideoSurveillance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -49,11 +49,11 @@
                                     <segment title="Двери"/>
                                 </segments>
                                 <connections>
-                                    <action selector="segmentedControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="gwt-Hl-8Bz"/>
+                                    <action selector="segmentedControlAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="gwt-Hl-8Bz"/>
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гостиная" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LID-XG-nQu">
-                                <rect key="frame" x="41" y="162" width="82" height="31"/>
+                                <rect key="frame" x="41" y="162" width="91" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="7p2-tt-8GP"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="82" id="8y3-we-sdV"/>
@@ -80,7 +80,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Камера 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzf-lU-Z5t">
-                                                    <rect key="frame" x="28" y="229" width="71" height="30"/>
+                                                    <rect key="frame" x="28" y="229" width="75" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="Coy-f5-O6v"/>
                                                         <constraint firstAttribute="height" constant="30" id="XUt-4V-xGf"/>
@@ -163,11 +163,168 @@
                         <outlet property="roomNameLabel" destination="LID-XG-nQu" id="BCt-Hq-BtL"/>
                         <outlet property="segmentedControl" destination="DfQ-Dd-eu7" id="4fp-Pr-MtF"/>
                         <outlet property="tableView" destination="4yB-Hy-cYN" id="uvm-lU-hX8"/>
+                        <segue destination="AYM-Xl-g4C" kind="presentation" identifier="toTheDoors" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="PGp-dA-d6L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="228.98550724637684" y="-133.25892857142856"/>
+            <point key="canvasLocation" x="-93" y="-139"/>
+        </scene>
+        <!--Doors Screen View Controller-->
+        <scene sceneID="Lkk-8C-7JM">
+            <objects>
+                <viewController id="AYM-Xl-g4C" customClass="DoorsScreenViewController" customModule="VideoSurveillance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="otV-ha-5c0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-top" translatesAutoresizingMaskIntoConstraints="NO" id="Ac6-I4-Nes">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="42x-CM-oC3"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Мой Дом" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEY-hF-alK">
+                                <rect key="frame" x="141.5" y="60" width="131" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="131" id="BUc-Wa-ejh"/>
+                                    <constraint firstAttribute="height" constant="26" id="n1F-Ht-7Wq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Circe-Regular" family="Circe" pointSize="21"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="MHA-KU-zxK">
+                                <rect key="frame" x="0.0" y="98" width="414" height="49"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="fco-oE-ZaJ"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Камеры"/>
+                                    <segment title="Двери"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentedControl:" destination="AYM-Xl-g4C" eventType="valueChanged" id="ezU-td-UEs"/>
+                                    <segue destination="SkH-Eg-AJ2" kind="unwind" unwindAction="unwindSegueToCamersWithSegue:" id="7hZ-Lp-UOO"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гостиная" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDj-mi-ba7">
+                                <rect key="frame" x="41" y="162" width="82" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="82" id="0Uc-21-im0"/>
+                                    <constraint firstAttribute="height" constant="31" id="mkU-01-5dp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Circe-Light" family="Circe" pointSize="21"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="279" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="n4b-pp-fp2">
+                                <rect key="frame" x="0.0" y="193" width="414" height="703"/>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="camsCell" id="2bm-Wa-3yx" customClass="CamsTableViewCell" customModule="VideoSurveillance" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="55.5" width="374" height="279"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2bm-Wa-3yx" id="Vbh-Vr-H6n">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="279"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="videoCamera" translatesAutoresizingMaskIntoConstraints="NO" id="yZW-oc-GKv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="374" height="207"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="207" id="384-2z-UoW"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Камера 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wet-Sd-aOl">
+                                                    <rect key="frame" x="28" y="229" width="71" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="RbE-gX-egr"/>
+                                                        <constraint firstAttribute="height" constant="30" id="cbQ-hF-B2F"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Circe-Light" family="Circe" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="favoriteStar" translatesAutoresizingMaskIntoConstraints="NO" id="iMW-9f-gm9">
+                                                    <rect key="frame" x="347" y="3" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="EHe-yt-dFC"/>
+                                                        <constraint firstAttribute="width" constant="24" id="ub7-NM-CTa"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rec" translatesAutoresizingMaskIntoConstraints="NO" id="UUs-zp-onP">
+                                                    <rect key="frame" x="8" y="8" width="24" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="iin-38-QM9"/>
+                                                        <constraint firstAttribute="width" constant="24" id="sAG-OB-Y6l"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="playButton" translatesAutoresizingMaskIntoConstraints="NO" id="aek-oK-lhp">
+                                                    <rect key="frame" x="157" y="73.5" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="NoK-Xa-6T2"/>
+                                                        <constraint firstAttribute="height" constant="60" id="xYh-xC-YTo"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iMW-9f-gm9" firstAttribute="top" secondItem="Vbh-Vr-H6n" secondAttribute="top" constant="3" id="5LW-zD-Gct"/>
+                                                <constraint firstAttribute="trailing" secondItem="iMW-9f-gm9" secondAttribute="trailing" constant="3" id="KDd-A7-9Sx"/>
+                                                <constraint firstAttribute="trailing" secondItem="yZW-oc-GKv" secondAttribute="trailing" id="Psh-Rc-1LH"/>
+                                                <constraint firstItem="aek-oK-lhp" firstAttribute="centerX" secondItem="yZW-oc-GKv" secondAttribute="centerX" id="QBp-di-u95"/>
+                                                <constraint firstItem="aek-oK-lhp" firstAttribute="centerY" secondItem="yZW-oc-GKv" secondAttribute="centerY" id="QTq-Qh-Her"/>
+                                                <constraint firstItem="Wet-Sd-aOl" firstAttribute="top" secondItem="Vbh-Vr-H6n" secondAttribute="top" constant="229" id="VDL-Fg-sOo"/>
+                                                <constraint firstItem="Wet-Sd-aOl" firstAttribute="leading" secondItem="Vbh-Vr-H6n" secondAttribute="leadingMargin" constant="8" id="baZ-Ct-60R"/>
+                                                <constraint firstItem="yZW-oc-GKv" firstAttribute="leading" secondItem="Vbh-Vr-H6n" secondAttribute="leading" id="er8-fX-qHX"/>
+                                                <constraint firstItem="yZW-oc-GKv" firstAttribute="top" secondItem="Vbh-Vr-H6n" secondAttribute="top" id="jvu-1X-YXb"/>
+                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Wet-Sd-aOl" secondAttribute="trailing" constant="255" id="kva-UJ-REP"/>
+                                                <constraint firstItem="UUs-zp-onP" firstAttribute="leading" secondItem="Vbh-Vr-H6n" secondAttribute="leading" constant="8" id="sNp-J2-rCa"/>
+                                                <constraint firstItem="UUs-zp-onP" firstAttribute="top" secondItem="Vbh-Vr-H6n" secondAttribute="top" constant="8" id="xrz-yr-SrI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="camLabel" destination="Wet-Sd-aOl" id="7Ly-DK-La3"/>
+                                            <outlet property="cameraRecorded" destination="UUs-zp-onP" id="OVT-Ok-nCW"/>
+                                            <outlet property="favoriteStar" destination="iMW-9f-gm9" id="562-wB-zpI"/>
+                                            <outlet property="videoCam" destination="yZW-oc-GKv" id="XYW-zv-D97"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="S45-JT-1ec"/>
+                        <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ac6-I4-Nes" firstAttribute="leading" secondItem="otV-ha-5c0" secondAttribute="leading" id="62l-FN-I9l"/>
+                            <constraint firstItem="aDj-mi-ba7" firstAttribute="top" secondItem="MHA-KU-zxK" secondAttribute="bottom" constant="16" id="Dc5-Qb-fYJ"/>
+                            <constraint firstItem="Ac6-I4-Nes" firstAttribute="top" secondItem="otV-ha-5c0" secondAttribute="top" id="E2I-41-FwZ"/>
+                            <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="aDj-mi-ba7" secondAttribute="trailing" constant="291" id="G5h-sW-Sas"/>
+                            <constraint firstItem="MHA-KU-zxK" firstAttribute="leading" secondItem="otV-ha-5c0" secondAttribute="leading" id="THj-9d-DLx"/>
+                            <constraint firstAttribute="trailing" secondItem="Ac6-I4-Nes" secondAttribute="trailing" id="UI5-I7-GnK"/>
+                            <constraint firstItem="n4b-pp-fp2" firstAttribute="top" secondItem="aDj-mi-ba7" secondAttribute="bottom" id="VJF-IO-aUl"/>
+                            <constraint firstAttribute="trailing" secondItem="MHA-KU-zxK" secondAttribute="trailing" id="WjV-It-Kqu"/>
+                            <constraint firstAttribute="trailing" secondItem="n4b-pp-fp2" secondAttribute="trailing" id="eQI-Bp-BNQ"/>
+                            <constraint firstItem="MHA-KU-zxK" firstAttribute="top" secondItem="otV-ha-5c0" secondAttribute="top" constant="98" id="f53-dX-xOZ"/>
+                            <constraint firstItem="DEY-hF-alK" firstAttribute="centerX" secondItem="otV-ha-5c0" secondAttribute="centerX" id="gfo-bg-wJe"/>
+                            <constraint firstAttribute="bottom" secondItem="n4b-pp-fp2" secondAttribute="bottom" id="kJM-1f-qoN"/>
+                            <constraint firstItem="aDj-mi-ba7" firstAttribute="leading" secondItem="otV-ha-5c0" secondAttribute="leadingMargin" constant="21" id="lzg-Kv-8bQ"/>
+                            <constraint firstItem="DEY-hF-alK" firstAttribute="top" secondItem="otV-ha-5c0" secondAttribute="top" constant="60" id="twg-3v-20s"/>
+                            <constraint firstItem="n4b-pp-fp2" firstAttribute="leading" secondItem="otV-ha-5c0" secondAttribute="leading" id="vAT-f9-IM6"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="FY9-ov-jmO"/>
+                    <connections>
+                        <outlet property="roomNameLabel" destination="aDj-mi-ba7" id="4oy-iM-8Sq"/>
+                        <outlet property="segmentedControl" destination="MHA-KU-zxK" id="6wV-9N-qSj"/>
+                        <outlet property="tableView" destination="n4b-pp-fp2" id="nRq-E6-ACu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IKo-uB-0vh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="SkH-Eg-AJ2" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="796" y="-139"/>
         </scene>
     </scenes>
     <resources>
