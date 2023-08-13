@@ -70,8 +70,9 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
     // MARK: - TableView Data Source
     // Adding trailing swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editMode = editMode(at: indexPath)
         let addTofavorites = addToFavorites(at: indexPath)
-        return UISwipeActionsConfiguration(actions: [addTofavorites])
+        return UISwipeActionsConfiguration(actions: [addTofavorites, editMode])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -109,6 +110,20 @@ extension DoorsScreenViewController {
         favorites.backgroundColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
         return favorites
     }
+    
+    // Adding edit mode for the cell with doors section for trailing swipe
+    private func editMode(at indexPath: IndexPath) -> UIContextualAction {
+        let editMode = UIContextualAction(style: .normal, title: "") { _, _, completion in
+            
+            completion(true)
+        }
+        
+        editMode.image = UIImage(named: "edit")
+        editMode.backgroundColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
+        return editMode
+    }
+    
+    
     
     // MARK: Network request
     private func getDataFromRemoteServer() {
