@@ -25,6 +25,8 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         tableView.delegate = self
         
+        
+        
         segmentedControl.addUnderlineForSelectedSegment() // Adding underline for segmentedControl
         
         getData()
@@ -46,21 +48,40 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - TableView Delegate
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return newData.data.cameras.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "camsCell", for: indexPath) as! CamsTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "camsCell", for: indexPath) as! CamsTableViewCell
         
-        cell.camLabel.text = newData.data.cameras[indexPath.row].name
-        cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row].favorites
-        cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row].rec
+        // Временнный костыль чтобы разделить ячейки за счет секций
+        switch indexPath.section {
+        case 0:
+            cell.camLabel.text = newData.data.cameras[indexPath.row].name
+            cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row].favorites
+            cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row].rec
+            return cell
+        case 1:
+            cell.camLabel.text = newData.data.cameras[indexPath.row + 1].name
+            cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row + 1].favorites
+            cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row + 1].rec
+            return cell
+        case 2:
+            cell.camLabel.text = newData.data.cameras[indexPath.row + 2].name
+            cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row + 2].favorites
+            cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row + 2].rec
+            return cell
+        default:
+            cell.camLabel.text = newData.data.cameras[indexPath.row + 3].name
+            cell.favoriteStar.isHidden = newData.data.cameras[indexPath.row + 3].favorites
+            cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.row + 3].rec
+            return cell
+        }
         
-        return cell
         
     }
     
