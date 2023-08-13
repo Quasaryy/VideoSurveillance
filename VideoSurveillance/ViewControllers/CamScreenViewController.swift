@@ -78,7 +78,7 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        
+        // Checking rooms name by Id camera
         let idOfCamera = newData.data.cameras[indexPath.section].id
         
         switch idOfCamera {
@@ -94,7 +94,7 @@ class CamScreenViewController: UIViewController, UITableViewDelegate, UITableVie
             return
         }
     }
-    
+
     
 }
 

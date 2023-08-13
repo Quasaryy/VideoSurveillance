@@ -103,6 +103,13 @@
                                                         <constraint firstAttribute="width" constant="24" id="vIp-hh-rVn"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="playButton" translatesAutoresizingMaskIntoConstraints="NO" id="wKO-ka-u9j">
+                                                    <rect key="frame" x="157" y="73.5" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="WAo-F6-7mo"/>
+                                                        <constraint firstAttribute="width" constant="60" id="xgV-T9-7Hz"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="htY-vS-x3z" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" constant="8" id="0im-MB-NSV"/>
@@ -110,9 +117,11 @@
                                                 <constraint firstItem="xzf-lU-Z5t" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" constant="229" id="64h-XN-aSd"/>
                                                 <constraint firstItem="htY-vS-x3z" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leading" constant="8" id="AJ0-jY-c4w"/>
                                                 <constraint firstItem="L0G-KL-qKD" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leading" id="DbS-b4-x7G"/>
+                                                <constraint firstItem="wKO-ka-u9j" firstAttribute="centerY" secondItem="L0G-KL-qKD" secondAttribute="centerY" id="JEO-uu-sRL"/>
                                                 <constraint firstAttribute="trailing" secondItem="Wg5-AR-wml" secondAttribute="trailing" constant="3" id="KNk-5L-Bka"/>
                                                 <constraint firstAttribute="trailing" secondItem="L0G-KL-qKD" secondAttribute="trailing" id="Th5-ia-SzY"/>
                                                 <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="xzf-lU-Z5t" secondAttribute="trailing" constant="255" id="UkY-0N-Leu"/>
+                                                <constraint firstItem="wKO-ka-u9j" firstAttribute="centerX" secondItem="L0G-KL-qKD" secondAttribute="centerX" id="aLL-hB-20n"/>
                                                 <constraint firstItem="Wg5-AR-wml" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" constant="3" id="wnL-jI-aES"/>
                                                 <constraint firstItem="L0G-KL-qKD" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" id="zpQ-NX-UWl"/>
                                             </constraints>
@@ -164,6 +173,7 @@
     <resources>
         <image name="background-top" width="375" height="154"/>
         <image name="favoriteStar" width="24" height="24"/>
+        <image name="playButton" width="60" height="60"/>
         <image name="rec" width="24" height="24"/>
         <image name="videoCamera" width="333" height="207"/>
     </resources>
