@@ -15,7 +15,7 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    private var newData = Cameras.shared // Data from remote server
+    private var newDataModel = Cameras.shared // Model for remote data
     
     
     override func viewDidLoad() {
@@ -25,36 +25,35 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.dataSource = self
         tableView.delegate = self
         
+        // Adding underline for segmentedControl
+        segmentedControl.addUnderlineForSelectedSegment()
         
-        
-        segmentedControl.addUnderlineForSelectedSegment() // Adding underline for segmentedControl
-        
-        getData()
+        // Getting remote data
+        getDataFromRemoteServer()
     }
     
     // MARK: - IB Actions
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
         segmentedControl.changeUnderlinePosition()
         
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            let sdsddgs = "sdfsdfdf"
-        case 1:
+        // Go to door section by SegmentedControl
+        if segmentedControl.selectedSegmentIndex == 1 {
             performSegue(withIdentifier: "toTheDoors", sender: nil)
-        default:
+        } else {
             return
         }
         
     }
     
+    
+    // To setup closing animation to false
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "toTheDoors" {
-                if let destinationViewController = segue.destination as? DoorsScreenViewController {
-                    // Устанавливаем анимацию закрытия на false
-                    destinationViewController.modalTransitionStyle = .crossDissolve
-                }
+        if segue.identifier == "toTheDoors" {
+            if let destinationViewController = segue.destination as? DoorsScreenViewController {
+                destinationViewController.modalTransitionStyle = .crossDissolve
             }
         }
+    }
     
     
     @IBAction func unwindSegueToCamers(segue: UIStoryboardSegue) {
@@ -65,7 +64,7 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - TableView Delegate
     func numberOfSections(in tableView: UITableView) -> Int {
-        return newData.data.cameras.count
+        return newDataModel.data.cameras.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,17 +72,15 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "camsCell", for: indexPath) as! CamsTableViewCell
         
-                let cell = tableView.dequeueReusableCell(withIdentifier: "camsCell", for: indexPath) as! CamsTableViewCell
+        // Configure the cell
+        cell.configCamsCellVideoImage(model: newDataModel, indexPath: indexPath, tableView: tableView)
+        cell.camLabel.text = newDataModel.data.cameras[indexPath.section].name
+        cell.favoriteStar.isHidden = !newDataModel.data.cameras[indexPath.section].favorites
+        cell.cameraRecorded.isHidden = !newDataModel.data.cameras[indexPath.section].rec
         
-
-            cell.configCamsCellVideoImage(model: newData, indexPath: indexPath, tableView: tableView)
-            cell.camLabel.text = newData.data.cameras[indexPath.section].name
-            cell.favoriteStar.isHidden = newData.data.cameras[indexPath.section].favorites
-            cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.section].rec
-            return cell
-        
-        
+        return cell
     }
     
     // MARK: - TableView Data Source
@@ -97,22 +94,22 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
         
         // Checking rooms name by Id camera
-        let idOfCamera = newData.data.cameras[indexPath.section].id
+        let idOfCamera = newDataModel.data.cameras[indexPath.section].id
         
         switch idOfCamera {
         case 1:
-            roomNameLabel.text = newData.data.cameras[indexPath.section].room
+            roomNameLabel.text = newDataModel.data.cameras[indexPath.section].room
         case 2:
-            roomNameLabel.text = newData.data.cameras[indexPath.section].room
+            roomNameLabel.text = newDataModel.data.cameras[indexPath.section].room
         case 3:
-            roomNameLabel.text = newData.data.cameras[indexPath.section].room
+            roomNameLabel.text = newDataModel.data.cameras[indexPath.section].room
         case 6:
-            roomNameLabel.text = newData.data.cameras[indexPath.section].room
+            roomNameLabel.text = newDataModel.data.cameras[indexPath.section].room
         default:
             return
         }
     }
-
+    
     
 }
 
@@ -122,11 +119,11 @@ extension CamsScreenViewController {
     
     // Add to favorites cams for trailing swipe
     private func addToFavorites(at indexPath: IndexPath) -> UIContextualAction {
-        let isFavorite = newData.data.cameras[indexPath.section].favorites
+        let isFavorite = newDataModel.data.cameras[indexPath.section].favorites
         let favorites = UIContextualAction(style: .normal, title: "") { _, _, completion in
-            self.newData.data.cameras[indexPath.section].favorites = isFavorite ? false : true
+            self.newDataModel.data.cameras[indexPath.section].favorites = isFavorite ? false : true
             if let customCamsCell = self.tableView.cellForRow(at: indexPath) as? CamsTableViewCell {
-                customCamsCell.favoriteStar.isHidden = self.newData.data.cameras[indexPath.section].favorites
+                customCamsCell.favoriteStar.isHidden = !self.newDataModel.data.cameras[indexPath.section].favorites
             }
             completion(true)
         }
@@ -137,7 +134,7 @@ extension CamsScreenViewController {
     }
     
     // MARK: Network request
-    private func getData() {
+    private func getDataFromRemoteServer() {
         guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             
@@ -155,7 +152,7 @@ extension CamsScreenViewController {
             
             guard let remtoteData = data else { return }
             do {
-                self.newData = try JSONDecoder().decode(Cameras.self, from: remtoteData)
+                self.newDataModel = try JSONDecoder().decode(Cameras.self, from: remtoteData)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

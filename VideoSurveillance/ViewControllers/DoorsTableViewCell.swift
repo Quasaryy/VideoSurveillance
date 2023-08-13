@@ -7,13 +7,16 @@
 
 import UIKit
 
-class CamsTableViewCell: UITableViewCell {
+class DoorsTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var lockOnTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var nameAndStatusStackView: UIStackView!
+    @IBOutlet weak var nameAndStatusStackViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var onlineLabel: UILabel!
+    @IBOutlet weak var doorNameLabel: UILabel!
+    @IBOutlet weak var favoriteStarDoors: UIImageView!
+    @IBOutlet weak var videoCameraDoors: UIImageView!
     
-    @IBOutlet weak var cameraRecorded: UIImageView!
-    @IBOutlet weak var camLabel: UILabel!
-    @IBOutlet weak var videoCam: UIImageView!
-    @IBOutlet weak var favoriteStar: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,17 +33,17 @@ class CamsTableViewCell: UITableViewCell {
     
 }
 
-extension CamsTableViewCell {
+extension DoorsTableViewCell {
     // Configuration the cell for images
-    func configCamsCellVideoImage(model: Cameras, indexPath: IndexPath, tableView: UITableView) {
+    func configDoorsCellVideoImage(model: Doors, indexPath: IndexPath, tableView: UITableView) {
         
-        guard let url = URL(string: model.data.cameras[indexPath.section].snapshot) else { return }
+        guard let url = URL(string: model.data[indexPath.section].snapshot ?? "") else { return }
         URLSession.shared.dataTask(with: url) { data, _, _ in
             
             guard let dataSource = data else { return }
             let imageSource = UIImage(data: dataSource)
             DispatchQueue.main.async {
-                self.videoCam.image = imageSource
+                self.videoCameraDoors.image = imageSource
             }
         }.resume()
     }

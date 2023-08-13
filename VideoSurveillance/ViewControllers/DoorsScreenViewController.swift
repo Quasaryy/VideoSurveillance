@@ -10,12 +10,11 @@ import UIKit
 class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
-    @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    private var newData = Cameras.shared // Data from remote server
+    private var newDataModel = Doors.shared // Model for remote data
     
     
     override func viewDidLoad() {
@@ -26,24 +25,21 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.delegate = self
         
         
+        // Adding underline for segmentedControl
+        segmentedControl.addUnderlineForSelectedSegment()
         
-        segmentedControl.addUnderlineForSelectedSegment() // Adding underline for segmentedControl
-        
-        getData()
+        // Getting remote data
+        getDataFromRemoteServer()
     }
     
     // MARK: - IB Actions
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
-        segmentedControl.changeUnderlinePosition()
         
-        if segmentedControl.selectedSegmentIndex == 0 {
-            dismiss(animated: false)
-        }
     }
     
     // MARK: - TableView Delegate
     func numberOfSections(in tableView: UITableView) -> Int {
-        return newData.data.cameras.count
+        return newDataModel.data.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,17 +47,24 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "doorsCell", for: indexPath) as! DoorsTableViewCell
         
-                let cell = tableView.dequeueReusableCell(withIdentifier: "camsCell", for: indexPath) as! CamsTableViewCell
+        // Hide the image if it is not on the remote server
+        if newDataModel.data[indexPath.section].snapshot == nil {
+            cell.videoCameraDoors.isHidden = true
+            cell.onlineLabel.isHidden = true
+            
+            
+            cell.nameAndStatusStackViewTopConstraint.constant = 12
+            cell.lockOnTopConstraint.constant = 0
+        }
         
-
-            cell.configCamsCellVideoImage(model: newData, indexPath: indexPath, tableView: tableView)
-            cell.camLabel.text = newData.data.cameras[indexPath.section].name
-            cell.favoriteStar.isHidden = newData.data.cameras[indexPath.section].favorites
-            cell.cameraRecorded.isHidden = newData.data.cameras[indexPath.section].rec
-            return cell
+        // Configure the cell
+        cell.configDoorsCellVideoImage(model: newDataModel, indexPath: indexPath, tableView: tableView)
+        cell.doorNameLabel.text = newDataModel.data[indexPath.section].name
+        cell.favoriteStarDoors.isHidden = !newDataModel.data[indexPath.section].favorites
         
-        
+        return cell
     }
     
     // MARK: - TableView Data Source
@@ -74,23 +77,16 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        // Checking rooms name by Id camera
-        let idOfCamera = newData.data.cameras[indexPath.section].id
-        
-        switch idOfCamera {
-        case 1:
-            roomNameLabel.text = newData.data.cameras[indexPath.section].room
-        case 2:
-            roomNameLabel.text = newData.data.cameras[indexPath.section].room
-        case 3:
-            roomNameLabel.text = newData.data.cameras[indexPath.section].room
-        case 6:
-            roomNameLabel.text = newData.data.cameras[indexPath.section].room
-        default:
-            return
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if newDataModel.data[indexPath.section].snapshot == nil {
+            return 72
+        } else {
+            return 279
         }
     }
-
+    
     
 }
 
@@ -100,11 +96,11 @@ extension DoorsScreenViewController {
     
     // Add to favorites cams for trailing swipe
     private func addToFavorites(at indexPath: IndexPath) -> UIContextualAction {
-        let isFavorite = newData.data.cameras[indexPath.section].favorites
+        let isFavorite = newDataModel.data[indexPath.section].favorites
         let favorites = UIContextualAction(style: .normal, title: "") { _, _, completion in
-            self.newData.data.cameras[indexPath.section].favorites = isFavorite ? false : true
-            if let customCamsCell = self.tableView.cellForRow(at: indexPath) as? CamsTableViewCell {
-                customCamsCell.favoriteStar.isHidden = self.newData.data.cameras[indexPath.section].favorites
+            self.newDataModel.data[indexPath.section].favorites = isFavorite ? false : true
+            if let customCamsCell = self.tableView.cellForRow(at: indexPath) as? DoorsTableViewCell {
+                customCamsCell.favoriteStarDoors.isHidden = !self.newDataModel.data[indexPath.section].favorites
             }
             completion(true)
         }
@@ -115,8 +111,8 @@ extension DoorsScreenViewController {
     }
     
     // MARK: Network request
-    private func getData() {
-        guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
+    private func getDataFromRemoteServer() {
+        guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/doors/") else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let error = error {
@@ -133,7 +129,7 @@ extension DoorsScreenViewController {
             
             guard let remtoteData = data else { return }
             do {
-                self.newData = try JSONDecoder().decode(Cameras.self, from: remtoteData)
+                self.newDataModel = try JSONDecoder().decode(Doors.self, from: remtoteData)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
