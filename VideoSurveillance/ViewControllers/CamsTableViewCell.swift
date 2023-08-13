@@ -28,13 +28,13 @@ class CamsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-
 }
 
 extension CamsTableViewCell {
+    // Configuration the cell for images
     func configCamsCellVideoImage(model: Cameras, indexPath: IndexPath, tableView: UITableView) {
                         
-            guard let url = URL(string: model.data.cameras[indexPath.row].snapshot) else { return }
+            guard let url = URL(string: model.data.cameras[indexPath.section].snapshot) else { return }
             URLSession.shared.dataTask(with: url) { data, _, _ in
                 
                 guard let dataSource = data else { return }
