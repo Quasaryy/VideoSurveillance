@@ -9,6 +9,10 @@ import UIKit
 
 class DoorsTableViewCell: UITableViewCell {
     
+    // MARK: - IB Outlets
+    @IBOutlet weak var unLockTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var unLock: UIImageView!
+    @IBOutlet weak var lockOn: UIImageView!
     @IBOutlet weak var lockOnTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var nameAndStatusStackView: UIStackView!
     @IBOutlet weak var nameAndStatusStackViewTopConstraint: NSLayoutConstraint!
@@ -18,9 +22,19 @@ class DoorsTableViewCell: UITableViewCell {
     @IBOutlet weak var videoCameraDoors: UIImageView!
     
     
+    // MARK: - Properties
+    var isLocked: Bool = false {
+        didSet {
+            lockOn.isHidden = isLocked
+            unLock.isHidden = !isLocked
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configureShadowAndBorders() // For shadow and borders of the cell
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,6 +47,7 @@ class DoorsTableViewCell: UITableViewCell {
     
 }
 
+// MARK: - Methods
 extension DoorsTableViewCell {
     // Configuration the cell for images
     func configDoorsCellVideoImage(model: Doors, indexPath: IndexPath, tableView: UITableView) {

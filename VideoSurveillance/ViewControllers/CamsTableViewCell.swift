@@ -9,7 +9,7 @@ import UIKit
 
 class CamsTableViewCell: UITableViewCell {
     
-    
+    // MARK: - IB Outlets
     @IBOutlet weak var cameraRecorded: UIImageView!
     @IBOutlet weak var camLabel: UILabel!
     @IBOutlet weak var videoCam: UIImageView!
@@ -30,6 +30,7 @@ class CamsTableViewCell: UITableViewCell {
     
 }
 
+// MARK: - Methods
 extension CamsTableViewCell {
     // Configuration the cell for images
     func configCamsCellVideoImage(model: Cameras, indexPath: IndexPath, tableView: UITableView) {

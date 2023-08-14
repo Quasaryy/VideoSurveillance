@@ -20,6 +20,8 @@
 		D28A1BE82A86BBEF002BCEEC /* Circle-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */; };
 		D28A1BE92A86BBEF002BCEEC /* Circe-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE42A86BBEF002BCEEC /* Circe-ExtraBold.otf */; };
 		D28A1BEA2A86BBEF002BCEEC /* Circle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */; };
+		D290D2432A8A1299004D3BFF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D290D2422A8A1299004D3BFF /* Realm */; };
+		D290D2452A8A1299004D3BFF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D290D2442A8A1299004D3BFF /* RealmSwift */; };
 		D2D2167D2A87F08B00068D5C /* Cams.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2167C2A87F08B00068D5C /* Cams.swift */; };
 		D2D216802A87F10A00068D5C /* Doors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2167F2A87F10A00068D5C /* Doors.swift */; };
 		D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D43AC62A87610D00C4E477 /* UISegmentedControl+extensions.swift */; };
@@ -55,6 +57,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D290D2452A8A1299004D3BFF /* RealmSwift in Frameworks */,
+				D290D2432A8A1299004D3BFF /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +163,10 @@
 			dependencies = (
 			);
 			name = VideoSurveillance;
+			packageProductDependencies = (
+				D290D2422A8A1299004D3BFF /* Realm */,
+				D290D2442A8A1299004D3BFF /* RealmSwift */,
+			);
 			productName = VideoSurveillance;
 			productReference = D2027A5B2A86856B00E5D94A /* VideoSurveillance.app */;
 			productType = "com.apple.product-type.application";
@@ -187,6 +195,9 @@
 				Base,
 			);
 			mainGroup = D2027A522A86856B00E5D94A;
+			packageReferences = (
+				D290D2412A8A1299004D3BFF /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = D2027A5C2A86856B00E5D94A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -452,6 +463,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D290D2412A8A1299004D3BFF /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.42.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D290D2422A8A1299004D3BFF /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D290D2412A8A1299004D3BFF /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		D290D2442A8A1299004D3BFF /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D290D2412A8A1299004D3BFF /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D2027A532A86856B00E5D94A /* Project object */;
 }

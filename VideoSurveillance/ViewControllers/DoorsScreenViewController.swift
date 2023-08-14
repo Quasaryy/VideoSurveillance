@@ -54,15 +54,16 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
             cell.videoCameraDoors.isHidden = true
             cell.onlineLabel.isHidden = true
             
-            
             cell.nameAndStatusStackViewTopConstraint.constant = 12
-            cell.lockOnTopConstraint.constant = 0
+            cell.lockOnTopConstraint.constant = 20
+            cell.unLockTopConstraint.constant = 19
         }
         
         // Configure the cell
         cell.configDoorsCellVideoImage(model: newDataModel, indexPath: indexPath, tableView: tableView)
         cell.doorNameLabel.text = newDataModel.data[indexPath.section].name
         cell.favoriteStarDoors.isHidden = !newDataModel.data[indexPath.section].favorites
+        cell.unLock.isHidden = true
         
         return cell
     }
@@ -77,6 +78,11 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Changing lock icons
+        if let customCell = tableView.cellForRow(at: indexPath) as? DoorsTableViewCell {
+            customCell.isLocked = !customCell.isLocked
+        }
         
     }
     

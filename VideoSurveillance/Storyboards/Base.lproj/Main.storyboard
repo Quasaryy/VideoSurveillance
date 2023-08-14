@@ -263,20 +263,29 @@
                                                         <constraint firstAttribute="height" constant="60" id="xYh-xC-YTo"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockon" translatesAutoresizingMaskIntoConstraints="NO" id="Hiv-9v-fFS" userLabel="LockOn">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockon" translatesAutoresizingMaskIntoConstraints="NO" id="Hiv-9v-fFS" userLabel="LockOn">
                                                     <rect key="frame" x="329" y="231" width="24" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="24" id="nwe-78-bud"/>
                                                         <constraint firstAttribute="height" constant="25" id="x8e-he-Lez"/>
                                                     </constraints>
                                                 </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlock" translatesAutoresizingMaskIntoConstraints="NO" id="LBM-uV-INl" userLabel="UnLock">
+                                                    <rect key="frame" x="329" y="229" width="24" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="5yd-0V-Eat"/>
+                                                        <constraint firstAttribute="width" constant="24" id="i1c-vL-y4y"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="iMW-9f-gm9" firstAttribute="top" secondItem="Vbh-Vr-H6n" secondAttribute="top" constant="3" id="5LW-zD-Gct"/>
                                                 <constraint firstItem="FWT-sP-5vl" firstAttribute="top" secondItem="iMW-9f-gm9" secondAttribute="top" constant="223" id="7nP-lU-git"/>
-                                                <constraint firstItem="Hiv-9v-fFS" firstAttribute="top" secondItem="iMW-9f-gm9" secondAttribute="bottom" constant="204" id="AZs-Xs-lnv"/>
+                                                <constraint firstItem="Hiv-9v-fFS" firstAttribute="top" secondItem="iMW-9f-gm9" secondAttribute="top" constant="228" id="AZs-Xs-lnv"/>
                                                 <constraint firstItem="FWT-sP-5vl" firstAttribute="leading" secondItem="Vbh-Vr-H6n" secondAttribute="leading" constant="16" id="DoZ-PE-tnt"/>
+                                                <constraint firstItem="LBM-uV-INl" firstAttribute="top" secondItem="iMW-9f-gm9" secondAttribute="top" constant="226" id="Jxh-ln-4Rg"/>
                                                 <constraint firstAttribute="trailing" secondItem="iMW-9f-gm9" secondAttribute="trailing" constant="3" id="KDd-A7-9Sx"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="LBM-uV-INl" secondAttribute="trailing" constant="1" id="OeH-28-LD6"/>
                                                 <constraint firstAttribute="trailing" secondItem="yZW-oc-GKv" secondAttribute="trailing" id="Psh-Rc-1LH"/>
                                                 <constraint firstItem="aek-oK-lhp" firstAttribute="centerX" secondItem="yZW-oc-GKv" secondAttribute="centerX" id="QBp-di-u95"/>
                                                 <constraint firstItem="aek-oK-lhp" firstAttribute="centerY" secondItem="yZW-oc-GKv" secondAttribute="centerY" id="QTq-Qh-Her"/>
@@ -289,10 +298,13 @@
                                         <connections>
                                             <outlet property="doorNameLabel" destination="Wet-Sd-aOl" id="vJK-BE-sQQ"/>
                                             <outlet property="favoriteStarDoors" destination="iMW-9f-gm9" id="rgu-vr-cyY"/>
+                                            <outlet property="lockOn" destination="Hiv-9v-fFS" id="oui-Or-eOU"/>
                                             <outlet property="lockOnTopConstraint" destination="AZs-Xs-lnv" id="6hF-3q-BYD"/>
                                             <outlet property="nameAndStatusStackView" destination="FWT-sP-5vl" id="Xdu-sY-6iX"/>
                                             <outlet property="nameAndStatusStackViewTopConstraint" destination="7nP-lU-git" id="AYB-SD-7f1"/>
                                             <outlet property="onlineLabel" destination="d7O-Bl-Cdy" id="WGk-d6-814"/>
+                                            <outlet property="unLock" destination="LBM-uV-INl" id="Bhm-O7-j6Z"/>
+                                            <outlet property="unLockTopConstraint" destination="Jxh-ln-4Rg" id="Oj9-Sx-yPd"/>
                                             <outlet property="videoCameraDoors" destination="yZW-oc-GKv" id="fLY-K8-9n4"/>
                                         </connections>
                                     </tableViewCell>
@@ -335,6 +347,7 @@
         <image name="lockon" width="26" height="24"/>
         <image name="playButton" width="60" height="60"/>
         <image name="rec" width="24" height="24"/>
+        <image name="unlock" width="18" height="22"/>
         <image name="videoCamera" width="333" height="207"/>
     </resources>
 </document>
