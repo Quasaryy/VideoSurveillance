@@ -13,6 +13,7 @@ class CameraRealm: Object {
     @objc dynamic var name: String = ""
     @objc dynamic var snapshot: String = ""
     @objc dynamic var room: String?
+    @objc dynamic var roomNameLabel: String?
     @objc dynamic var favorites: Bool = false
     @objc dynamic var rec: Bool = false
     

@@ -18,6 +18,7 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: - Properties
     private let realm = try! Realm() // Creating Realm instance
     private var newDataModel = Cameras.shared // Model for remote data
+    private let refreshControl = UIRefreshControl()
     
     
     override func viewDidLoad() {
@@ -32,6 +33,14 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // Try loading data from Realm on startup
         loadAndDisplayDataFromRealm()
+        
+        // Adding refresh control for TableView
+        tableView.refreshControl = refreshControl
+        
+        // Configure Refresh Control
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching data from remote server")
         
     }
     
@@ -82,6 +91,7 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.camLabel.text = newDataModel.data.cameras[indexPath.section].name
         cell.favoriteStar.isHidden = !newDataModel.data.cameras[indexPath.section].favorites
         cell.cameraRecorded.isHidden = !newDataModel.data.cameras[indexPath.section].rec
+        // roomNameLabel.text = newDataModel.data.cameras[0].room // не знаю нужно ли сразу загружать название комнаты из JSON и какой именно?
         
         return cell
     }
@@ -98,21 +108,31 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // Checking rooms name by Id camera
         let idOfCamera = newDataModel.data.cameras[indexPath.section].id
+        var newRoomValue = ""
+        let roomName = newDataModel.data.cameras[indexPath.section].room
         
         switch idOfCamera {
-        case 1:
-            roomNameLabel.text = newDataModel.data.cameras[indexPath.section].room
-        case 2:
-            roomNameLabel.text = newDataModel.data.cameras[indexPath.section].room
-        case 3:
-            roomNameLabel.text = newDataModel.data.cameras[indexPath.section].room
-        case 6:
-            roomNameLabel.text = newDataModel.data.cameras[indexPath.section].room
+        case 1, 2, 3, 6:
+            newRoomValue = roomName ?? ""
         default:
             return
         }
+        
+        newDataModel.data.cameras[indexPath.section].room = newRoomValue
+        roomNameLabel.text = newRoomValue
+        
+        do {
+            let realm = try Realm()
+            if let existingCamera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
+                try realm.write {
+                    existingCamera.roomNameLabel = newRoomValue
+                }
+            }
+        } catch {
+            print("Error with Realm: \(error)")
+        }
+        
     }
-    
     
 }
 
@@ -124,11 +144,22 @@ extension CamsScreenViewController {
     private func addToFavorites(at indexPath: IndexPath) -> UIContextualAction {
         let isFavorite = newDataModel.data.cameras[indexPath.section].favorites
         let favorites = UIContextualAction(style: .normal, title: "") { _, _, completion in
-            self.newDataModel.data.cameras[indexPath.section].favorites = isFavorite ? false : true
-            if let customCamsCell = self.tableView.cellForRow(at: indexPath) as? CamsTableViewCell {
-                customCamsCell.favoriteStar.isHidden = !self.newDataModel.data.cameras[indexPath.section].favorites
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    self.newDataModel.data.cameras[indexPath.section].favorites = isFavorite ? false : true
+                    let cameraRealm = realm.object(ofType: CameraRealm.self, forPrimaryKey: self.newDataModel.data.cameras[indexPath.section].id)
+                    cameraRealm?.favorites = self.newDataModel.data.cameras[indexPath.section].favorites
+                }
+                
+                if let customCamsCell = self.tableView.cellForRow(at: indexPath) as? CamsTableViewCell {
+                    customCamsCell.favoriteStar.isHidden = !self.newDataModel.data.cameras[indexPath.section].favorites
+                }
+                completion(true)
+            } catch let error {
+                print("Realm error: \(error)")
+                completion(false)
             }
-            completion(true)
         }
         
         favorites.image = UIImage(named: "star")
@@ -167,6 +198,7 @@ extension CamsScreenViewController {
                                 "name": cameraData.name,
                                 "snapshot": cameraData.snapshot,
                                 "room": cameraData.room ?? "",
+                                "roomNameLabel": cameraData.roomNameLabel ?? "",
                                 "favorites": cameraData.favorites,
                                 "rec": cameraData.rec
                             ] as [String : Any])
@@ -202,33 +234,38 @@ extension CamsScreenViewController {
     
     // MARK: Realm section
     // The method of loading data from Realm or from the server
-        private func loadAndDisplayDataFromRealm() {
-            let cameras = realm.objects(CameraRealm.self) // Loading data from Realm
-
-            if cameras.isEmpty {
-                // If there is no data in Realm, make a request to the server
-                getDataFromRemoteServer()
-            } else {
-                // If the data is in the Realm display it
-                newDataModel.data.cameras = cameras.map { cameraRealm in
-                    return Camera(
-                        name: cameraRealm.name,
-                        snapshot: cameraRealm.snapshot,
-                        room: cameraRealm.room,
-                        id: cameraRealm.id,
-                        favorites: cameraRealm.favorites,
-                        rec: cameraRealm.rec
-                    )
-                }
-                tableView.reloadData()
+    private func loadAndDisplayDataFromRealm() {
+        let cameras = realm.objects(CameraRealm.self) // Loading data from Realm
+        
+        if cameras.isEmpty {
+            // If there is no data in Realm, make a request to the server
+            getDataFromRemoteServer()
+        } else {
+            // If the data is in the Realm display it
+            newDataModel.data.cameras = cameras.map { cameraRealm in
+                return Camera(
+                    name: cameraRealm.name,
+                    snapshot: cameraRealm.snapshot,
+                    room: cameraRealm.room,
+                    roomNameLabel: cameraRealm.roomNameLabel,
+                    id: cameraRealm.id,
+                    favorites: cameraRealm.favorites,
+                    rec: cameraRealm.rec
+                )
+            }
+            tableView.reloadData()
+            
+            if let firstCamera = cameras.first {
+                roomNameLabel.text = firstCamera.roomNameLabel
             }
         }
-
-        // Method to update data via pull-to-refresh
-        @objc private func refreshData(_ sender: UIRefreshControl) {
-            getDataFromRemoteServer()
-            sender.endRefreshing()
-        }
+    }
+    
+    // Method to update data via pull-to-refresh
+    @objc private func refreshData(_ sender: UIRefreshControl) {
+        getDataFromRemoteServer()
+        sender.endRefreshing()
+    }
     
 }
 

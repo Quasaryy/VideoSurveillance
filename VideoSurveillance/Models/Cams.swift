@@ -24,7 +24,8 @@ struct DataClass: Codable {
 struct Camera: Codable {
     let name: String
     let snapshot: String
-    let room: String?
+    var room: String?
+    var roomNameLabel: String?
     let id: Int
     var favorites, rec: Bool
 }

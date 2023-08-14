@@ -63,6 +63,7 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
         cell.configDoorsCellVideoImage(model: newDataModel, indexPath: indexPath, tableView: tableView)
         cell.doorNameLabel.text = newDataModel.data[indexPath.section].name
         cell.favoriteStarDoors.isHidden = !newDataModel.data[indexPath.section].favorites
+
         cell.unLock.isHidden = true
         
         return cell
