@@ -22,6 +22,7 @@
 		D28A1BEA2A86BBEF002BCEEC /* Circle-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */; };
 		D290D2432A8A1299004D3BFF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D290D2422A8A1299004D3BFF /* Realm */; };
 		D290D2452A8A1299004D3BFF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D290D2442A8A1299004D3BFF /* RealmSwift */; };
+		D290D2472A8A2DE9004D3BFF /* RealmCams.swift in Sources */ = {isa = PBXBuildFile; fileRef = D290D2462A8A2DE9004D3BFF /* RealmCams.swift */; };
 		D2D2167D2A87F08B00068D5C /* Cams.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2167C2A87F08B00068D5C /* Cams.swift */; };
 		D2D216802A87F10A00068D5C /* Doors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2167F2A87F10A00068D5C /* Doors.swift */; };
 		D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D43AC62A87610D00C4E477 /* UISegmentedControl+extensions.swift */; };
@@ -45,6 +46,7 @@
 		D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Light.otf"; sourceTree = "<group>"; };
 		D28A1BE42A86BBEF002BCEEC /* Circe-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-ExtraBold.otf"; sourceTree = "<group>"; };
 		D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Regular.otf"; sourceTree = "<group>"; };
+		D290D2462A8A2DE9004D3BFF /* RealmCams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCams.swift; sourceTree = "<group>"; };
 		D2D2167C2A87F08B00068D5C /* Cams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cams.swift; sourceTree = "<group>"; };
 		D2D2167F2A87F10A00068D5C /* Doors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doors.swift; sourceTree = "<group>"; };
 		D2D43AC62A87610D00C4E477 /* UISegmentedControl+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+extensions.swift"; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				D2D2167C2A87F08B00068D5C /* Cams.swift */,
 				D2D2167F2A87F10A00068D5C /* Doors.swift */,
+				D290D2462A8A2DE9004D3BFF /* RealmCams.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				D2FF85892A89356D006EF0E7 /* DoorsTableViewCell.swift in Sources */,
 				D2027A632A86856B00E5D94A /* DoorsScreenViewController.swift in Sources */,
 				D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */,
+				D290D2472A8A2DE9004D3BFF /* RealmCams.swift in Sources */,
 				D2D216802A87F10A00068D5C /* Doors.swift in Sources */,
 				D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */,
 				D2EC65172A877B89005D597F /* UIImage+extension.swift in Sources */,

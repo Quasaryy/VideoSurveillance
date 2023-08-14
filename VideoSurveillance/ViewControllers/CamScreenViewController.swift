@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -15,6 +16,7 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
+    private let realm = try! Realm() // Creating Realm instance
     private var newDataModel = Cameras.shared // Model for remote data
     
     
@@ -28,8 +30,9 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         // Adding underline for segmentedControl
         segmentedControl.addUnderlineForSelectedSegment()
         
-        // Getting remote data
-        getDataFromRemoteServer()
+        // Try loading data from Realm on startup
+        loadAndDisplayDataFromRealm()
+        
     }
     
     // MARK: - IB Actions
@@ -137,7 +140,6 @@ extension CamsScreenViewController {
     private func getDataFromRemoteServer() {
         guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
-            
             if let error = error {
                 print(error.localizedDescription)
                 DispatchQueue.main.async {
@@ -150,10 +152,35 @@ extension CamsScreenViewController {
                 print(response)
             }
             
-            guard let remtoteData = data else { return }
+            guard let remoteData = data else { return }
             do {
-                self.newDataModel = try JSONDecoder().decode(Cameras.self, from: remtoteData)
+                let RealmDataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
+                
+                // Saving data to Realm
+                do {
+                    let realm = try Realm()
+                    print("Realm is located at:", realm.configuration.fileURL!)
+                    try realm.write {
+                        realm.add(RealmDataModel.data.cameras.map { cameraData in
+                            return CameraRealm(value: [
+                                "id": cameraData.id,
+                                "name": cameraData.name,
+                                "snapshot": cameraData.snapshot,
+                                "room": cameraData.room ?? "",
+                                "favorites": cameraData.favorites,
+                                "rec": cameraData.rec
+                            ] as [String : Any])
+                        }, update: .modified)
+                    }
+                } catch let error {
+                    print("Realm error: \(error)")
+                    DispatchQueue.main.async {
+                        self.alert(title: "Realm Error", message: "An error occurred while saving data.")
+                    }
+                }
+                
                 DispatchQueue.main.async {
+                    self.newDataModel = RealmDataModel // Update data model
                     self.tableView.reloadData()
                 }
             } catch let error {
@@ -172,6 +199,36 @@ extension CamsScreenViewController {
         alert.addAction(buttonOK)
         present(alert, animated: true)
     }
+    
+    // MARK: Realm section
+    // The method of loading data from Realm or from the server
+        private func loadAndDisplayDataFromRealm() {
+            let cameras = realm.objects(CameraRealm.self) // Loading data from Realm
+
+            if cameras.isEmpty {
+                // If there is no data in Realm, make a request to the server
+                getDataFromRemoteServer()
+            } else {
+                // If the data is in the Realm display it
+                newDataModel.data.cameras = cameras.map { cameraRealm in
+                    return Camera(
+                        name: cameraRealm.name,
+                        snapshot: cameraRealm.snapshot,
+                        room: cameraRealm.room,
+                        id: cameraRealm.id,
+                        favorites: cameraRealm.favorites,
+                        rec: cameraRealm.rec
+                    )
+                }
+                tableView.reloadData()
+            }
+        }
+
+        // Method to update data via pull-to-refresh
+        @objc private func refreshData(_ sender: UIRefreshControl) {
+            getDataFromRemoteServer()
+            sender.endRefreshing()
+        }
     
 }
 

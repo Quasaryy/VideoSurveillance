@@ -22,7 +22,7 @@ struct DataClass: Codable {
 
 // MARK: - Camera
 struct Camera: Codable {
-    let name: String?
+    let name: String
     let snapshot: String
     let room: String?
     let id: Int
