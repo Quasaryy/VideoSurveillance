@@ -16,13 +16,16 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    private let realm = try! Realm() // Creating Realm instance
     private var newDataModel = Cameras.shared // Model for remote data
     private let refreshControl = UIRefreshControl()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Checking Realm location
+        let realm = try! Realm()
+        print("Realm is located at:", realm.configuration.fileURL!)
         
         // Adding delegates and data source for tableView
         tableView.dataSource = self
@@ -39,7 +42,7 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        refreshControl.tintColor = UIColor(red:0.25, green:0.72, blue:0.85, alpha:1.0)
+        refreshControl.tintColor = UIColor(red:0.25, green:0.75, blue:0.85, alpha:1.0)
         refreshControl.attributedTitle = NSAttributedString(string: "Fetching data from remote server")
         
     }
@@ -91,7 +94,6 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.camLabel.text = newDataModel.data.cameras[indexPath.section].name
         cell.favoriteStar.isHidden = !newDataModel.data.cameras[indexPath.section].favorites
         cell.cameraRecorded.isHidden = !newDataModel.data.cameras[indexPath.section].rec
-        // roomNameLabel.text = newDataModel.data.cameras[0].room // не знаю нужно ли сразу загружать название комнаты из JSON и какой именно?
         
         return cell
     }
@@ -123,9 +125,9 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         do {
             let realm = try Realm()
-            if let existingCamera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
+            if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
                 try realm.write {
-                    existingCamera.roomNameLabel = newRoomValue
+                    camera.roomNameLabel = newRoomValue
                 }
             }
         } catch {
@@ -158,8 +160,8 @@ extension CamsScreenViewController {
                 completion(true)
             } catch let error {
                 print("Realm error: \(error)")
-                completion(false)
-            }
+                completion(true)
+            } 
         }
         
         favorites.image = UIImage(named: "star")
@@ -171,6 +173,7 @@ extension CamsScreenViewController {
     private func getDataFromRemoteServer() {
         guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
+            
             if let error = error {
                 print(error.localizedDescription)
                 DispatchQueue.main.async {
@@ -187,10 +190,9 @@ extension CamsScreenViewController {
             do {
                 let RealmDataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
                 
-                // Saving data to Realm
+                // MARK: Saving data to Realm
                 do {
                     let realm = try Realm()
-                    print("Realm is located at:", realm.configuration.fileURL!)
                     try realm.write {
                         realm.add(RealmDataModel.data.cameras.map { cameraData in
                             return CameraRealm(value: [
@@ -235,6 +237,7 @@ extension CamsScreenViewController {
     // MARK: Realm section
     // The method of loading data from Realm or from the server
     private func loadAndDisplayDataFromRealm() {
+        let realm = try! Realm()
         let cameras = realm.objects(CameraRealm.self) // Loading data from Realm
         
         if cameras.isEmpty {

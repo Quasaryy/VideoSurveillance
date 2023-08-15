@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class DoorsTableViewCell: UITableViewCell {
+    
+    
     
     // MARK: - IB Outlets
     @IBOutlet weak var unLockTopConstraint: NSLayoutConstraint!
@@ -28,13 +31,15 @@ class DoorsTableViewCell: UITableViewCell {
             lockOn.isHidden = isLocked
             unLock.isHidden = !isLocked
         }
+        
+        
     }
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureShadowAndBorders() // For shadow and borders of the cell
-        
+                
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -74,4 +79,17 @@ extension DoorsTableViewCell {
         self.layer.borderWidth = 0.3
         self.layer.borderColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1).cgColor
     }
+    
+    func configureCellUI(model: DoorRealm) {
+        // Проверяем является ли значение snapshot пустым
+        if model.snapshot == nil {
+            // Выполняем код только если snapshot пустое
+            videoCameraDoors.isHidden = true
+            onlineLabel.isHidden = true
+            nameAndStatusStackViewTopConstraint.constant = 12
+            lockOnTopConstraint.constant = 20
+            unLockTopConstraint.constant = 19
+        }
+    }
+    
 }

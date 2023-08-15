@@ -14,6 +14,9 @@
 		D2027A682A86856D00E5D94A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2027A672A86856D00E5D94A /* Assets.xcassets */; };
 		D2027A6B2A86856D00E5D94A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */; };
 		D211C4572A87A2B2001DF7C6 /* CamsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D211C4562A87A2B2001DF7C6 /* CamsTableViewCell.swift */; };
+		D22FD0EC2A8AEFF0003D2F7B /* RealmLockIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22FD0EB2A8AEFF0003D2F7B /* RealmLockIcon.swift */; };
+		D253D61E2A8AA089001D7467 /* RealmDoors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D61D2A8AA089001D7467 /* RealmDoors.swift */; };
+		D253D6202A8ABEA8001D7467 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D61F2A8ABEA8001D7467 /* EditViewController.swift */; };
 		D26390712A89040B00D81059 /* CamScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26390702A89040B00D81059 /* CamScreenViewController.swift */; };
 		D28A1BE62A86BBEF002BCEEC /* Circel-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */; };
 		D28A1BE72A86BBEF002BCEEC /* Circe-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */; };
@@ -40,6 +43,9 @@
 		D2027A6A2A86856D00E5D94A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2027A6C2A86856D00E5D94A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D211C4562A87A2B2001DF7C6 /* CamsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamsTableViewCell.swift; sourceTree = "<group>"; };
+		D22FD0EB2A8AEFF0003D2F7B /* RealmLockIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLockIcon.swift; sourceTree = "<group>"; };
+		D253D61D2A8AA089001D7467 /* RealmDoors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDoors.swift; sourceTree = "<group>"; };
+		D253D61F2A8ABEA8001D7467 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		D26390702A89040B00D81059 /* CamScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CamScreenViewController.swift; sourceTree = "<group>"; };
 		D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circel-ExtraLight.otf"; sourceTree = "<group>"; };
 		D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-Bold.otf"; sourceTree = "<group>"; };
@@ -117,6 +123,8 @@
 				D2D2167C2A87F08B00068D5C /* Cams.swift */,
 				D2D2167F2A87F10A00068D5C /* Doors.swift */,
 				D290D2462A8A2DE9004D3BFF /* RealmCams.swift */,
+				D22FD0EB2A8AEFF0003D2F7B /* RealmLockIcon.swift */,
+				D253D61D2A8AA089001D7467 /* RealmDoors.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -143,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				D2027A622A86856B00E5D94A /* DoorsScreenViewController.swift */,
+				D253D61F2A8ABEA8001D7467 /* EditViewController.swift */,
 				D26390702A89040B00D81059 /* CamScreenViewController.swift */,
 				D2FF85882A89356D006EF0E7 /* DoorsTableViewCell.swift */,
 				D211C4562A87A2B2001DF7C6 /* CamsTableViewCell.swift */,
@@ -233,9 +242,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D253D6202A8ABEA8001D7467 /* EditViewController.swift in Sources */,
 				D2D2167D2A87F08B00068D5C /* Cams.swift in Sources */,
 				D2FF85892A89356D006EF0E7 /* DoorsTableViewCell.swift in Sources */,
 				D2027A632A86856B00E5D94A /* DoorsScreenViewController.swift in Sources */,
+				D253D61E2A8AA089001D7467 /* RealmDoors.swift in Sources */,
 				D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */,
 				D290D2472A8A2DE9004D3BFF /* RealmCams.swift in Sources */,
 				D2D216802A87F10A00068D5C /* Doors.swift in Sources */,
@@ -244,6 +255,7 @@
 				D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */,
 				D26390712A89040B00D81059 /* CamScreenViewController.swift in Sources */,
 				D211C4572A87A2B2001DF7C6 /* CamsTableViewCell.swift in Sources */,
+				D22FD0EC2A8AEFF0003D2F7B /* RealmLockIcon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
