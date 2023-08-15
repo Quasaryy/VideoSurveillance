@@ -33,21 +33,21 @@ class DoorsTableViewCell: UITableViewCell {
         }
         
         
+        
+        
     }
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
         configureShadowAndBorders() // For shadow and borders of the cell
-                
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+                
         
-        
-        
-        // Configure the view for the selected state
     }
     
 }
@@ -80,15 +80,20 @@ extension DoorsTableViewCell {
         self.layer.borderColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1).cgColor
     }
     
-    func configureCellUI(model: DoorRealm) {
-        // Проверяем является ли значение snapshot пустым
-        if model.snapshot == nil {
-            // Выполняем код только если snapshot пустое
-            videoCameraDoors.isHidden = true
-            onlineLabel.isHidden = true
-            nameAndStatusStackViewTopConstraint.constant = 12
-            lockOnTopConstraint.constant = 20
-            unLockTopConstraint.constant = 19
+    // Update constraints and visibility of some elements
+    func updateCellWithSnapshotStatus(hidden: Bool) {
+        videoCameraDoors.isHidden = hidden
+        onlineLabel.isHidden = hidden
+        nameAndStatusStackViewTopConstraint.constant = 12
+        lockOnTopConstraint.constant = 20
+        unLockTopConstraint.constant = 19
+        setNeedsLayout()
+    }
+    
+    func updateCellState(model: Doors, indexPath: IndexPath, tableView: UITableView) {
+        if model.data[indexPath.section].snapshot == nil {
+            updateCellWithSnapshotStatus(hidden: true)
+            tableView.rowHeight = 72
         }
     }
     

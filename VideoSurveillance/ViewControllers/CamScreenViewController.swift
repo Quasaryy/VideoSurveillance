@@ -54,8 +54,6 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         // Go to door section by SegmentedControl
         if segmentedControl.selectedSegmentIndex == 1 {
             performSegue(withIdentifier: "toTheDoors", sender: nil)
-        } else {
-            return
         }
         
     }
@@ -188,13 +186,13 @@ extension CamsScreenViewController {
             
             guard let remoteData = data else { return }
             do {
-                let RealmDataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
+                let dataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
                 
                 // MARK: Saving data to Realm
                 do {
                     let realm = try Realm()
                     try realm.write {
-                        realm.add(RealmDataModel.data.cameras.map { cameraData in
+                        realm.add(dataModel.data.cameras.map { cameraData in
                             return CameraRealm(value: [
                                 "id": cameraData.id,
                                 "name": cameraData.name,
@@ -214,7 +212,7 @@ extension CamsScreenViewController {
                 }
                 
                 DispatchQueue.main.async {
-                    self.newDataModel = RealmDataModel // Update data model
+                    self.newDataModel = dataModel // Update data model
                     self.tableView.reloadData()
                 }
             } catch let error {
@@ -256,7 +254,9 @@ extension CamsScreenViewController {
                     rec: cameraRealm.rec
                 )
             }
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
             
             if let firstCamera = cameras.first {
                 roomNameLabel.text = firstCamera.roomNameLabel

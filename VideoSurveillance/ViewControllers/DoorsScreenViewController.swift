@@ -15,10 +15,9 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-    var selectedIndexPath: IndexPath!
-    private var newDataModel = Doors.shared // Model for remote data
+    var selectedIndexPath: IndexPath?
+    private var newDataModel = Doors.shared // Model for remote data and Realm
     private let refreshControl = UIRefreshControl()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +47,10 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editSegue" {
             if let destinationVC = segue.destination as? EditViewController {
-                let id = newDataModel.data[selectedIndexPath.section].id
-                destinationVC.idOfDoor = id
+                if let indexPath = selectedIndexPath {
+                    let id = newDataModel.data[indexPath.section].id
+                    destinationVC.idOfDoor = id
+                }
             }
         }
     }
@@ -75,11 +76,11 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
         let realm = try! Realm()
         let doorName = realm.objects(DoorRealm.self).map { $0.name }
         
-        if let selectedIndexPath = selectedIndexPath, doorName.indices.contains(selectedIndexPath.section) {
-            let selectedDoorName = doorName[selectedIndexPath.section]
-            newDataModel.data[selectedIndexPath.section].name = selectedDoorName
+        if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
+            let selectedDoorName = doorName[indexPath.section]
+            newDataModel.data[indexPath.section].name = selectedDoorName
             
-            tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            tableView.reloadRows(at: [indexPath], with: .none)
         } else {
             print("error")
         }
@@ -100,20 +101,14 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
         
         // Hide the image if it is not on the remote server
         if newDataModel.data[indexPath.section].snapshot == nil {
-            
-            cell.videoCameraDoors.isHidden = true
-            cell.onlineLabel.isHidden = true
-            
-            cell.nameAndStatusStackViewTopConstraint.constant = 12
-            cell.lockOnTopConstraint.constant = 20
-            cell.unLockTopConstraint.constant = 19
+            cell.updateCellState(model: newDataModel, indexPath: indexPath, tableView: tableView)
         }
         
         // Configure the cell
         cell.configDoorsCellVideoImage(model: newDataModel, indexPath: indexPath, tableView: tableView)
         cell.doorNameLabel.text = newDataModel.data[indexPath.section].name
         cell.favoriteStarDoors.isHidden = !newDataModel.data[indexPath.section].favorites
-
+        
         cell.unLock.isHidden = true
         
         return cell
@@ -213,13 +208,13 @@ extension DoorsScreenViewController {
             
             guard let remoteData = data else { return }
             do {
-                let RealmDataModel = try JSONDecoder().decode(Doors.self, from: remoteData)
+                let dataModel = try JSONDecoder().decode(Doors.self, from: remoteData)
                 
                 // MARK: Saving data to Realm
                 do {
                     let realm = try Realm()
                     try realm.write {
-                        realm.add(RealmDataModel.data.map { doorsData in
+                        realm.add(dataModel.data.map { doorsData in
                             return DoorRealm(value: [
                                 "id": doorsData.id,
                                 "name": doorsData.name,
@@ -237,7 +232,7 @@ extension DoorsScreenViewController {
                 }
                 
                 DispatchQueue.main.async {
-                    self.newDataModel = RealmDataModel // Update data model
+                    self.newDataModel = dataModel // Update data model
                     self.tableView.reloadData()
                 }
             } catch let error {
@@ -277,28 +272,15 @@ extension DoorsScreenViewController {
                     snapshot: doorsRealm.snapshot
                 )
             }
-            
-            tableView.reloadData()
-            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
     // Method to update data via pull-to-refresh
     @objc private func refreshData(_ sender: UIRefreshControl) {
-        let realm = try! Realm()
-        let doors = realm.objects(DoorRealm.self)
-        
-        newDataModel.data = doors.map { doorsRealm in
-            return Datum(
-                name: doorsRealm.name,
-                room: doorsRealm.room,
-                id: doorsRealm.id,
-                favorites: doorsRealm.favorites,
-                snapshot: doorsRealm.snapshot
-            )
-        }
-        
-        tableView.reloadData()
+        loadAndDisplayDataFromRealm()
         sender.endRefreshing()
     }
     
