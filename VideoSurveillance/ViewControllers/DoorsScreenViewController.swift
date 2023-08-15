@@ -55,6 +55,23 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func unwindSegueToDoors(segue: UIStoryboardSegue) {
+        guard let sourceViewController = segue.source as? EditViewController else { return }
+        
+        // Saving data from EditViewController to Realm
+        let id = sourceViewController.idOfDoor
+        let textField = sourceViewController.editDoorNameTextField.text
+        do {
+            let realm = try Realm()
+            if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
+                try realm.write {
+                    doors.name = textField ?? ""
+                }
+            }
+        } catch {
+            print("Error with Realm: \(error)")
+        }
+        
+        // Reading data from Realm
         let realm = try! Realm()
         let doorName = realm.objects(DoorRealm.self).map { $0.name }
         

@@ -31,17 +31,7 @@ class EditViewController: UIViewController {
 
     // MARK: IB Actions
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        do {
-            let realm = try Realm()
-            if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: idOfDoor) {
-                try realm.write {
-                    doors.name = editDoorNameTextField.text ?? ""
-                }
-            }
-        } catch {
-            print("Error with Realm: \(error)")
-        }
-        
+        dismiss(animated: true)
     }
     
     // Enable save button if text field are not empty and has been edited

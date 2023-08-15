@@ -9,8 +9,8 @@ import Foundation
 import RealmSwift
 
 class LockIconRealm: Object {
-    @objc dynamic var id = 0
-    @objc dynamic var lockIcon: Bool = false
+    @Persisted var id = 0
+    @Persisted var lockIcon: Bool = false
     
     override static func primaryKey() -> String? {
         return "id"

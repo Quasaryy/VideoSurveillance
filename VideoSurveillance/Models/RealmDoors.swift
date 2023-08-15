@@ -9,11 +9,11 @@ import Foundation
 import RealmSwift
 
 class DoorRealm: Object {
-    @objc dynamic var id = 0
-    @objc dynamic var name: String = ""
-    @objc dynamic var room: String?
-    @objc dynamic var snapshot: String?
-    @objc dynamic var favorites: Bool = false
+    @Persisted var id = 0
+    @Persisted var name: String = ""
+    @Persisted var room: String?
+    @Persisted var snapshot: String?
+    @Persisted var favorites: Bool = false
     
     override static func primaryKey() -> String? {
         return "id"
