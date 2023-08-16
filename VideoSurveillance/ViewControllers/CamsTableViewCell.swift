@@ -16,9 +16,13 @@ class CamsTableViewCell: UITableViewCell {
     @IBOutlet weak var videoCam: UIImageView!
     @IBOutlet weak var favoriteStar: UIImageView!
     @IBOutlet weak var stackViewTopConstaraint: NSLayoutConstraint!
+    @IBOutlet weak var unLock: UIImageView!
     
+    @IBOutlet weak var unLockConstraintTop: NSLayoutConstraint!
+    @IBOutlet weak var lockOn: UIImageView!
     var imageURL: URL?
     
+    @IBOutlet weak var lockOnConstraintTop: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         configureShadowAndBorders() // For shadow and borders of the cell

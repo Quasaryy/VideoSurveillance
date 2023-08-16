@@ -116,17 +116,35 @@
                                                         <constraint firstAttribute="height" constant="40" id="bJ1-d2-Bcq"/>
                                                     </constraints>
                                                 </stackView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockon" translatesAutoresizingMaskIntoConstraints="NO" id="Crt-JW-rPp" userLabel="LockOn">
+                                                    <rect key="frame" x="329" y="237" width="24" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="ZAA-YP-Q3v"/>
+                                                        <constraint firstAttribute="height" constant="25" id="fE7-WL-sVq"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlock" translatesAutoresizingMaskIntoConstraints="NO" id="gFh-0F-DJo" userLabel="UnLock">
+                                                    <rect key="frame" x="329" y="235" width="24" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="iow-6L-pPp"/>
+                                                        <constraint firstAttribute="height" constant="25" id="whm-wc-N4o"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="htY-vS-x3z" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" constant="8" id="0im-MB-NSV"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gFh-0F-DJo" secondAttribute="trailing" constant="1" id="1am-Wg-rSy"/>
+                                                <constraint firstItem="Crt-JW-rPp" firstAttribute="top" secondItem="Wg5-AR-wml" secondAttribute="bottom" constant="210" id="6O7-Qp-Cp3"/>
                                                 <constraint firstItem="htY-vS-x3z" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leading" constant="8" id="AJ0-jY-c4w"/>
                                                 <constraint firstItem="L0G-KL-qKD" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leading" id="DbS-b4-x7G"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Crt-JW-rPp" secondAttribute="trailing" constant="1" id="DgX-ln-Ysp"/>
                                                 <constraint firstItem="wKO-ka-u9j" firstAttribute="centerY" secondItem="L0G-KL-qKD" secondAttribute="centerY" id="JEO-uu-sRL"/>
                                                 <constraint firstAttribute="trailing" secondItem="Wg5-AR-wml" secondAttribute="trailing" constant="3" id="KNk-5L-Bka"/>
                                                 <constraint firstItem="W6D-nS-yD8" firstAttribute="leading" secondItem="TF9-ZO-5Xr" secondAttribute="leading" constant="16" id="Qfr-mX-AeH"/>
                                                 <constraint firstAttribute="trailing" secondItem="L0G-KL-qKD" secondAttribute="trailing" id="Th5-ia-SzY"/>
                                                 <constraint firstItem="W6D-nS-yD8" firstAttribute="top" secondItem="Wg5-AR-wml" secondAttribute="top" constant="223" id="VwJ-BX-vtn"/>
                                                 <constraint firstItem="wKO-ka-u9j" firstAttribute="centerX" secondItem="L0G-KL-qKD" secondAttribute="centerX" id="aLL-hB-20n"/>
+                                                <constraint firstItem="gFh-0F-DJo" firstAttribute="top" secondItem="Wg5-AR-wml" secondAttribute="bottom" constant="208" id="o1B-6k-KjS"/>
                                                 <constraint firstItem="L0G-KL-qKD" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" id="wPu-Bg-jYE"/>
                                                 <constraint firstItem="Wg5-AR-wml" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" constant="3" id="wnL-jI-aES"/>
                                                 <constraint firstItem="L0G-KL-qKD" firstAttribute="top" secondItem="TF9-ZO-5Xr" secondAttribute="top" id="zpQ-NX-UWl"/>
@@ -137,8 +155,12 @@
                                             <outlet property="camLabel" destination="xzf-lU-Z5t" id="rve-O3-yJc"/>
                                             <outlet property="cameraRecorded" destination="htY-vS-x3z" id="DA7-ao-eRc"/>
                                             <outlet property="favoriteStar" destination="Wg5-AR-wml" id="6ny-sW-Yw2"/>
+                                            <outlet property="lockOn" destination="Crt-JW-rPp" id="U2f-Ay-WQa"/>
+                                            <outlet property="lockOnConstraintTop" destination="6O7-Qp-Cp3" id="UJD-IH-X54"/>
                                             <outlet property="onlineLabel" destination="8v5-f9-x3a" id="Q7p-kj-4do"/>
                                             <outlet property="stackViewTopConstaraint" destination="VwJ-BX-vtn" id="qmV-i3-5qd"/>
+                                            <outlet property="unLock" destination="gFh-0F-DJo" id="sFh-pT-Ri5"/>
+                                            <outlet property="unLockConstraintTop" destination="o1B-6k-KjS" id="mzy-pd-XyX"/>
                                             <outlet property="videoCam" destination="L0G-KL-qKD" id="7jQ-fS-MVK"/>
                                         </connections>
                                     </tableViewCell>

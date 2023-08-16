@@ -86,6 +86,8 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.favoriteStar.isHidden = !camDataModel.data.cameras[indexPath.section].favorites
             cell.cameraRecorded.isHidden = !camDataModel.data.cameras[indexPath.section].rec
             cell.stackViewTopConstaraint.constant = 223
+            cell.lockOn.isHidden = true
+            cell.unLock.isHidden = true
             print("Creating cell at indexPath: \(indexPath)")
             return cell
         } else {
@@ -96,6 +98,8 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.favoriteStar.isHidden = !doorDataModel.data[indexPath.section].favorites
             cell.camLabel.text = doorDataModel.data[indexPath.section].name
             cell.cameraRecorded.isHidden = true
+            cell.unLock.isHidden = true
+            cell.lockOn.isHidden = false
             
             //cell.unLock.isHidden = true
             
@@ -105,12 +109,16 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 cell.videoCam.isHidden = true
                 cell.onlineLabel.isHidden = true
                 cell.stackViewTopConstaraint.constant = 12
+                cell.lockOnConstraintTop.constant = 4
+                cell.unLockConstraintTop.constant = 4
                 
             } else {
                 // Configure the cell for doors with non-nil snapshot
                 cell.videoCam.isHidden = false
                 cell.onlineLabel.isHidden = false
                 cell.stackViewTopConstaraint.constant = 223
+                cell.lockOnConstraintTop.constant = 208
+                cell.unLockConstraintTop.constant = 208
                 
                 // Call the method to load and display the image
                 let imageURL = URL(string: doorDataModel.data[indexPath.section].snapshot ?? "")
@@ -146,8 +154,8 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         return 279
     }
     
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        tableView.deselectRow(at: indexPath, animated: true)
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.deselectRow(at: indexPath, animated: true)
     //
     //        // Checking rooms name by Id camera
     //        let idOfCamera = camDataModel.data.cameras[indexPath.section].id
@@ -175,7 +183,9 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     //            print("Error with Realm: \(error)")
     //        }
     //
-    //    }
+        }
+    
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditSegue" {
