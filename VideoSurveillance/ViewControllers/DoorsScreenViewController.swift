@@ -8,6 +8,10 @@
 import UIKit
 import RealmSwift
 
+protocol DoorsScreenViewControllerDelegate: AnyObject {
+    func updateCellState(model: Doors, indexPath: IndexPath, tableView: UITableView)
+}
+
 class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
@@ -16,8 +20,9 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
     
     // MARK: - Properties
     var selectedIndexPath: IndexPath?
-    private var newDataModel = Doors.shared // Model for remote data and Realm
+    private var newDataModel = Doors.shared // Model for remote data
     private let refreshControl = UIRefreshControl()
+    weak var delegate: DoorsScreenViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,17 +104,17 @@ class DoorsScreenViewController: UIViewController, UITableViewDelegate, UITableV
         // Creating and casting cell as custom cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "doorsCell", for: indexPath) as! DoorsTableViewCell
         
-        // Hide the image if it is not on the remote server
-        if newDataModel.data[indexPath.section].snapshot == nil {
-            cell.updateCellState(model: newDataModel, indexPath: indexPath, tableView: tableView)
-        }
-        
         // Configure the cell
         cell.configDoorsCellVideoImage(model: newDataModel, indexPath: indexPath, tableView: tableView)
         cell.doorNameLabel.text = newDataModel.data[indexPath.section].name
         cell.favoriteStarDoors.isHidden = !newDataModel.data[indexPath.section].favorites
         
         cell.unLock.isHidden = true
+        
+        // Hide the image if it is not on the remote server
+        if newDataModel.data[indexPath.section].snapshot == nil {
+            cell.updateCellState(model: newDataModel, indexPath: indexPath, tableView: tableView)
+        }
         
         return cell
     }
@@ -220,7 +225,7 @@ extension DoorsScreenViewController {
                                 "name": doorsData.name,
                                 "snapshot": doorsData.snapshot ?? "",
                                 "room": doorsData.room ?? "",
-                                "favorites": doorsData.favorites,
+                                "favorites": doorsData.favorites
                             ] as [String : Any])
                         }, update: .modified)
                     }
@@ -272,9 +277,7 @@ extension DoorsScreenViewController {
                     snapshot: doorsRealm.snapshot
                 )
             }
-            DispatchQueue.main.async {
                 self.tableView.reloadData()
-            }
         }
     }
     
@@ -282,6 +285,11 @@ extension DoorsScreenViewController {
     @objc private func refreshData(_ sender: UIRefreshControl) {
         loadAndDisplayDataFromRealm()
         sender.endRefreshing()
+    }
+    
+    func updateCellState() {
+        guard let indexPath = selectedIndexPath else { return }
+        delegate?.updateCellState(model: newDataModel, indexPath: indexPath, tableView: tableView)
     }
     
 }

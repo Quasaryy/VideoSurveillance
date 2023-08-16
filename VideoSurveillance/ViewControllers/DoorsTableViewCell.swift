@@ -8,7 +8,9 @@
 import UIKit
 import RealmSwift
 
-class DoorsTableViewCell: UITableViewCell {
+class DoorsTableViewCell: UITableViewCell, DoorsScreenViewControllerDelegate {
+    
+    
     
     
     
@@ -42,6 +44,7 @@ class DoorsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         configureShadowAndBorders() // For shadow and borders of the cell
         
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -87,14 +90,12 @@ extension DoorsTableViewCell {
         nameAndStatusStackViewTopConstraint.constant = 12
         lockOnTopConstraint.constant = 20
         unLockTopConstraint.constant = 19
-        setNeedsLayout()
     }
     
     func updateCellState(model: Doors, indexPath: IndexPath, tableView: UITableView) {
-        if model.data[indexPath.section].snapshot == nil {
-            updateCellWithSnapshotStatus(hidden: true)
-            tableView.rowHeight = 72
-        }
+        updateCellWithSnapshotStatus(hidden: true)
+        tableView.rowHeight = 72
     }
+    
     
 }
