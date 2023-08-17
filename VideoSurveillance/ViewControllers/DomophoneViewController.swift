@@ -16,8 +16,6 @@ class DomophoneViewController: UIViewController {
         
         // Add shadow and borders for the bottom views
         configureShadowAndBorders(for: bottomView)
-        configureShadowAndBorders(for: viewWithKey)
-        
         viewWithKey.layer.cornerRadius = 12
     }
     
@@ -42,10 +40,10 @@ extension DomophoneViewController {
         self.bottomView.layer.shadowColor = UIColor.black.cgColor
         self.bottomView.layer.shadowOffset = CGSize(width: 0, height: -2)
         self.bottomView.layer.shadowRadius = 90
-        self.bottomView.layer.shadowOpacity = 1
+        self.bottomView.layer.shadowOpacity = 0.1
         
         self.bottomView.layer.borderWidth = 0.3
-        self.bottomView.layer.borderColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1).cgColor
+        self.bottomView.layer.borderColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.1).cgColor
     }
     
 }

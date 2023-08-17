@@ -114,8 +114,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.videoCam.isHidden = true
                 cell.onlineLabel.isHidden = true
                 cell.stackViewTopConstaraint.constant = 12
-                cell.lockOnConstraintTop.constant = 4
-                cell.unLockConstraintTop.constant = 4
+                cell.lockOnConstraintTop.constant = 1
+                cell.unLockConstraintTop.constant = 1
                 
             } else {
                 // Configure the cell for doors with non-nil snapshot
@@ -162,30 +162,34 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
     
-            // Checking rooms name by Id camera
-            let idOfCamera = camDataModel.data.cameras[indexPath.section].id
-            var newRoomValue = ""
-            let roomName = camDataModel.data.cameras[indexPath.section].room
-    
-            switch idOfCamera {
-            case 1, 2, 3, 6:
-                newRoomValue = roomName ?? ""
-            default:
-                return
-            }
-    
-            camDataModel.data.cameras[indexPath.section].room = newRoomValue
-            roomNameLabel.text = newRoomValue
-    
-            do {
-                let realm = try Realm()
-                if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
-                    try realm.write {
-                        camera.roomNameLabel = newRoomValue
-                    }
+            if segmentedControl.selectedSegmentIndex == 0 {
+                // Checking rooms name by Id camera
+                let idOfCamera = camDataModel.data.cameras[indexPath.section].id
+                var newRoomValue = ""
+                let roomName = camDataModel.data.cameras[indexPath.section].room
+                
+                switch idOfCamera {
+                case 1, 2, 3, 6:
+                    newRoomValue = roomName ?? ""
+                default:
+                    return
                 }
-            } catch {
-                print("Error with Realm: \(error)")
+                
+                camDataModel.data.cameras[indexPath.section].room = newRoomValue
+                roomNameLabel.text = newRoomValue
+                
+                do {
+                    let realm = try Realm()
+                    if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
+                        try realm.write {
+                            camera.roomNameLabel = newRoomValue
+                        }
+                    }
+                } catch {
+                    print("Error with Realm: \(error)")
+                }
+            } else {
+                self.performSegue(withIdentifier: "toDomophone", sender: nil)
             }
     
         }
