@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CamsTableViewCell: UITableViewCell {
+class CustomTableViewCell: UITableViewCell {
     
     // MARK: - IB Outlets
     @IBOutlet weak var onlineLabel: UILabel!
@@ -17,12 +17,14 @@ class CamsTableViewCell: UITableViewCell {
     @IBOutlet weak var favoriteStar: UIImageView!
     @IBOutlet weak var stackViewTopConstaraint: NSLayoutConstraint!
     @IBOutlet weak var unLock: UIImageView!
-    
     @IBOutlet weak var unLockConstraintTop: NSLayoutConstraint!
     @IBOutlet weak var lockOn: UIImageView!
+    @IBOutlet weak var lockOnConstraintTop: NSLayoutConstraint!
+    
+    // MARK: - Properties
     var imageURL: URL?
     
-    @IBOutlet weak var lockOnConstraintTop: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         configureShadowAndBorders() // For shadow and borders of the cell
@@ -31,37 +33,14 @@ class CamsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        
-        
-        // Configure the view for the selected state
     }
     
 }
 
 // MARK: - Methods
-extension CamsTableViewCell {
+extension CustomTableViewCell {
     // Configuration the cell for images for Cams model
-    func configCellVideoImageCams(imageURL: URL?) {
-        guard let imageURL = imageURL else {
-            videoCam.image = nil
-            return
-        }
-        print("Loading image from: \(imageURL)")
-
-        self.imageURL = imageURL
-        videoCam.image = nil
-
-        URLSession.shared.dataTask(with: imageURL) { [weak self] data, _, _ in
-            guard let self = self, let dataSource = data, self.imageURL == imageURL else { return }
-            let imageSource = UIImage(data: dataSource)
-            DispatchQueue.main.async {
-                self.videoCam.image = imageSource
-            }
-        }.resume()
-    }
-    
-    // Configuration the cell for images for Door model
-    func configCellVideoImageDoors(imageURL: URL?) {
+    func configCellVideoImage(imageURL: URL?) {
         guard let imageURL = imageURL else {
             videoCam.image = nil
             return

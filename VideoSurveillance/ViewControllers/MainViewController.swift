@@ -8,11 +8,13 @@
 import UIKit
 import RealmSwift
 
-class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
+    @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewConstraintTop: NSLayoutConstraint!
     
     // MARK: - Properties
     private var camDataModel = Cameras.shared // Model for remote data
@@ -55,8 +57,12 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         if sender.selectedSegmentIndex == 0 {
             loadAndDisplayDataFromRealmCams()
+            tableViewConstraintTop.constant = 25
+            roomNameLabel.isHidden = false
         } else {
             loadAndDisplayDataFromRealmDoors()
+            tableViewConstraintTop.constant = 5
+            roomNameLabel.isHidden = true
         }
         tableView.reloadData()
     }
@@ -74,12 +80,12 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // Creating and casting cell as custom cell for cams
-        let cell = tableView.dequeueReusableCell(withIdentifier: "camsCell", for: indexPath) as! CamsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
         
         if segmentedControl.selectedSegmentIndex == 0 {
             // Configure the cell for cams
             let imageURL = URL(string: camDataModel.data.cameras[indexPath.section].snapshot)
-            cell.configCellVideoImageDoors(imageURL: imageURL)
+            cell.configCellVideoImage(imageURL: imageURL)
             cell.camLabel.text = camDataModel.data.cameras[indexPath.section].name
             cell.videoCam.isHidden = false
             cell.onlineLabel.isHidden = false
@@ -88,13 +94,12 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.stackViewTopConstaraint.constant = 223
             cell.lockOn.isHidden = true
             cell.unLock.isHidden = true
-            print("Creating cell at indexPath: \(indexPath)")
             return cell
         } else {
             
             // Configure the cell for doors
             let imageURL = URL(string: doorDataModel.data[indexPath.section].snapshot ?? "")
-            cell.configCellVideoImageDoors(imageURL: imageURL)
+            cell.configCellVideoImage(imageURL: imageURL)
             cell.favoriteStar.isHidden = !doorDataModel.data[indexPath.section].favorites
             cell.camLabel.text = doorDataModel.data[indexPath.section].name
             cell.cameraRecorded.isHidden = true
@@ -116,16 +121,16 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 // Configure the cell for doors with non-nil snapshot
                 cell.videoCam.isHidden = false
                 cell.onlineLabel.isHidden = false
+                //cell.
                 cell.stackViewTopConstaraint.constant = 223
                 cell.lockOnConstraintTop.constant = 208
                 cell.unLockConstraintTop.constant = 208
                 
                 // Call the method to load and display the image
                 let imageURL = URL(string: doorDataModel.data[indexPath.section].snapshot ?? "")
-                cell.configCellVideoImageDoors(imageURL: imageURL)
+                cell.configCellVideoImage(imageURL: imageURL)
             }
             
-            print("Creating cell at indexPath: \(indexPath)")
             return cell
         }
     }
@@ -156,33 +161,33 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
-    //
-    //        // Checking rooms name by Id camera
-    //        let idOfCamera = camDataModel.data.cameras[indexPath.section].id
-    //        var newRoomValue = ""
-    //        let roomName = camDataModel.data.cameras[indexPath.section].room
-    //
-    //        switch idOfCamera {
-    //        case 1, 2, 3, 6:
-    //            newRoomValue = roomName ?? ""
-    //        default:
-    //            return
-    //        }
-    //
-    //        camDataModel.data.cameras[indexPath.section].room = newRoomValue
-    //        roomNameLabel.text = newRoomValue
-    //
-    //        do {
-    //            let realm = try Realm()
-    //            if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
-    //                try realm.write {
-    //                    camera.roomNameLabel = newRoomValue
-    //                }
-    //            }
-    //        } catch {
-    //            print("Error with Realm: \(error)")
-    //        }
-    //
+    
+            // Checking rooms name by Id camera
+            let idOfCamera = camDataModel.data.cameras[indexPath.section].id
+            var newRoomValue = ""
+            let roomName = camDataModel.data.cameras[indexPath.section].room
+    
+            switch idOfCamera {
+            case 1, 2, 3, 6:
+                newRoomValue = roomName ?? ""
+            default:
+                return
+            }
+    
+            camDataModel.data.cameras[indexPath.section].room = newRoomValue
+            roomNameLabel.text = newRoomValue
+    
+            do {
+                let realm = try Realm()
+                if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
+                    try realm.write {
+                        camera.roomNameLabel = newRoomValue
+                    }
+                }
+            } catch {
+                print("Error with Realm: \(error)")
+            }
+    
         }
     
     
@@ -234,7 +239,7 @@ class CamsScreenViewController: UIViewController, UITableViewDelegate, UITableVi
 
 
 // MARK: - Private Methods
-extension CamsScreenViewController {
+extension MainViewController {
     
     // Add to favorites cams for trailing swipe for Cams
     private func addToFavoritesCams(at indexPath: IndexPath) -> UIContextualAction {
@@ -248,7 +253,7 @@ extension CamsScreenViewController {
                     cameraRealm?.favorites = self.camDataModel.data.cameras[indexPath.section].favorites
                 }
                 
-                if let customCamsCell = self.tableView.cellForRow(at: indexPath) as? CamsTableViewCell {
+                if let customCamsCell = self.tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
                     customCamsCell.favoriteStar.isHidden = !self.camDataModel.data.cameras[indexPath.section].favorites
                 }
                 completion(true)
@@ -288,7 +293,7 @@ extension CamsScreenViewController {
                     doorRealm?.favorites = self.doorDataModel.data[indexPath.section].favorites
                 }
                 
-                if let customDoorsCell = self.tableView.cellForRow(at: indexPath) as? CamsTableViewCell {
+                if let customDoorsCell = self.tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
                     customDoorsCell.favoriteStar.isHidden = !self.doorDataModel.data[indexPath.section].favorites
                 }
                 completion(true)
@@ -449,7 +454,7 @@ extension CamsScreenViewController {
         }
     }
     
-    // The method of loading data from Realm or from the server
+    // The method of loading data from Realm or from the server for Doors
     private func loadAndDisplayDataFromRealmDoors() {
         let realm = try! Realm()
         let doors = realm.objects(DoorRealm.self) // Loading data from Realm
@@ -474,7 +479,7 @@ extension CamsScreenViewController {
     
     // Method to update data via pull-to-refresh
     @objc private func refreshData(_ sender: UIRefreshControl) {
-        loadAndDisplayDataFromRealmDoors()
+        segmentedControl.selectedSegmentIndex == 0 ? loadAndDisplayDataFromRealmCams() : loadAndDisplayDataFromRealmDoors()
         sender.endRefreshing()
     }
     

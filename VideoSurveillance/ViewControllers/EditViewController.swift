@@ -9,13 +9,13 @@ import UIKit
 import RealmSwift
 
 class EditViewController: UIViewController {
-    
-    // MARK: - Properties
-    var idOfDoor: Int!
-    
+        
     // MARK: IB Outlets
     @IBOutlet weak var editDoorNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
+    
+    // MARK: - Properties
+    var idOfDoor: Int!
     
     
     override func viewDidLoad() {
