@@ -284,14 +284,145 @@
             </objects>
             <point key="canvasLocation" x="1646" y="-139"/>
         </scene>
+        <!--Domophone View Controller-->
+        <scene sceneID="E6P-X6-uQ0">
+            <objects>
+                <viewController id="v0F-0z-ZAb" customClass="DomophoneViewController" customModule="VideoSurveillance" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Nq-lB-8aH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfb-d8-EAa">
+                                <rect key="frame" x="0.0" y="821" width="414" height="75"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="haB-H0-PiR">
+                                        <rect key="frame" x="40" y="14" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="5he-C4-euH"/>
+                                            <constraint firstAttribute="height" constant="32" id="TCI-Hs-gJm"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackscreen" translatesAutoresizingMaskIntoConstraints="NO" id="NZl-wy-tQv">
+                                        <rect key="frame" x="342" y="14" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="6q7-Q9-gRc"/>
+                                            <constraint firstAttribute="width" constant="32" id="kpw-wa-gUA"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Настройки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eE-J1-Rjy">
+                                        <rect key="frame" x="165" y="28" width="84" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="2DK-HG-LAS"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="xQX-7d-roU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Circe-Regular" family="Circe" pointSize="17"/>
+                                        <color key="textColor" red="0.73333333333333328" green="0.73333333333333328" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upArrow" translatesAutoresizingMaskIntoConstraints="NO" id="tfN-ax-GWE">
+                                        <rect key="frame" x="195.5" y="14" width="23" height="16"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="nbm-6p-s3n"/>
+                                            <constraint firstAttribute="width" constant="23" id="xkD-XU-k0v"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="tfN-ax-GWE" firstAttribute="top" secondItem="dfb-d8-EAa" secondAttribute="top" constant="14" id="Cay-uA-1iM"/>
+                                    <constraint firstAttribute="trailing" secondItem="NZl-wy-tQv" secondAttribute="trailing" constant="40" id="YT2-RQ-XGn"/>
+                                    <constraint firstItem="haB-H0-PiR" firstAttribute="leading" secondItem="dfb-d8-EAa" secondAttribute="leading" constant="40" id="ZwF-vA-jhf"/>
+                                    <constraint firstItem="3eE-J1-Rjy" firstAttribute="centerX" secondItem="dfb-d8-EAa" secondAttribute="centerX" id="d2u-q0-SqQ"/>
+                                    <constraint firstItem="NZl-wy-tQv" firstAttribute="top" secondItem="dfb-d8-EAa" secondAttribute="top" constant="14" id="dO7-9U-THz"/>
+                                    <constraint firstAttribute="bottom" secondItem="3eE-J1-Rjy" secondAttribute="bottom" constant="25" id="gXc-pa-dOr"/>
+                                    <constraint firstItem="tfN-ax-GWE" firstAttribute="centerX" secondItem="dfb-d8-EAa" secondAttribute="centerX" id="gqD-dx-cTO"/>
+                                    <constraint firstAttribute="height" constant="75" id="hPh-l7-Tgz"/>
+                                    <constraint firstItem="haB-H0-PiR" firstAttribute="top" secondItem="dfb-d8-EAa" secondAttribute="top" constant="14" id="yuW-Cu-z5D"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2YN-f7-S8f">
+                                <rect key="frame" x="16" y="691" width="382" height="105"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Открыть дверь" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OD6-jX-sI0">
+                                        <rect key="frame" x="144.5" y="78" width="93" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="17" id="cHP-mF-Ab5"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="qc5-KV-6r7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Circe-Regular" family="Circe" pointSize="14"/>
+                                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key" translatesAutoresizingMaskIntoConstraints="NO" id="1m4-KK-r3X">
+                                        <rect key="frame" x="171" y="24" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="64F-nh-1yM"/>
+                                            <constraint firstAttribute="width" constant="40" id="EW4-6x-bjk"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="OD6-jX-sI0" firstAttribute="centerX" secondItem="2YN-f7-S8f" secondAttribute="centerX" id="FDY-4p-1bO"/>
+                                    <constraint firstAttribute="bottom" secondItem="OD6-jX-sI0" secondAttribute="bottom" constant="10" id="Q0A-Fh-ki8"/>
+                                    <constraint firstItem="1m4-KK-r3X" firstAttribute="centerX" secondItem="2YN-f7-S8f" secondAttribute="centerX" id="TSC-lD-9Aq"/>
+                                    <constraint firstItem="1m4-KK-r3X" firstAttribute="top" secondItem="2YN-f7-S8f" secondAttribute="top" constant="24" id="Xed-u4-BHa"/>
+                                    <constraint firstAttribute="height" constant="105" id="gTz-Tp-dYM"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Домофон общедомовой" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81w-Mx-OtZ">
+                                <rect key="frame" x="81.5" y="108" width="251" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="JkL-uc-odH"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="251" id="KzL-nU-BMk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Circe-Regular" family="Circe" pointSize="21"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="domophoneImage" translatesAutoresizingMaskIntoConstraints="NO" id="D4C-Km-O6a">
+                                <rect key="frame" x="0.0" y="169" width="414" height="216"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="uqN-yk-vWJ"/>
+                        <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="uqN-yk-vWJ" firstAttribute="trailing" secondItem="2YN-f7-S8f" secondAttribute="trailing" constant="16" id="1Bk-VY-AKB"/>
+                            <constraint firstItem="uqN-yk-vWJ" firstAttribute="trailing" secondItem="dfb-d8-EAa" secondAttribute="trailing" id="32s-oi-WyI"/>
+                            <constraint firstAttribute="bottom" secondItem="dfb-d8-EAa" secondAttribute="bottom" id="4zj-ZD-vhO"/>
+                            <constraint firstItem="dfb-d8-EAa" firstAttribute="top" secondItem="2YN-f7-S8f" secondAttribute="bottom" constant="25" id="6gA-1z-Q1j"/>
+                            <constraint firstItem="2YN-f7-S8f" firstAttribute="leading" secondItem="uqN-yk-vWJ" secondAttribute="leading" constant="16" id="Cdb-Fy-Wng"/>
+                            <constraint firstItem="dfb-d8-EAa" firstAttribute="leading" secondItem="uqN-yk-vWJ" secondAttribute="leading" id="Eao-jb-xVl"/>
+                            <constraint firstItem="D4C-Km-O6a" firstAttribute="leading" secondItem="9Nq-lB-8aH" secondAttribute="leading" id="EtT-19-bQe"/>
+                            <constraint firstItem="81w-Mx-OtZ" firstAttribute="top" secondItem="uqN-yk-vWJ" secondAttribute="top" constant="60" id="Ir2-ip-ON2"/>
+                            <constraint firstItem="D4C-Km-O6a" firstAttribute="top" secondItem="81w-Mx-OtZ" secondAttribute="bottom" constant="35" id="Lz9-8r-dUW"/>
+                            <constraint firstItem="81w-Mx-OtZ" firstAttribute="centerX" secondItem="9Nq-lB-8aH" secondAttribute="centerX" id="bbT-yR-lMp"/>
+                            <constraint firstAttribute="trailing" secondItem="D4C-Km-O6a" secondAttribute="trailing" id="kBr-2j-o1m"/>
+                            <constraint firstItem="D4C-Km-O6a" firstAttribute="centerX" secondItem="9Nq-lB-8aH" secondAttribute="centerX" id="xya-K5-4Ms"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomView" destination="2YN-f7-S8f" id="ckB-3l-2y6"/>
+                        <outlet property="viewWithKey" destination="2YN-f7-S8f" id="j6d-IK-pTo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xeR-y4-ipq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1153.6231884057972" y="555.80357142857144"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="back" width="32" height="32"/>
         <image name="background-top" width="375" height="154"/>
+        <image name="blackscreen" width="32" height="32"/>
+        <image name="domophoneImage" width="375" height="216"/>
         <image name="favoriteStar" width="24" height="24"/>
+        <image name="key" width="40" height="40"/>
         <image name="lockon" width="26" height="24"/>
         <image name="playButton" width="60" height="60"/>
         <image name="rec" width="24" height="24"/>
         <image name="unlock" width="18" height="22"/>
+        <image name="upArrow" width="25" height="9"/>
         <image name="videoCamera" width="333" height="207"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
