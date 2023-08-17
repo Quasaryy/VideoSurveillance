@@ -7,10 +7,19 @@
 
 import UIKit
 
-class DomophoneViewController: UIViewController {
+class IntercomViewController: UIViewController {
 
+    // MARK: - IB Outlets
+    @IBOutlet weak var intercomImage: UIImageView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var viewWithKey: UIView!
+    @IBOutlet weak var doorOpenLabel: UILabel!
+    
+    // MARK: - Properties
+    private var hideOrNot = true
+    private var openOrCloseDoor = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,7 +28,35 @@ class DomophoneViewController: UIViewController {
         viewWithKey.layer.cornerRadius = 12
     }
     
-
+    
+    
+    @IBAction func keyButtonTapped(_ sender: UIButton) {
+        if openOrCloseDoor == false {
+            doorOpenLabel.text = "Дверь открыта - закрыть дверь"
+            openOrCloseDoor = !openOrCloseDoor
+        } else {
+            doorOpenLabel.text = "Открыть дверь"
+            openOrCloseDoor = !openOrCloseDoor
+        }
+    }
+    
+    @IBAction func hideButtonTapped(_ sender: UIButton) {
+        intercomImage.isHidden = hideOrNot ? true : false
+        hideOrNot = !hideOrNot
+    }
+    
+    @IBAction func upArrowButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func settingsButtonTapper(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func backButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -33,7 +70,7 @@ class DomophoneViewController: UIViewController {
 }
 
 // MARK: - Private Methods
-extension DomophoneViewController {
+extension IntercomViewController {
     // Add shadow and borders for the bottom view
     private func configureShadowAndBorders(for: UIView) {
         self.bottomView.layer.masksToBounds = false

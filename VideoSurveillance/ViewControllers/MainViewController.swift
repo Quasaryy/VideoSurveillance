@@ -41,6 +41,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         loadAndDisplayDataFromRealmCams()
         loadAndDisplayDataFromRealmDoors()
         
+        // Loading room name
+        
         // Adding refresh control for TableView
         tableView.refreshControl = refreshControl
         
@@ -49,6 +51,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshControl.tintColor = UIColor(red:0.25, green:0.75, blue:0.85, alpha:1.0)
         refreshControl.attributedTitle = NSAttributedString(string: "Updating data from Realm")
         
+        // Loading room name
+        roomNameLabel.text = camDataModel.data.cameras.first?.roomNameLabel ?? "Название комнаты"
     }
     
     // MARK: - IB Actions
@@ -175,7 +179,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     return
                 }
                 
-                camDataModel.data.cameras[indexPath.section].room = newRoomValue
+                camDataModel.data.cameras[indexPath.section].roomNameLabel = newRoomValue
                 roomNameLabel.text = newRoomValue
                 
                 do {
@@ -189,7 +193,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     print("Error with Realm: \(error)")
                 }
             } else {
-                self.performSegue(withIdentifier: "toDomophone", sender: nil)
+                self.performSegue(withIdentifier: "toIntercome", sender: nil)
             }
     
         }
@@ -333,7 +337,7 @@ extension MainViewController {
             do {
                 let dataModel = try JSONDecoder().decode(Doors.self, from: remoteData)
                 
-                // MARK: Saving data to Realm for Cams
+                // MARK: Saving data to Realm for Doors
                 do {
                     let realm = try Realm()
                     try realm.write {
@@ -387,7 +391,7 @@ extension MainViewController {
             do {
                 let dataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
                 
-                // MARK: Saving data to Realm for Doors
+                // MARK: Saving data to Realm for Cams
                 do {
                     let realm = try Realm()
                     try realm.write {
