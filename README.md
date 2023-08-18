@@ -5,7 +5,7 @@ Tech Stack: Realm for storing data, Layout from Figma, MVC, GCD, UIKit, TableVie
 ![Иллюстрация к проекту](https://github.com/Quasaryy/VideoSurveillance/blob/main/1.png)
 
 # Start screen with swipe option do add cam to favorites
-![Иллюстрация к проекту](https://github.com/QQuasaryy/VideoSurveillance/blob/main/2.pngg)
+![Иллюстрация к проекту](https://github.com/QQuasaryy/VideoSurveillance/blob/main/2.png)
 
 # Second screen with doors section
 ![Иллюстрация к проекту](https://github.com/Quasaryy/VideoSurveillance/blob/main/3.png)
