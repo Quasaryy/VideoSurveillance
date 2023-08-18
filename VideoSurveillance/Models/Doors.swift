@@ -21,5 +21,6 @@ struct Datum: Codable {
     let id: Int
     var favorites: Bool
     let snapshot: String?
+    var lockIcon: Bool?
 }
 

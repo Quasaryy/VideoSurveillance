@@ -16,9 +16,9 @@ class IntercomViewController: UIViewController {
     @IBOutlet weak var doorOpenLabel: UILabel!
     
     // MARK: - Properties
+    var idOfDoor: Int!
     private var hideOrNot = true
-    private var openOrCloseDoor = false
-    
+    var openOrCloseDoor = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +26,24 @@ class IntercomViewController: UIViewController {
         // Add shadow and borders for the bottom views
         configureShadowAndBorders(for: bottomView)
         viewWithKey.layer.cornerRadius = 12
+        print(openOrCloseDoor)
+        
+        // Checking current status door lock
+        if openOrCloseDoor == false {
+            doorOpenLabel.text = "Дверь открыта - Нажать для закрия"
+        } else {
+            doorOpenLabel.text = "Дверь закрыта - Нажать для открытия"
+        }
     }
     
     
-    
+    // Open or close door
     @IBAction func keyButtonTapped(_ sender: UIButton) {
-        if openOrCloseDoor == false {
-            doorOpenLabel.text = "Дверь открыта - закрыть дверь"
+        if openOrCloseDoor == true {
+            doorOpenLabel.text = "Дверь открыта - Нажать для закрия"
             openOrCloseDoor = !openOrCloseDoor
         } else {
-            doorOpenLabel.text = "Открыть дверь"
+            doorOpenLabel.text = "Дверь закрыта - Нажать для открытия"
             openOrCloseDoor = !openOrCloseDoor
         }
     }
@@ -56,16 +64,6 @@ class IntercomViewController: UIViewController {
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

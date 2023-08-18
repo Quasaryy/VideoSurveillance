@@ -13,7 +13,6 @@
 		D2027A682A86856D00E5D94A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2027A672A86856D00E5D94A /* Assets.xcassets */; };
 		D2027A6B2A86856D00E5D94A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */; };
 		D211C4572A87A2B2001DF7C6 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D211C4562A87A2B2001DF7C6 /* CustomTableViewCell.swift */; };
-		D22FD0EC2A8AEFF0003D2F7B /* RealmLockIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22FD0EB2A8AEFF0003D2F7B /* RealmLockIcon.swift */; };
 		D253D61E2A8AA089001D7467 /* RealmDoors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D61D2A8AA089001D7467 /* RealmDoors.swift */; };
 		D253D6202A8ABEA8001D7467 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D61F2A8ABEA8001D7467 /* EditViewController.swift */; };
 		D26390712A89040B00D81059 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26390702A89040B00D81059 /* MainViewController.swift */; };
@@ -41,7 +40,6 @@
 		D2027A6A2A86856D00E5D94A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2027A6C2A86856D00E5D94A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D211C4562A87A2B2001DF7C6 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		D22FD0EB2A8AEFF0003D2F7B /* RealmLockIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmLockIcon.swift; sourceTree = "<group>"; };
 		D253D61D2A8AA089001D7467 /* RealmDoors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDoors.swift; sourceTree = "<group>"; };
 		D253D61F2A8ABEA8001D7467 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		D26390702A89040B00D81059 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				D2D2167C2A87F08B00068D5C /* Cams.swift */,
 				D2D2167F2A87F10A00068D5C /* Doors.swift */,
 				D290D2462A8A2DE9004D3BFF /* RealmCams.swift */,
-				D22FD0EB2A8AEFF0003D2F7B /* RealmLockIcon.swift */,
 				D253D61D2A8AA089001D7467 /* RealmDoors.swift */,
 			);
 			path = Models;
@@ -251,7 +248,6 @@
 				D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */,
 				D26390712A89040B00D81059 /* MainViewController.swift in Sources */,
 				D211C4572A87A2B2001DF7C6 /* CustomTableViewCell.swift in Sources */,
-				D22FD0EC2A8AEFF0003D2F7B /* RealmLockIcon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

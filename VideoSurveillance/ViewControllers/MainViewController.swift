@@ -71,6 +71,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
     }
     
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toEditSegue" {
+            if let destinationViewController = segue.destination as? EditViewController {
+                if let indexPath = selectedIndexPath {
+                    let id = doorDataModel.data[indexPath.section].id
+                    destinationViewController.idOfDoor = id
+                }
+            }
+        } else if segue.identifier == "toIntercome" {
+            if let destinationViewController = segue.destination as? IntercomViewController {
+                if let indexPath = selectedIndexPath {
+                    let id = doorDataModel.data[indexPath.section].id
+                    destinationViewController.idOfDoor = id
+                    destinationViewController.openOrCloseDoor = doorDataModel.data[indexPath.section].lockIcon!
+                }
+            }
+        }
+    }
+    
     
     // MARK: - TableView Delegate
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -100,17 +120,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.unLock.isHidden = true
             return cell
         } else {
-            
-            // Configure the cell for doors
-            let imageURL = URL(string: doorDataModel.data[indexPath.section].snapshot ?? "")
-            cell.configCellVideoImage(imageURL: imageURL)
-            cell.favoriteStar.isHidden = !doorDataModel.data[indexPath.section].favorites
-            cell.camLabel.text = doorDataModel.data[indexPath.section].name
-            cell.cameraRecorded.isHidden = true
-            cell.unLock.isHidden = true
-            cell.lockOn.isHidden = false
-            
-            //cell.unLock.isHidden = true
+            DispatchQueue.main.async {
+                // Configure the cell for doors
+                let imageURL = URL(string: self.doorDataModel.data[indexPath.section].snapshot ?? "")
+                cell.configCellVideoImage(imageURL: imageURL)
+                cell.favoriteStar.isHidden = !self.doorDataModel.data[indexPath.section].favorites
+                cell.camLabel.text = self.doorDataModel.data[indexPath.section].name
+                cell.cameraRecorded.isHidden = true
+                cell.unLock.isHidden = self.doorDataModel.data[indexPath.section].lockIcon!
+                cell.lockOn.isHidden = !self.doorDataModel.data[indexPath.section].lockIcon!
+            }
             
             // Update cell if image is nil
             if URL(string: doorDataModel.data[indexPath.section].snapshot ?? "") == nil {
@@ -120,23 +139,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.stackViewTopConstaraint.constant = 12
                 cell.lockOnConstraintTop.constant = 1
                 cell.unLockConstraintTop.constant = 1
-                
+
             } else {
                 // Configure the cell for doors with non-nil snapshot
                 cell.videoCam.isHidden = false
                 cell.onlineLabel.isHidden = false
-                //cell.
                 cell.stackViewTopConstaraint.constant = 223
                 cell.lockOnConstraintTop.constant = 208
                 cell.unLockConstraintTop.constant = 208
-                
+
                 // Call the method to load and display the image
                 let imageURL = URL(string: doorDataModel.data[indexPath.section].snapshot ?? "")
                 cell.configCellVideoImage(imageURL: imageURL)
             }
-            
-            return cell
         }
+        return cell
     }
     
     // MARK: - TableView Data Source
@@ -163,83 +180,114 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 279
     }
     
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-    
-            if segmentedControl.selectedSegmentIndex == 0 {
-                // Checking rooms name by Id camera
-                let idOfCamera = camDataModel.data.cameras[indexPath.section].id
-                var newRoomValue = ""
-                let roomName = camDataModel.data.cameras[indexPath.section].room
-                
-                switch idOfCamera {
-                case 1, 2, 3, 6:
-                    newRoomValue = roomName ?? ""
-                default:
-                    return
-                }
-                
-                camDataModel.data.cameras[indexPath.section].roomNameLabel = newRoomValue
-                roomNameLabel.text = newRoomValue
-                
-                do {
-                    let realm = try Realm()
-                    if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
-                        try realm.write {
-                            camera.roomNameLabel = newRoomValue
-                        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            // Checking rooms name by Id camera
+            let idOfCamera = camDataModel.data.cameras[indexPath.section].id
+            var newRoomValue = ""
+            let roomName = camDataModel.data.cameras[indexPath.section].room
+            
+            switch idOfCamera {
+            case 1, 2, 3, 6:
+                newRoomValue = roomName ?? ""
+            default:
+                return
+            }
+            
+            camDataModel.data.cameras[indexPath.section].roomNameLabel = newRoomValue
+            roomNameLabel.text = newRoomValue
+            
+            do {
+                let realm = try Realm()
+                if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
+                    try realm.write {
+                        camera.roomNameLabel = newRoomValue
                     }
-                } catch {
-                    print("Error with Realm: \(error)")
                 }
-            } else {
-                self.performSegue(withIdentifier: "toIntercome", sender: nil)
+            } catch {
+                print("Error with Realm: \(error)")
             }
-    
+        } else {
+            self.selectedIndexPath = indexPath
+            self.performSegue(withIdentifier: "toIntercome", sender: nil)
         }
-    
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toEditSegue" {
-            if let destinationViewController = segue.destination as? EditViewController {
-                if let indexPath = selectedIndexPath {
-                    let id = doorDataModel.data[indexPath.section].id
-                    destinationViewController.idOfDoor = id
-                }
-            }
-        }
+        
     }
     
     
+    // MARK: - Unwind segue
     @IBAction func unwindSegueToMain(segue: UIStoryboardSegue) {
-        guard let sourceViewController = segue.source as? EditViewController else { return }
-        
         // Saving data from EditViewController to Realm
-        let id = sourceViewController.idOfDoor
-        let textField = sourceViewController.editDoorNameTextField.text
-        do {
-            let realm = try Realm()
-            if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
-                try realm.write {
-                    doors.name = textField ?? ""
-                }
-            }
-        } catch {
-            print("Error with Realm: \(error)")
-        }
-        
-        // Reading data from Realm
-        let realm = try! Realm()
-        let doorName = realm.objects(DoorRealm.self).map { $0.name }
-        
-        if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
-            let selectedDoorName = doorName[indexPath.section]
-            doorDataModel.data[indexPath.section].name = selectedDoorName
+        if let sourceViewController = segue.source as? EditViewController {
             
-            tableView.reloadRows(at: [indexPath], with: .none)
-        } else {
-            print("error")
+            let id = sourceViewController.idOfDoor
+            let textField = sourceViewController.editDoorNameTextField.text
+            do {
+                let realm = try Realm()
+                if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
+                    try realm.write {
+                        doors.name = textField ?? ""
+                    }
+                }
+            } catch {
+                print("Error with Realm: \(error)")
+            }
+            
+            // Reading data from Realm
+            let realm = try! Realm()
+            let doorName = realm.objects(DoorRealm.self).map { $0.name }
+            
+            if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
+                let selectedDoorName = doorName[indexPath.section]
+                doorDataModel.data[indexPath.section].name = selectedDoorName
+                
+            } else {
+                print("error")
+            }
+            // Saving data from IntercomeViewController to Realm
+        } else if let sourceViewController = segue.source as? IntercomViewController {
+            
+            let id = sourceViewController.idOfDoor
+            let statusLock = sourceViewController.openOrCloseDoor
+            do {
+                let realm = try Realm()
+                if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
+                    try realm.write {
+                        doors.lockIcon = statusLock
+                    }
+                }
+            } catch {
+                print("Error with Realm: \(error)")
+            }
+            
+            // Reading data from Realm
+            let realm = try! Realm()
+            let lockIconStatus = realm.objects(DoorRealm.self).map { $0.lockIcon }
+            
+            if let indexPath = selectedIndexPath, lockIconStatus.indices.contains(indexPath.section) {
+                let lockStatus = lockIconStatus[indexPath.section]
+                doorDataModel.data[indexPath.section].lockIcon = lockStatus
+                print(lockStatus)
+                
+                
+                if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
+                    if doorDataModel.data[indexPath.section].lockIcon == true {
+                        customCell.unLock.isHidden = true
+                        customCell.lockOn.isHidden = false
+                    } else {
+                        if doorDataModel.data[indexPath.section].lockIcon == false {
+                            customCell.unLock.isHidden = false
+                            customCell.lockOn.isHidden = true
+                        }
+                    }
+
+                }
+                tableView.reloadData()
+            } else {
+                print("error")
+            }
         }
     }
     
@@ -347,7 +395,8 @@ extension MainViewController {
                                 "name": doorsData.name,
                                 "snapshot": doorsData.snapshot ?? "",
                                 "room": doorsData.room ?? "",
-                                "favorites": doorsData.favorites
+                                "favorites": doorsData.favorites,
+                                "lockIcon": doorsData.lockIcon ?? true
                             ] as [String : Any])
                         }, update: .modified)
                     }
@@ -457,7 +506,7 @@ extension MainViewController {
                     rec: cameraRealm.rec
                 )
             }
-                self.tableView.reloadData()
+            self.tableView.reloadData()
             
         }
     }
@@ -478,7 +527,8 @@ extension MainViewController {
                     room: doorsRealm.room,
                     id: doorsRealm.id,
                     favorites: doorsRealm.favorites,
-                    snapshot: doorsRealm.snapshot
+                    snapshot: doorsRealm.snapshot,
+                    lockIcon: doorsRealm.lockIcon
                 )
             }
             self.tableView.reloadData()

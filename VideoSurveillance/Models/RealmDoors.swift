@@ -14,6 +14,7 @@ class DoorRealm: Object {
     @Persisted var room: String?
     @Persisted var snapshot: String?
     @Persisted var favorites: Bool = false
+    @Persisted var lockIcon: Bool = false
     
     override static func primaryKey() -> String? {
         return "id"

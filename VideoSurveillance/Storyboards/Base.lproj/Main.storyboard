@@ -206,7 +206,7 @@
                         <outlet property="tableView" destination="4yB-Hy-cYN" id="uvm-lU-hX8"/>
                         <outlet property="tableViewConstraintTop" destination="YWi-FI-QwS" id="1as-Eo-ORf"/>
                         <segue destination="T5b-Lf-U9p" kind="presentation" identifier="toEditSegue" id="f34-Sw-R2G"/>
-                        <segue destination="v0F-0z-ZAb" kind="presentation" identifier="toIntercome" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="bEi-AE-j26"/>
+                        <segue destination="v0F-0z-ZAb" kind="presentation" identifier="toIntercome" id="ieJ-aQ-0rK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -290,11 +290,11 @@
             <objects>
                 <viewController id="v0F-0z-ZAb" customClass="IntercomViewController" customModule="VideoSurveillance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Nq-lB-8aH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfb-d8-EAa">
-                                <rect key="frame" x="0.0" y="821" width="414" height="75"/>
+                                <rect key="frame" x="0.0" y="811" width="414" height="75"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I2O-j1-Pp8">
                                         <rect key="frame" x="342" y="13" width="56" height="32"/>
@@ -318,6 +318,7 @@
                                         <buttonConfiguration key="configuration" style="plain" image="back"/>
                                         <connections>
                                             <action selector="backButtonTapped:" destination="v0F-0z-ZAb" eventType="touchUpInside" id="cVt-ic-G1Y"/>
+                                            <segue destination="d0C-pv-NW5" kind="unwind" unwindAction="unwindSegueToMainWithSegue:" id="XB4-EE-juS"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtA-wF-3gL">
@@ -366,7 +367,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2YN-f7-S8f">
-                                <rect key="frame" x="16" y="691" width="382" height="105"/>
+                                <rect key="frame" x="16" y="681" width="382" height="105"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Открыть дверь" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OD6-jX-sI0">
                                         <rect key="frame" x="144.5" y="78" width="93" height="17"/>
@@ -439,6 +440,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeR-y4-ipq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="d0C-pv-NW5" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1153.6231884057972" y="555.80357142857144"/>
         </scene>
