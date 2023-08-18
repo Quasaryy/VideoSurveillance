@@ -117,10 +117,10 @@
                                                     </constraints>
                                                 </stackView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lockon" translatesAutoresizingMaskIntoConstraints="NO" id="Crt-JW-rPp" userLabel="LockOn">
-                                                    <rect key="frame" x="329" y="237" width="24" height="25"/>
+                                                    <rect key="frame" x="325" y="237" width="28" height="26"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="24" id="ZAA-YP-Q3v"/>
-                                                        <constraint firstAttribute="height" constant="25" id="fE7-WL-sVq"/>
+                                                        <constraint firstAttribute="width" constant="28" id="ZAA-YP-Q3v"/>
+                                                        <constraint firstAttribute="height" constant="26" id="fE7-WL-sVq"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unlock" translatesAutoresizingMaskIntoConstraints="NO" id="gFh-0F-DJo" userLabel="UnLock">
