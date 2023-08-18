@@ -1,5 +1,5 @@
 # VideoSurveillance
-Tech Stack: Realm for storing data, Layout from Figma, MVC, GCD, UIKit, TableView with custom swipes to add to favorites and edit, Delegates, Pull to refresh from Realm
+Tech Stack: Realm for storing data, Layout from Figma, MVC, GCD, UIKit, TableView with custom swipes to add to favorites and edit, Delegates, Pull to refresh from Realm **(Test work by employer)**
 
 # Start screen with camers
 ![Иллюстрация к проекту](https://github.com/Quasaryy/VideoSurveillance/blob/main/1.png)
