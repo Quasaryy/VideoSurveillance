@@ -18,3 +18,7 @@ Tech Stack: Realm for storing data, Layout from Figma, MVC, GCD, UIKit, TableVie
 
 # Open or close door with some settings
 ![Иллюстрация к проекту](https://github.com/Quasaryy/VideoSurveillance/blob/main/6.png)
+
+# video
+![Иллюстрация к проекту](https://github.com/Quasaryy/VideoSurveillance/blob/main/Screen%20Recording%202023-08-18%20at%2015.09.49.mov)
+Quasaryy/VideoSurveillance/blob/main/Screen%20Recording%202023-08-18%20at%2015.09.49.mov
