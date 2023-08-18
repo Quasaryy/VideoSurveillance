@@ -361,9 +361,9 @@
                                     <constraint firstItem="I2O-j1-Pp8" firstAttribute="top" secondItem="dfb-d8-EAa" secondAttribute="top" constant="13" id="Yvh-4N-QCl"/>
                                     <constraint firstItem="78x-Zy-yuQ" firstAttribute="top" secondItem="dfb-d8-EAa" secondAttribute="top" constant="13" id="bK1-tC-x7i"/>
                                     <constraint firstAttribute="height" constant="75" id="hPh-l7-Tgz"/>
-                                    <constraint firstItem="I2O-j1-Pp8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XtA-wF-3gL" secondAttribute="trailing" constant="65" id="kud-ZK-50Q"/>
+                                    <constraint firstItem="I2O-j1-Pp8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XtA-wF-3gL" secondAttribute="trailing" constant="55" id="kud-ZK-50Q"/>
                                     <constraint firstItem="YzR-Bf-eMU" firstAttribute="centerX" secondItem="dfb-d8-EAa" secondAttribute="centerX" id="t8c-cP-0J3"/>
-                                    <constraint firstItem="XtA-wF-3gL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="78x-Zy-yuQ" secondAttribute="trailing" constant="65" id="yZk-tx-6NU"/>
+                                    <constraint firstItem="XtA-wF-3gL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="78x-Zy-yuQ" secondAttribute="trailing" constant="55" id="yZk-tx-6NU"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2YN-f7-S8f">
