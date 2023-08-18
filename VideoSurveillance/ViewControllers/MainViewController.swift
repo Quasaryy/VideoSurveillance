@@ -219,7 +219,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // MARK: - Unwind segue
     @IBAction func unwindSegueToMain(segue: UIStoryboardSegue) {
-        // Saving data from EditViewController to Realm
+        // Saving data from EditViewController to Realm for door name
         if let sourceViewController = segue.source as? EditViewController {
             
             let id = sourceViewController.idOfDoor
@@ -235,18 +235,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Error with Realm: \(error)")
             }
             
-            // Reading data from Realm
+            // Reading data from Realm for door name
             let realm = try! Realm()
             let doorName = realm.objects(DoorRealm.self).map { $0.name }
             
             if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
                 let selectedDoorName = doorName[indexPath.section]
                 doorDataModel.data[indexPath.section].name = selectedDoorName
+                tableView.reloadRows(at: [indexPath], with: .automatic)
                 
             } else {
                 print("error")
             }
-            // Saving data from IntercomeViewController to Realm
+            // Saving data from IntercomeViewController to Realm for door lock ststus
         } else if let sourceViewController = segue.source as? IntercomViewController {
             
             let id = sourceViewController.idOfDoor
@@ -262,7 +263,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 print("Error with Realm: \(error)")
             }
             
-            // Reading data from Realm
+            // Reading data from Realm door lock ststus
             let realm = try! Realm()
             let lockIconStatus = realm.objects(DoorRealm.self).map { $0.lockIcon }
             
@@ -280,6 +281,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         if doorDataModel.data[indexPath.section].lockIcon == false {
                             customCell.unLock.isHidden = false
                             customCell.lockOn.isHidden = true
+                            tableView.reloadRows(at: [indexPath], with: .automatic)
                         }
                     }
 

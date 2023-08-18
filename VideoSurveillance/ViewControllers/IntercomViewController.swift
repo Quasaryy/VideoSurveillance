@@ -30,9 +30,9 @@ class IntercomViewController: UIViewController {
         
         // Checking current status door lock
         if openOrCloseDoor == false {
-            doorOpenLabel.text = "Дверь открыта - Нажать для закрия"
+            doorOpenLabel.text = "Дверь открыта - (Закрыть)"
         } else {
-            doorOpenLabel.text = "Дверь закрыта - Нажать для открытия"
+            doorOpenLabel.text = "Дверь закрыта - (Открыть)"
         }
     }
     
@@ -40,10 +40,10 @@ class IntercomViewController: UIViewController {
     // Open or close door
     @IBAction func keyButtonTapped(_ sender: UIButton) {
         if openOrCloseDoor == true {
-            doorOpenLabel.text = "Дверь открыта - Нажать для закрия"
+            doorOpenLabel.text = "Дверь открыта - (Закрыть)"
             openOrCloseDoor = !openOrCloseDoor
         } else {
-            doorOpenLabel.text = "Дверь закрыта - Нажать для открытия"
+            doorOpenLabel.text = "Дверь закрыта - (Открыть)"
             openOrCloseDoor = !openOrCloseDoor
         }
     }
