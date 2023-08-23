@@ -26,7 +26,7 @@ class IntercomViewController: UIViewController {
         // Add shadow and borders for the bottom views
         configureShadowAndBorders(for: bottomView)
         viewWithKey.layer.cornerRadius = 12
-        print(openOrCloseDoor)
+        Logger.logLockStatus(openOrCloseDoor)
         
         // Checking current status door lock
         if openOrCloseDoor == false {

@@ -21,14 +21,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var doorDataModel = Doors.shared // Model for remote data
     private let refreshControl = UIRefreshControl()
     private var selectedIndexPath: IndexPath?
+    private var realm: Realm?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Checking Realm location
-        let realm = try! Realm()
-        print("Realm is located at:", realm.configuration.fileURL!)
+        do {
+               realm = try Realm()
+           } catch {
+               Logger.logRealmInitializationError(error)
+           }
+
+        if let realm = realm {
+            Logger.logRealmLocation(realm)
+        }
         
         // Adding delegates and data source for tableView
         tableView.dataSource = self
@@ -126,7 +134,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
                 // Configure the cell for doors with nil snapshot
                 cell.configCellForDoorsIfSnapshotNil()
-
+                
             } else {
                 // Configure the cell for doors with non-nil snapshot
                 cell.configCellForDoorsIfSnapshotIsNotNil(indexPath: indexPath, model: doorDataModel)
@@ -186,7 +194,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
             } catch {
-                print("Error with Realm: \(error)")
+                Logger.logRealmError(error)
             }
         } else {
             self.selectedIndexPath = indexPath
@@ -211,7 +219,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
             } catch {
-                print("Error with Realm: \(error)")
+                Logger.logRealmError(error)
             }
             
             // Reading data from Realm for door name
@@ -224,7 +232,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 tableView.reloadRows(at: [indexPath], with: .automatic)
                 
             } else {
-                print("error")
+                Logger.log("error")
             }
             // Saving data from IntercomeViewController to Realm for door lock ststus
         } else if let sourceViewController = segue.source as? IntercomViewController {
@@ -239,7 +247,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                 }
             } catch {
-                print("Error with Realm: \(error)")
+                Logger.logRealmError(error)
             }
             
             // Reading data from Realm door lock ststus
@@ -249,7 +257,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let indexPath = selectedIndexPath, lockIconStatus.indices.contains(indexPath.section) {
                 let lockStatus = lockIconStatus[indexPath.section]
                 doorDataModel.data[indexPath.section].lockIcon = lockStatus
-                print(lockStatus)
+                Logger.logLockStatus(lockStatus)
                 
                 
                 if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
@@ -263,11 +271,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                             tableView.reloadRows(at: [indexPath], with: .automatic)
                         }
                     }
-
+                    
                 }
                 tableView.reloadData()
             } else {
-                print("error")
+                Logger.log("error")
             }
         }
     }
@@ -295,7 +303,7 @@ extension MainViewController {
                 }
                 completion(true)
             } catch let error {
-                print("Realm error: \(error)")
+                Logger.logRealmError(error)
                 completion(true)
             }
         }
@@ -335,7 +343,7 @@ extension MainViewController {
                 }
                 completion(true)
             } catch let error {
-                print("Realm error: \(error)")
+                Logger.logRealmError(error)
                 completion(true)
             }
         }
@@ -351,15 +359,12 @@ extension MainViewController {
         URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let error = error {
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self.alert(title: "Something wrong", message: error.localizedDescription)
-                }
+                Logger.logErrorDescription(error)
                 return
             }
             
             if let response = response {
-                print(response)
+                Logger.logResponse(response)
             }
             
             guard let remoteData = data else { return }
@@ -382,10 +387,8 @@ extension MainViewController {
                         }, update: .modified)
                     }
                 } catch let error {
-                    print("Realm error: \(error)")
-                    DispatchQueue.main.async {
-                        self.alert(title: "Realm Error", message: "An error occurred while saving data.")
-                    }
+                    Logger.logRealmError(error)
+                    
                 }
                 
                 DispatchQueue.main.async {
@@ -393,10 +396,8 @@ extension MainViewController {
                     self.tableView.reloadData()
                 }
             } catch let error {
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self.alert(title: "Remote data decoding error", message: "We are working on fixing the bug, please try again later.")
-                }
+                Logger.logErrorDescription(error)
+                
             }
         }.resume()
     }
@@ -406,15 +407,12 @@ extension MainViewController {
         URLSession.shared.dataTask(with: url) { data, response, error in
             
             if let error = error {
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self.alert(title: "Something wrong", message: error.localizedDescription)
-                }
+                Logger.logErrorDescription(error)
                 return
             }
             
             if let response = response {
-                print(response)
+                Logger.logResponse(response)
             }
             
             guard let remoteData = data else { return }
@@ -438,10 +436,8 @@ extension MainViewController {
                         }, update: .modified)
                     }
                 } catch let error {
-                    print("Realm error: \(error)")
-                    DispatchQueue.main.async {
-                        self.alert(title: "Realm Error", message: "An error occurred while saving data.")
-                    }
+                    Logger.logRealmError(error)
+   
                 }
                 
                 DispatchQueue.main.async {
@@ -449,46 +445,23 @@ extension MainViewController {
                     self.tableView.reloadData()
                 }
             } catch let error {
-                print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    self.alert(title: "Remote data decoding error", message: "We are working on fixing the bug, please try again later.")
-                }
+                Logger.logErrorDescription(error)
+                
             }
         }.resume()
-    }
-    
-    // MARK: Alert controller
-    func alert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let buttonOK = UIAlertAction(title: "OK", style: .default)
-        alert.addAction(buttonOK)
-        present(alert, animated: true)
     }
     
     // MARK: Realm section
     // The method of loading data from Realm or from the server
     private func loadAndDisplayDataFromRealmCams() {
-        let realm = try! Realm()
-        let cameras = realm.objects(CameraRealm.self) // Loading data from Realm
+        let cameras = DataManagerForRealm.shared.loadCameras()
         
         if cameras.isEmpty {
             // If there is no data in Realm, make a request to the server
             getCamsDataFromRemoteServer()
         } else {
-            // If the data is in the Realm display it
-            camDataModel.data.cameras = cameras.map { cameraRealm in
-                return Camera(
-                    name: cameraRealm.name,
-                    snapshot: cameraRealm.snapshot,
-                    room: cameraRealm.room,
-                    roomNameLabel: cameraRealm.roomNameLabel,
-                    id: cameraRealm.id,
-                    favorites: cameraRealm.favorites,
-                    rec: cameraRealm.rec
-                )
-            }
+            camDataModel.data.cameras = cameras
             self.tableView.reloadData()
-            
         }
     }
     
