@@ -106,6 +106,7 @@ extension CustomTableViewCell {
         lockOnConstraintTop.constant = 1
         unLockConstraintTop.constant = 1
     }
+    
     // Configure the cell for doors with non-nil snapshot
     func configCellForDoorsIfSnapshotIsNotNil(indexPath: IndexPath, model: Doors) {
         // Configure the cell for doors with non-nil snapshot

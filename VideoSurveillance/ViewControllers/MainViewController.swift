@@ -48,7 +48,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Configure Refresh Control
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        refreshControl.tintColor = UIColor(red:0.25, green:0.75, blue:0.85, alpha:1.0)
+        refreshControl.tintColor = UIColor(red: 63/255, green: 192/255, blue: 216/255, alpha: 1.0)
         refreshControl.attributedTitle = NSAttributedString(string: "Updating data from Realm")
         
         // Loading room name
