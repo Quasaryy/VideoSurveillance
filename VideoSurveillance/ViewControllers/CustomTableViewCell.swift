@@ -45,10 +45,10 @@ extension CustomTableViewCell {
             videoCam.image = nil
             return
         }
-
+        
         self.imageURL = imageURL
         videoCam.image = nil
-
+        
         URLSession.shared.dataTask(with: imageURL) { [weak self] data, _, _ in
             guard let self = self, let dataSource = data, self.imageURL == imageURL else { return }
             let imageSource = UIImage(data: dataSource)
@@ -68,6 +68,56 @@ extension CustomTableViewCell {
         
         self.layer.borderWidth = 0.3
         self.layer.borderColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1).cgColor
+    }
+    
+    // Configure the cell for cams
+    func configCellForCams(indexPath: IndexPath, model: Cameras) {
+        let imageURL = URL(string: model.data.cameras[indexPath.section].snapshot)
+        configCellVideoImage(imageURL: imageURL)
+        camLabel.text = model.data.cameras[indexPath.section].name
+        videoCam.isHidden = false
+        onlineLabel.isHidden = false
+        favoriteStar.isHidden = !model.data.cameras[indexPath.section].favorites
+        cameraRecorded.isHidden = !model.data.cameras[indexPath.section].rec
+        stackViewTopConstaraint.constant = 223
+        lockOn.isHidden = true
+        unLock.isHidden = true
+    }
+    
+    // Configure the cell for doors
+    func configCellForDoors(indexPath: IndexPath, model: Doors) {
+        DispatchQueue.main.async {
+            // Configure the cell for doors
+            let imageURL = URL(string: model.data[indexPath.section].snapshot ?? "")
+            self.configCellVideoImage(imageURL: imageURL)
+            self.favoriteStar.isHidden = !model.data[indexPath.section].favorites
+            self.camLabel.text = model.data[indexPath.section].name
+            self.cameraRecorded.isHidden = true
+            self.unLock.isHidden = model.data[indexPath.section].lockIcon!
+            self.lockOn.isHidden = !model.data[indexPath.section].lockIcon!
+        }
+    }
+    
+    // Configure the cell for doors with nil snapshot
+    func configCellForDoorsIfSnapshotNil() {
+        videoCam.isHidden = true
+        onlineLabel.isHidden = true
+        stackViewTopConstaraint.constant = 12
+        lockOnConstraintTop.constant = 1
+        unLockConstraintTop.constant = 1
+    }
+    // Configure the cell for doors with non-nil snapshot
+    func configCellForDoorsIfSnapshotIsNotNil(indexPath: IndexPath, model: Doors) {
+        // Configure the cell for doors with non-nil snapshot
+        videoCam.isHidden = false
+        onlineLabel.isHidden = false
+        stackViewTopConstaraint.constant = 223
+        lockOnConstraintTop.constant = 208
+        unLockConstraintTop.constant = 208
+        
+        // Call the method to load and display the image
+        let imageURL = URL(string: model.data[indexPath.section].snapshot ?? "")
+        configCellVideoImage(imageURL: imageURL)
     }
     
     

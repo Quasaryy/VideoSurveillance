@@ -103,54 +103,29 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // Creating and casting cell as custom cell for cams
+        // Creating and casting cell as custom cell for cams and doors
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
         
         if segmentedControl.selectedSegmentIndex == 0 {
+            
             // Configure the cell for cams
-            let imageURL = URL(string: camDataModel.data.cameras[indexPath.section].snapshot)
-            cell.configCellVideoImage(imageURL: imageURL)
-            cell.camLabel.text = camDataModel.data.cameras[indexPath.section].name
-            cell.videoCam.isHidden = false
-            cell.onlineLabel.isHidden = false
-            cell.favoriteStar.isHidden = !camDataModel.data.cameras[indexPath.section].favorites
-            cell.cameraRecorded.isHidden = !camDataModel.data.cameras[indexPath.section].rec
-            cell.stackViewTopConstaraint.constant = 223
-            cell.lockOn.isHidden = true
-            cell.unLock.isHidden = true
+            cell.configCellForCams(indexPath: indexPath, model: camDataModel)
+            
             return cell
         } else {
-            DispatchQueue.main.async {
-                // Configure the cell for doors
-                let imageURL = URL(string: self.doorDataModel.data[indexPath.section].snapshot ?? "")
-                cell.configCellVideoImage(imageURL: imageURL)
-                cell.favoriteStar.isHidden = !self.doorDataModel.data[indexPath.section].favorites
-                cell.camLabel.text = self.doorDataModel.data[indexPath.section].name
-                cell.cameraRecorded.isHidden = true
-                cell.unLock.isHidden = self.doorDataModel.data[indexPath.section].lockIcon!
-                cell.lockOn.isHidden = !self.doorDataModel.data[indexPath.section].lockIcon!
-            }
+            
+            // Configure the cell for doors
+            cell.configCellForDoors(indexPath: indexPath, model: doorDataModel)
             
             // Update cell if image is nil
             if URL(string: doorDataModel.data[indexPath.section].snapshot ?? "") == nil {
+                
                 // Configure the cell for doors with nil snapshot
-                cell.videoCam.isHidden = true
-                cell.onlineLabel.isHidden = true
-                cell.stackViewTopConstaraint.constant = 12
-                cell.lockOnConstraintTop.constant = 1
-                cell.unLockConstraintTop.constant = 1
+                cell.configCellForDoorsIfSnapshotNil()
 
             } else {
                 // Configure the cell for doors with non-nil snapshot
-                cell.videoCam.isHidden = false
-                cell.onlineLabel.isHidden = false
-                cell.stackViewTopConstaraint.constant = 223
-                cell.lockOnConstraintTop.constant = 208
-                cell.unLockConstraintTop.constant = 208
-
-                // Call the method to load and display the image
-                let imageURL = URL(string: doorDataModel.data[indexPath.section].snapshot ?? "")
-                cell.configCellVideoImage(imageURL: imageURL)
+                cell.configCellForDoorsIfSnapshotIsNotNil(indexPath: indexPath, model: doorDataModel)
             }
         }
         return cell
