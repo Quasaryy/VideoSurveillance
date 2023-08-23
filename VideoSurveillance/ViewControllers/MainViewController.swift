@@ -61,11 +61,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if sender.selectedSegmentIndex == 0 {
             loadAndDisplayDataFromRealmCams()
-            tableViewConstraintTop.constant = 25
+            
+            let tableViewTopConstant: CGFloat = 25.0
+            tableViewConstraintTop.constant = tableViewTopConstant
             roomNameLabel.isHidden = false
         } else {
             loadAndDisplayDataFromRealmDoors()
-            tableViewConstraintTop.constant = 5
+            
+            let tableViewTopConstant: CGFloat = 5.0
+            tableViewConstraintTop.constant = tableViewTopConstant
             roomNameLabel.isHidden = true
         }
         tableView.reloadData()
