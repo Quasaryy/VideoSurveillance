@@ -17,7 +17,7 @@
 		D253D61E2A8AA089001D7467 /* RealmDoors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D61D2A8AA089001D7467 /* RealmDoors.swift */; };
 		D253D6202A8ABEA8001D7467 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253D61F2A8ABEA8001D7467 /* EditViewController.swift */; };
 		D26390712A89040B00D81059 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26390702A89040B00D81059 /* MainViewController.swift */; };
-		D276CA932A8E43A7001DB7C8 /* IntercomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CA922A8E43A7001DB7C8 /* IntercomViewController.swift */; };
+		D276CA932A8E43A7001DB7C8 /* IntercomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D276CA922A8E43A7001DB7C8 /* IntercomeViewController.swift */; };
 		D28A1BE62A86BBEF002BCEEC /* Circel-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */; };
 		D28A1BE72A86BBEF002BCEEC /* Circe-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */; };
 		D28A1BE82A86BBEF002BCEEC /* Circle-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */; };
@@ -47,7 +47,7 @@
 		D253D61D2A8AA089001D7467 /* RealmDoors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDoors.swift; sourceTree = "<group>"; };
 		D253D61F2A8ABEA8001D7467 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		D26390702A89040B00D81059 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		D276CA922A8E43A7001DB7C8 /* IntercomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntercomViewController.swift; sourceTree = "<group>"; };
+		D276CA922A8E43A7001DB7C8 /* IntercomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntercomeViewController.swift; sourceTree = "<group>"; };
 		D28A1BE12A86BBEF002BCEEC /* Circel-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circel-ExtraLight.otf"; sourceTree = "<group>"; };
 		D28A1BE22A86BBEF002BCEEC /* Circe-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-Bold.otf"; sourceTree = "<group>"; };
 		D28A1BE32A86BBEF002BCEEC /* Circle-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Light.otf"; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 				D253D61F2A8ABEA8001D7467 /* EditViewController.swift */,
 				D26390702A89040B00D81059 /* MainViewController.swift */,
 				D211C4562A87A2B2001DF7C6 /* CustomTableViewCell.swift */,
-				D276CA922A8E43A7001DB7C8 /* IntercomViewController.swift */,
+				D276CA922A8E43A7001DB7C8 /* IntercomeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -266,7 +266,7 @@
 				D2D2167D2A87F08B00068D5C /* Cams.swift in Sources */,
 				D253D61E2A8AA089001D7467 /* RealmDoors.swift in Sources */,
 				D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */,
-				D276CA932A8E43A7001DB7C8 /* IntercomViewController.swift in Sources */,
+				D276CA932A8E43A7001DB7C8 /* IntercomeViewController.swift in Sources */,
 				D290D2472A8A2DE9004D3BFF /* RealmCams.swift in Sources */,
 				D2D216802A87F10A00068D5C /* Doors.swift in Sources */,
 				D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */,

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -218,17 +217,17 @@
             <objects>
                 <viewController id="T5b-Lf-U9p" customClass="EditViewController" customModule="VideoSurveillance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kxc-j8-weq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit door name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gPE-Mz-kNr">
-                                <rect key="frame" x="108.5" y="90" width="197" height="44.5"/>
+                                <rect key="frame" x="104" y="90" width="206" height="35"/>
                                 <fontDescription key="fontDescription" name="Circe-Light" family="Circe" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Door name" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="eWf-ug-gEN">
-                                <rect key="frame" x="16" y="174.5" width="382" height="45"/>
+                                <rect key="frame" x="16" y="165" width="382" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="5tF-tQ-BnQ"/>
                                 </constraints>
@@ -239,7 +238,7 @@
                                 </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="Ofk-nZ-f4V">
-                                <rect key="frame" x="82" y="269.5" width="250" height="40"/>
+                                <rect key="frame" x="82" y="260" width="250" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tol-Vy-g1K">
                                         <rect key="frame" x="0.0" y="0.0" width="108" height="40"/>
@@ -285,10 +284,10 @@
             </objects>
             <point key="canvasLocation" x="1646" y="-139"/>
         </scene>
-        <!--Intercom View Controller-->
+        <!--Intercome View Controller-->
         <scene sceneID="E6P-X6-uQ0">
             <objects>
-                <viewController id="v0F-0z-ZAb" customClass="IntercomViewController" customModule="VideoSurveillance" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="v0F-0z-ZAb" customClass="IntercomeViewController" customModule="VideoSurveillance" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Nq-lB-8aH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -322,7 +321,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtA-wF-3gL">
-                                        <rect key="frame" x="153.5" y="25" width="107.5" height="22"/>
+                                        <rect key="frame" x="152" y="25" width="110.5" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="X94-Hk-RwY"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="lRf-6H-SbQ"/>
@@ -370,7 +369,7 @@
                                 <rect key="frame" x="16" y="691" width="382" height="105"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Открыть дверь" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OD6-jX-sI0">
-                                        <rect key="frame" x="144.5" y="78" width="93" height="17"/>
+                                        <rect key="frame" x="141" y="78" width="100" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="cHP-mF-Ab5"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="qc5-KV-6r7"/>
@@ -449,11 +448,11 @@
             <objects>
                 <viewController id="3fe-Xx-H3D" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LJ5-pm-Dnt">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Окно с некими настройками" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XMW-Gp-FWF">
-                                <rect key="frame" x="16" y="126" width="382" height="31"/>
+                                <rect key="frame" x="16" y="126" width="382" height="24.5"/>
                                 <fontDescription key="fontDescription" name="Circe-Regular" family="Circe" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

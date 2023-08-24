@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IntercomViewController: UIViewController {
+class IntercomeViewController: UIViewController {
 
     // MARK: - IB Outlets
     @IBOutlet weak var intercomImage: UIImageView!
@@ -16,7 +16,7 @@ class IntercomViewController: UIViewController {
     @IBOutlet weak var doorOpenLabel: UILabel!
     
     // MARK: - Properties
-    var idOfDoor: Int!
+    var idOfDoor: Int?
     private var hideOrNot = true
     var openOrCloseDoor = false
     
@@ -68,7 +68,7 @@ class IntercomViewController: UIViewController {
 }
 
 // MARK: - Private Methods
-extension IntercomViewController {
+extension IntercomeViewController {
     // Add shadow and borders for the bottom view
     private func configureShadowAndBorders(for: UIView) {
         self.bottomView.layer.masksToBounds = false

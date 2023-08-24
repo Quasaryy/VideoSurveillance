@@ -15,7 +15,7 @@ class EditViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     
     // MARK: - Properties
-    var idOfDoor: Int!
+    var DoorId: Int?
     
     
     override func viewDidLoad() {

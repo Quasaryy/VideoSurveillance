@@ -55,6 +55,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Loading room name
         roomNameLabel.text = camDataModel.data.cameras.first?.roomNameLabel ?? "Название комнаты"
+        
     }
     
     // MARK: - IB Actions
@@ -80,17 +81,90 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let destinationViewController = segue.destination as? EditViewController {
                 if let indexPath = selectedIndexPath {
                     let id = doorDataModel.data[indexPath.section].id
-                    destinationViewController.idOfDoor = id
+                    destinationViewController.DoorId = id
                 }
             }
         } else if segue.identifier == "toIntercome" {
-            if let destinationViewController = segue.destination as? IntercomViewController {
+            if let destinationViewController = segue.destination as? IntercomeViewController {
                 if let indexPath = selectedIndexPath {
                     let id = doorDataModel.data[indexPath.section].id
                     destinationViewController.idOfDoor = id
-                    destinationViewController.openOrCloseDoor = doorDataModel.data[indexPath.section].lockIcon!
+                    destinationViewController.openOrCloseDoor = doorDataModel.data[indexPath.section].lockIcon ?? true
                 }
             }
+        }
+    }
+    
+    // MARK: Unwind segue
+    @IBAction func unwindSegueToMain(segue: UIStoryboardSegue) {
+        // Saving data from EditViewController to Realm for door name
+        if let sourceViewController = segue.source as? EditViewController {
+            
+            let id = sourceViewController.DoorId
+            let textField = sourceViewController.editDoorNameTextField.text
+            
+            // Saving data to Realm for door name
+            let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id)
+            DataManagerForRealm.shared.saveObjectsToRealm(doors) {
+                doors?.name = textField ?? ""
+            }
+            
+            // Reading data from Realm for door name
+            let doorName = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self).compactMap { (datum: Datum) in
+                return datum.name
+            }
+            
+            if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
+                
+                let selectedDoorName = doorName[indexPath.section]
+                doorDataModel.data[indexPath.section].name = selectedDoorName
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+                
+            } else {
+                Logger.log("error")
+            }
+            
+            // Saving data from IntercomeViewController to Realm for door lock ststus
+        } else if let sourceViewController = segue.source as? IntercomeViewController {
+            
+            let id = sourceViewController.idOfDoor
+            let statusLock = sourceViewController.openOrCloseDoor
+            
+            if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
+                DataManagerForRealm.shared.saveObjectsToRealm(doors) {
+                    doors.lockIcon = statusLock
+                }
+            }
+        }
+        
+        // Reading data from Realm door lock status
+        let lockIconStatus = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self).compactMap { (datum: Datum) in
+            return datum.lockIcon
+        }
+        
+        if let indexPath = selectedIndexPath, lockIconStatus.indices.contains(indexPath.section) {
+            
+            let lockStatus = lockIconStatus[indexPath.section]
+            doorDataModel.data[indexPath.section].lockIcon = lockStatus
+            Logger.logLockStatus(lockStatus)
+            
+            
+            if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
+                if doorDataModel.data[indexPath.section].lockIcon == true {
+                    customCell.unLock.isHidden = true
+                    customCell.lockOn.isHidden = false
+                } else {
+                    if doorDataModel.data[indexPath.section].lockIcon == false {
+                        customCell.unLock.isHidden = false
+                        customCell.lockOn.isHidden = true
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                }
+                
+            }
+            tableView.reloadData()
+        } else {
+            Logger.log("error")
         }
     }
     
@@ -194,76 +268,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    
-    // MARK: - Unwind segue
-    @IBAction func unwindSegueToMain(segue: UIStoryboardSegue) {
-        // Saving data from EditViewController to Realm for door name
-        if let sourceViewController = segue.source as? EditViewController {
-            
-            let id = sourceViewController.idOfDoor
-            let textField = sourceViewController.editDoorNameTextField.text
-            
-            let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id)
-            DataManagerForRealm.shared.saveObjectsToRealm(doors) {
-                doors?.name = textField ?? ""
-            }
-            
-            // Reading data from Realm for door name
-            let doorName = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self).compactMap { (datum: Datum) in
-                return datum.name
-            }
-            
-            if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
-                let selectedDoorName = doorName[indexPath.section]
-                doorDataModel.data[indexPath.section].name = selectedDoorName
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-                
-            } else {
-                Logger.log("error")
-            }
-            
-            // Saving data from IntercomeViewController to Realm for door lock ststus
-        } else if let sourceViewController = segue.source as? IntercomViewController {
-            
-            let id = sourceViewController.idOfDoor
-            let statusLock = sourceViewController.openOrCloseDoor
-            
-            if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
-                DataManagerForRealm.shared.saveObjectsToRealm(doors) {
-                    doors.lockIcon = statusLock
-                }
-            }
-        }
-        
-        // Reading data from Realm door lock ststus
-        let lockIconStatus = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self).compactMap { (datum: Datum) in
-            return datum.lockIcon
-        }
-        
-        if let indexPath = selectedIndexPath, lockIconStatus.indices.contains(indexPath.section) {
-            let lockStatus = lockIconStatus[indexPath.section]
-            doorDataModel.data[indexPath.section].lockIcon = lockStatus
-            Logger.logLockStatus(lockStatus)
-            
-            
-            if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
-                if doorDataModel.data[indexPath.section].lockIcon == true {
-                    customCell.unLock.isHidden = true
-                    customCell.lockOn.isHidden = false
-                } else {
-                    if doorDataModel.data[indexPath.section].lockIcon == false {
-                        customCell.unLock.isHidden = false
-                        customCell.lockOn.isHidden = true
-                        tableView.reloadRows(at: [indexPath], with: .automatic)
-                    }
-                }
-                
-            }
-            tableView.reloadData()
-        } else {
-            Logger.log("error")
-        }
-    }
 }
 
 
@@ -290,7 +294,6 @@ extension MainViewController {
                 completion(true)
             } catch let error {
                 Logger.logRealmError(error)
-                completion(true)
             }
         }
         
@@ -330,7 +333,6 @@ extension MainViewController {
                 completion(true)
             } catch let error {
                 Logger.logRealmError(error)
-                completion(true)
             }
         }
         
@@ -338,8 +340,6 @@ extension MainViewController {
         favorites.backgroundColor = UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1)
         return favorites
     }
-    
-    
     
     // Method to update data via pull-to-refresh
     @objc private func refreshData(_ sender: UIRefreshControl) {
