@@ -21,22 +21,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var doorDataModel = Doors.shared // Model for remote data
     private let refreshControl = UIRefreshControl()
     private var selectedIndexPath: IndexPath?
-    private var realm: Realm?
+    private let realm = try! Realm()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Checking Realm location
-        do {
-               realm = try Realm()
-           } catch {
-               Logger.logRealmInitializationError(error)
-           }
-
-        if let realm = realm {
-            Logger.logRealmLocation(realm)
-        }
+        Logger.logRealmLocation(realm)
         
         // Adding delegates and data source for tableView
         tableView.dataSource = self
@@ -46,10 +38,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         segmentedControl.addUnderlineForSelectedSegment()
         
         // Try loading data from Realm on startup
-        loadAndDisplayDataFromRealmCams()
-        loadAndDisplayDataFromRealmDoors()
-        
-        // Loading room name
+        NetworkManager.shared.getDoorsDataFromRemoteServerIfNeeded(tableView: tableView) { doorsModel in
+            self.doorDataModel = doorsModel
+        }
+        NetworkManager.shared.getCamerasDataFromRemoteServerIfNeeded(tableView: tableView) { camsModel in
+            self.camDataModel = camsModel
+        }
         
         // Adding refresh control for TableView
         tableView.refreshControl = refreshControl
@@ -68,14 +62,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         sender.changeUnderlinePosition()
         
         if sender.selectedSegmentIndex == 0 {
-            loadAndDisplayDataFromRealmCams()
             
             let tableViewTopConstant: CGFloat = 25.0
             tableViewConstraintTop.constant = tableViewTopConstant
             roomNameLabel.isHidden = false
         } else {
-            loadAndDisplayDataFromRealmDoors()
-            
             let tableViewTopConstant: CGFloat = 5.0
             tableViewConstraintTop.constant = tableViewTopConstant
             roomNameLabel.isHidden = true
@@ -177,10 +168,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             let roomName = camDataModel.data.cameras[indexPath.section].room
             
             switch idOfCamera {
-            case 1, 2, 3, 6:
-                newRoomValue = roomName ?? ""
-            default:
-                return
+                case 1, 2, 3, 6:
+                    newRoomValue = roomName ?? ""
+                default:
+                    return
             }
             
             camDataModel.data.cameras[indexPath.section].roomNameLabel = newRoomValue
@@ -211,20 +202,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let id = sourceViewController.idOfDoor
             let textField = sourceViewController.editDoorNameTextField.text
-            do {
-                let realm = try Realm()
-                if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
-                    try realm.write {
-                        doors.name = textField ?? ""
-                    }
-                }
-            } catch {
-                Logger.logRealmError(error)
+            
+            let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id)
+            DataManagerForRealm.shared.saveObjectsToRealm(doors) {
+                doors?.name = textField ?? ""
             }
             
             // Reading data from Realm for door name
-            let realm = try! Realm()
-            let doorName = realm.objects(DoorRealm.self).map { $0.name }
+            let doorName = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self).compactMap { (datum: Datum) in
+                return datum.name
+            }
             
             if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
                 let selectedDoorName = doorName[indexPath.section]
@@ -234,53 +221,52 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             } else {
                 Logger.log("error")
             }
+            
             // Saving data from IntercomeViewController to Realm for door lock ststus
         } else if let sourceViewController = segue.source as? IntercomViewController {
             
             let id = sourceViewController.idOfDoor
             let statusLock = sourceViewController.openOrCloseDoor
-            do {
-                let realm = try Realm()
-                if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
-                    try realm.write {
-                        doors.lockIcon = statusLock
-                    }
-                }
-            } catch {
-                Logger.logRealmError(error)
-            }
             
-            // Reading data from Realm door lock ststus
-            let realm = try! Realm()
-            let lockIconStatus = realm.objects(DoorRealm.self).map { $0.lockIcon }
-            
-            if let indexPath = selectedIndexPath, lockIconStatus.indices.contains(indexPath.section) {
-                let lockStatus = lockIconStatus[indexPath.section]
-                doorDataModel.data[indexPath.section].lockIcon = lockStatus
-                Logger.logLockStatus(lockStatus)
-                
-                
-                if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
-                    if doorDataModel.data[indexPath.section].lockIcon == true {
-                        customCell.unLock.isHidden = true
-                        customCell.lockOn.isHidden = false
-                    } else {
-                        if doorDataModel.data[indexPath.section].lockIcon == false {
-                            customCell.unLock.isHidden = false
-                            customCell.lockOn.isHidden = true
-                            tableView.reloadRows(at: [indexPath], with: .automatic)
-                        }
-                    }
-                    
+            if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
+                DataManagerForRealm.shared.saveObjectsToRealm(doors) {
+                    doors.lockIcon = statusLock
                 }
-                tableView.reloadData()
-            } else {
-                Logger.log("error")
             }
         }
+        
+        // Reading data from Realm door lock ststus
+        let lockIconStatus = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self).compactMap { (datum: Datum) in
+            return datum.lockIcon
+        }
+        
+        if let indexPath = selectedIndexPath, lockIconStatus.indices.contains(indexPath.section) {
+            let lockStatus = lockIconStatus[indexPath.section]
+            doorDataModel.data[indexPath.section].lockIcon = lockStatus
+            Logger.logLockStatus(lockStatus)
+            
+            
+            if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
+                if doorDataModel.data[indexPath.section].lockIcon == true {
+                    customCell.unLock.isHidden = true
+                    customCell.lockOn.isHidden = false
+                } else {
+                    if doorDataModel.data[indexPath.section].lockIcon == false {
+                        customCell.unLock.isHidden = false
+                        customCell.lockOn.isHidden = true
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                    }
+                }
+                
+            }
+            tableView.reloadData()
+        } else {
+            Logger.log("error")
+        }
     }
-    
 }
+
+
 
 
 // MARK: - Private Methods
@@ -353,145 +339,24 @@ extension MainViewController {
         return favorites
     }
     
-    // MARK: Network request
-    private func getDoorsDataFromRemoteServer() {
-        guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/doors/") else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            
-            if let error = error {
-                Logger.logErrorDescription(error)
-                return
-            }
-            
-            if let response = response {
-                Logger.logResponse(response)
-            }
-            
-            guard let remoteData = data else { return }
-            do {
-                let dataModel = try JSONDecoder().decode(Doors.self, from: remoteData)
-                
-                // MARK: Saving data to Realm for Doors
-                do {
-                    let realm = try Realm()
-                    try realm.write {
-                        realm.add(dataModel.data.map { doorsData in
-                            return DoorRealm(value: [
-                                "id": doorsData.id,
-                                "name": doorsData.name,
-                                "snapshot": doorsData.snapshot ?? "",
-                                "room": doorsData.room ?? "",
-                                "favorites": doorsData.favorites,
-                                "lockIcon": doorsData.lockIcon ?? true
-                            ] as [String : Any])
-                        }, update: .modified)
-                    }
-                } catch let error {
-                    Logger.logRealmError(error)
-                    
-                }
-                
-                DispatchQueue.main.async {
-                    self.doorDataModel = dataModel // Update data model
-                    self.tableView.reloadData()
-                }
-            } catch let error {
-                Logger.logErrorDescription(error)
-                
-            }
-        }.resume()
-    }
     
-    private func getCamsDataFromRemoteServer() {
-        guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            
-            if let error = error {
-                Logger.logErrorDescription(error)
-                return
-            }
-            
-            if let response = response {
-                Logger.logResponse(response)
-            }
-            
-            guard let remoteData = data else { return }
-            do {
-                let dataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
-                
-                // MARK: Saving data to Realm for Cams
-                do {
-                    let realm = try Realm()
-                    try realm.write {
-                        realm.add(dataModel.data.cameras.map { cameraData in
-                            return CameraRealm(value: [
-                                "id": cameraData.id,
-                                "name": cameraData.name,
-                                "snapshot": cameraData.snapshot,
-                                "room": cameraData.room ?? "",
-                                "roomNameLabel": cameraData.roomNameLabel ?? "",
-                                "favorites": cameraData.favorites,
-                                "rec": cameraData.rec
-                            ] as [String : Any])
-                        }, update: .modified)
-                    }
-                } catch let error {
-                    Logger.logRealmError(error)
-   
-                }
-                
-                DispatchQueue.main.async {
-                    self.camDataModel = dataModel // Update data model
-                    self.tableView.reloadData()
-                }
-            } catch let error {
-                Logger.logErrorDescription(error)
-                
-            }
-        }.resume()
-    }
-    
-    // MARK: Realm section
-    // The method of loading data from Realm or from the server
-    private func loadAndDisplayDataFromRealmCams() {
-        let cameras = DataManagerForRealm.shared.loadCameras()
-        
-        if cameras.isEmpty {
-            // If there is no data in Realm, make a request to the server
-            getCamsDataFromRemoteServer()
-        } else {
-            camDataModel.data.cameras = cameras
-            self.tableView.reloadData()
-        }
-    }
-    
-    // The method of loading data from Realm or from the server for Doors
-    private func loadAndDisplayDataFromRealmDoors() {
-        let realm = try! Realm()
-        let doors = realm.objects(DoorRealm.self) // Loading data from Realm
-        
-        if doors.isEmpty {
-            // If there is no data in Realm, make a request to the server
-            getDoorsDataFromRemoteServer()
-        } else {
-            // If the data is in the Realm display it
-            doorDataModel.data = doors.map { doorsRealm in
-                return Datum(
-                    name: doorsRealm.name,
-                    room: doorsRealm.room,
-                    id: doorsRealm.id,
-                    favorites: doorsRealm.favorites,
-                    snapshot: doorsRealm.snapshot,
-                    lockIcon: doorsRealm.lockIcon
-                )
-            }
-            self.tableView.reloadData()
-        }
-    }
     
     // Method to update data via pull-to-refresh
     @objc private func refreshData(_ sender: UIRefreshControl) {
-        segmentedControl.selectedSegmentIndex == 0 ? loadAndDisplayDataFromRealmCams() : loadAndDisplayDataFromRealmDoors()
+        if segmentedControl.selectedSegmentIndex == 0 {
+            
+            let camsFromRealm: [Camera] = DataManagerForRealm.shared.loadFromRealm(CameraRealm.self)
+            let camerasModel = Cameras(success: true, data: DataClass(room: [], cameras: camsFromRealm))
+            camDataModel = camerasModel
+            
+            tableView.reloadData()
+        } else {
+            let doorsFromRealm: [Datum] = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self)
+            let doorsModel = Doors(success: true, data: doorsFromRealm)
+            doorDataModel = doorsModel
+            
+            tableView.reloadData()
+        }
         sender.endRefreshing()
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2000F052A9765BE00F60E18 /* Networkmanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2000F042A9765BE00F60E18 /* Networkmanager.swift */; };
 		D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A5E2A86856B00E5D94A /* AppDelegate.swift */; };
 		D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A602A86856B00E5D94A /* SceneDelegate.swift */; };
 		D2027A662A86856B00E5D94A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A642A86856B00E5D94A /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D2000F042A9765BE00F60E18 /* Networkmanager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkmanager.swift; sourceTree = "<group>"; };
 		D2027A5B2A86856B00E5D94A /* VideoSurveillance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoSurveillance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2027A5E2A86856B00E5D94A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2027A602A86856B00E5D94A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				D2C2168A2A9675D4000190F4 /* DataManagerForRealm.swift */,
+				D2000F042A9765BE00F60E18 /* Networkmanager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				D2EC65172A877B89005D597F /* UIImage+extension.swift in Sources */,
 				D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */,
 				D26390712A89040B00D81059 /* MainViewController.swift in Sources */,
+				D2000F052A9765BE00F60E18 /* Networkmanager.swift in Sources */,
 				D211C4572A87A2B2001DF7C6 /* CustomTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,14 @@ import Foundation
 import RealmSwift
 
 struct Logger {
+    
+    // MARK: - Properties
     static var isLoggingEnabled = true // Flag to enable/disable logging
+    
+}
+
+// MARK: - Methods
+extension Logger {
     
     // Method for logging Realm location information
     static func logRealmLocation(_ realm: Realm) {
