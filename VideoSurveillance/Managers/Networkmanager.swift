@@ -46,9 +46,9 @@ extension NetworkManager {
                     let dataModel = try JSONDecoder().decode(Doors.self, from: remoteData)
                     
                     // MARK: Saving data to Realm for Doors
-                    DataManagerForRealm.shared.saveDoorsToRealm(dataModel.data)
                     
                     DispatchQueue.main.async {
+                        DataManagerForRealm.shared.saveDoorsToRealm(dataModel.data)
                         let doorsModel = Doors(success: true, data: dataModel.data)
                         completion(doorsModel) // Passing an existing model through a closure
                         tableView.reloadData()
@@ -93,9 +93,9 @@ extension NetworkManager {
                     let dataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
                     
                     // MARK: Saving data to Realm for Doors if data existing
-                    DataManagerForRealm.shared.saveCamerasToRealm(dataModel.data.cameras)
                     
                     DispatchQueue.main.async {
+                        DataManagerForRealm.shared.saveCamerasToRealm(dataModel.data.cameras)
                         let camsModel = Cameras(success: true, data: DataClass(room: [], cameras: dataModel.data.cameras))
                         completion(camsModel) // Passing an existing model through a closure
                         tableView.reloadData()

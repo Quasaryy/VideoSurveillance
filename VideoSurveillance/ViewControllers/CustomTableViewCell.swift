@@ -93,8 +93,8 @@ extension CustomTableViewCell {
             self.favoriteStar.isHidden = !model.data[indexPath.section].favorites
             self.camLabel.text = model.data[indexPath.section].name
             self.cameraRecorded.isHidden = true
-            self.unLock.isHidden = ((model.data[indexPath.section].lockIcon) != nil)
-            self.lockOn.isHidden = !((model.data[indexPath.section].lockIcon) != nil)
+            self.unLock.isHidden = model.data[indexPath.section].lockIcon ?? true
+            self.lockOn.isHidden = !(model.data[indexPath.section].lockIcon ?? true)
         }
     }
     

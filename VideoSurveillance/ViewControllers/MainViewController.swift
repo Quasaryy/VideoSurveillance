@@ -21,7 +21,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var doorDataModel = Doors.shared // Model for remote data
     private let refreshControl = UIRefreshControl()
     private var selectedIndexPath: IndexPath?
-    private let realm = try! Realm()
+    private let realm = DataManagerForRealm.shared.realm
     
     
     override func viewDidLoad() {
@@ -38,9 +38,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         segmentedControl.addUnderlineForSelectedSegment()
         
         // Try loading data from Realm on startup
-        NetworkManager.shared.getDoorsDataFromRemoteServerIfNeeded(tableView: tableView) { doorsModel in
-            self.doorDataModel = doorsModel
-        }
+        NetworkManager.shared.getDoorsDataFromRemoteServerIfNeeded(tableView: self.tableView) { doorsModel in
+                self.doorDataModel = doorsModel
+            }
         NetworkManager.shared.getCamerasDataFromRemoteServerIfNeeded(tableView: tableView) { camsModel in
             self.camDataModel = camsModel
         }

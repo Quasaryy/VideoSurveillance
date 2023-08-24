@@ -8,24 +8,34 @@
 import Foundation
 import UIKit
 
-extension UISegmentedControl{
-    func removeBorder(){
+extension UISegmentedControl {
+    
+    func changeBackGround() {
         let backgroundImage = UIImage.getColoredRectImageWith(color: UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1.0).cgColor, andSize: self.bounds.size)
         self.setBackgroundImage(backgroundImage, for: .normal, barMetrics: .default)
         self.setBackgroundImage(backgroundImage, for: .selected, barMetrics: .default)
         self.setBackgroundImage(backgroundImage, for: .highlighted, barMetrics: .default)
-
+    }
+    
+    func changeDeviderImage() {
         let deviderImage = UIImage.getColoredRectImageWith(color: UIColor(red: 246/255, green: 246/255, blue: 246/255, alpha: 1.0).cgColor, andSize: CGSize(width: 1.0, height: self.bounds.size.height))
         self.setDividerImage(deviderImage, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
-        self.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(red: 51/255, green: 51/255, blue: 51/255, alpha: 1.0)], for: .selected)
-        
-        // Set custom font and font size
+    }
+    
+    func removeBorder() {
+        changeBackGround()
+        changeDeviderImage()
+    }
+    
+    // Set custom font and font size
+    func changeFont() {
         let attr = NSDictionary(object: UIFont(name: "Circe-regular", size: 17.0)!, forKey: NSAttributedString.Key.font as NSCopying)
         self.setTitleTextAttributes(attr as? [NSAttributedString.Key: AnyObject] , for: .normal)
     }
-
+    
     func addUnderlineForSelectedSegment(){
         removeBorder()
+        changeFont()
         let underlineWidth: CGFloat = self.bounds.size.width / CGFloat(self.numberOfSegments)
         let underlineHeight: CGFloat = 4.0
         let underlineXPosition = CGFloat(selectedSegmentIndex * Int(underlineWidth))
@@ -36,7 +46,7 @@ extension UISegmentedControl{
         underline.tag = 1
         self.addSubview(underline)
     }
-
+    
     func changeUnderlinePosition(){
         guard let underline = self.viewWithTag(1) else {return}
         let underlineFinalXPosition = (self.bounds.width / CGFloat(self.numberOfSegments)) * CGFloat(selectedSegmentIndex)
