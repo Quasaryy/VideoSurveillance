@@ -75,6 +75,106 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
     }
     
+    
+    // MARK: - Table view data source
+    func numberOfSections(in tableView: UITableView) -> Int {
+        segmentedControl.selectedSegmentIndex == 0 ? camDataModel.data.cameras.count : doorDataModel.data.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // Creating and casting cell as custom cell for cams and doors
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            
+            // Configure the cell for cams
+            cell.configCellForCams(indexPath: indexPath, model: camDataModel)
+            
+            return cell
+        } else {
+            
+            // Configure the cell for doors
+            cell.configCellForDoors(indexPath: indexPath, model: doorDataModel)
+            
+            // Update cell if image is nil
+            if URL(string: doorDataModel.data[indexPath.section].snapshot ?? "") == nil {
+                
+                // Configure the cell for doors with nil snapshot
+                cell.configCellForDoorsIfSnapshotNil()
+                
+            } else {
+                // Configure the cell for doors with non-nil snapshot
+                cell.configCellForDoorsIfSnapshotIsNotNil(indexPath: indexPath, model: doorDataModel)
+            }
+        }
+        return cell
+    }
+    
+    // MARK: - TableView delegate
+    // Adding trailing swipe
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            let addToFavoritesCam = addToFavoritesCams(at: indexPath)
+            return UISwipeActionsConfiguration(actions: [addToFavoritesCam])
+        } else {
+            let editMode = editMode(at: indexPath)
+            let addToFavoritesDoor = addToFavoritesDoors(at: indexPath)
+            return UISwipeActionsConfiguration(actions: [addToFavoritesDoor, editMode])
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if segmentedControl.selectedSegmentIndex == 1 {
+            let imageURL = URL(string: doorDataModel.data[indexPath.section].snapshot ?? "")
+            if imageURL == nil {
+                return 72
+            }
+        }
+        return 279
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            // Checking rooms name by Id camera
+            let idOfCamera = camDataModel.data.cameras[indexPath.section].id
+            var newRoomValue = ""
+            let roomName = camDataModel.data.cameras[indexPath.section].room
+            
+            switch idOfCamera {
+                case 1, 2, 3, 6:
+                    newRoomValue = roomName ?? ""
+                default:
+                    return
+            }
+            
+            camDataModel.data.cameras[indexPath.section].roomNameLabel = newRoomValue
+            roomNameLabel.text = newRoomValue
+            
+            do {
+                let realm = try Realm()
+                if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
+                    try realm.write {
+                        camera.roomNameLabel = newRoomValue
+                    }
+                }
+            } catch {
+                Logger.logRealmError(error)
+            }
+        } else {
+            self.selectedIndexPath = indexPath
+            self.performSegue(withIdentifier: "toIntercome", sender: nil)
+        }
+        
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditSegue" {
@@ -168,110 +268,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    
-    // MARK: - TableView Delegate
-    func numberOfSections(in tableView: UITableView) -> Int {
-        segmentedControl.selectedSegmentIndex == 0 ? camDataModel.data.cameras.count : doorDataModel.data.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // Creating and casting cell as custom cell for cams and doors
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
-        
-        if segmentedControl.selectedSegmentIndex == 0 {
-            
-            // Configure the cell for cams
-            cell.configCellForCams(indexPath: indexPath, model: camDataModel)
-            
-            return cell
-        } else {
-            
-            // Configure the cell for doors
-            cell.configCellForDoors(indexPath: indexPath, model: doorDataModel)
-            
-            // Update cell if image is nil
-            if URL(string: doorDataModel.data[indexPath.section].snapshot ?? "") == nil {
-                
-                // Configure the cell for doors with nil snapshot
-                cell.configCellForDoorsIfSnapshotNil()
-                
-            } else {
-                // Configure the cell for doors with non-nil snapshot
-                cell.configCellForDoorsIfSnapshotIsNotNil(indexPath: indexPath, model: doorDataModel)
-            }
-        }
-        return cell
-    }
-    
-    // MARK: - TableView Data Source
-    // Adding trailing swipe
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        if segmentedControl.selectedSegmentIndex == 0 {
-            let addToFavoritesCam = addToFavoritesCams(at: indexPath)
-            return UISwipeActionsConfiguration(actions: [addToFavoritesCam])
-        } else {
-            let editMode = editMode(at: indexPath)
-            let addToFavoritesDoor = addToFavoritesDoors(at: indexPath)
-            return UISwipeActionsConfiguration(actions: [addToFavoritesDoor, editMode])
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if segmentedControl.selectedSegmentIndex == 1 {
-            let imageURL = URL(string: doorDataModel.data[indexPath.section].snapshot ?? "")
-            if imageURL == nil {
-                return 72
-            }
-        }
-        return 279
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if segmentedControl.selectedSegmentIndex == 0 {
-            // Checking rooms name by Id camera
-            let idOfCamera = camDataModel.data.cameras[indexPath.section].id
-            var newRoomValue = ""
-            let roomName = camDataModel.data.cameras[indexPath.section].room
-            
-            switch idOfCamera {
-                case 1, 2, 3, 6:
-                    newRoomValue = roomName ?? ""
-                default:
-                    return
-            }
-            
-            camDataModel.data.cameras[indexPath.section].roomNameLabel = newRoomValue
-            roomNameLabel.text = newRoomValue
-            
-            do {
-                let realm = try Realm()
-                if let camera = realm.object(ofType: CameraRealm.self, forPrimaryKey: 1) {
-                    try realm.write {
-                        camera.roomNameLabel = newRoomValue
-                    }
-                }
-            } catch {
-                Logger.logRealmError(error)
-            }
-        } else {
-            self.selectedIndexPath = indexPath
-            self.performSegue(withIdentifier: "toIntercome", sender: nil)
-        }
-        
-    }
-    
 }
-
-
-
 
 // MARK: - Private Methods
 extension MainViewController {
