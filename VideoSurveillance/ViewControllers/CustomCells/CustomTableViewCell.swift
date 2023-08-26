@@ -121,5 +121,21 @@ extension CustomTableViewCell {
         configCellVideoImage(imageURL: imageURL)
     }
     
+    func finalCellConfig(indexPath: IndexPath, doorsModel: Doors) {
+        // Configure the cell for doors
+        configCellForDoors(indexPath: indexPath, model: doorsModel)
+        
+        // Update cell if image is nil
+        if URL(string: doorsModel.data[indexPath.section].snapshot ?? "") == nil {
+            
+            // Configure the cell for doors with nil snapshot
+            configCellForDoorsIfSnapshotNil()
+            
+        } else {
+            // Configure the cell for doors with non-nil snapshot
+            configCellForDoorsIfSnapshotIsNotNil(indexPath: indexPath, model: doorsModel)
+        }
+    }
+    
     
 }

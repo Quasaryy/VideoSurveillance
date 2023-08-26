@@ -109,6 +109,14 @@
 			path = VideoSurveillance;
 			sourceTree = "<group>";
 		};
+		D222C0A52A9A802500D5FF38 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				D211C4562A87A2B2001DF7C6 /* CustomTableViewCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
 		D28A1BEB2A86BC0C002BCEEC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,8 +180,8 @@
 			children = (
 				D253D61F2A8ABEA8001D7467 /* EditViewController.swift */,
 				D26390702A89040B00D81059 /* MainViewController.swift */,
-				D211C4562A87A2B2001DF7C6 /* CustomTableViewCell.swift */,
 				D276CA922A8E43A7001DB7C8 /* IntercomeViewController.swift */,
+				D222C0A52A9A802500D5FF38 /* CustomCells */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

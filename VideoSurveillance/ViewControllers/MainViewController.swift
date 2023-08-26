@@ -27,12 +27,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Checking Realm location
-        Logger.logRealmLocation(realm)
-        
         // Adding delegates and data source for tableView
         tableView.dataSource = self
         tableView.delegate = self
+        
+        // Checking Realm location
+        Logger.logRealmLocation(realm)
         
         // Adding underline for segmentedControl
         segmentedControl.addUnderlineForSelectedSegment()
@@ -98,19 +98,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else {
             
-            // Configure the cell for doors
-            cell.configCellForDoors(indexPath: indexPath, model: doorDataModel)
-            
-            // Update cell if image is nil
-            if URL(string: doorDataModel.data[indexPath.section].snapshot ?? "") == nil {
-                
-                // Configure the cell for doors with nil snapshot
-                cell.configCellForDoorsIfSnapshotNil()
-                
-            } else {
-                // Configure the cell for doors with non-nil snapshot
-                cell.configCellForDoorsIfSnapshotIsNotNil(indexPath: indexPath, model: doorDataModel)
-            }
+            cell.finalCellConfig(indexPath: indexPath, doorsModel: doorDataModel)
         }
         return cell
     }
@@ -253,11 +241,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if doorDataModel.data[indexPath.section].lockIcon == true {
                     customCell.unLock.isHidden = true
                     customCell.lockOn.isHidden = false
+                    
                 } else {
                     if doorDataModel.data[indexPath.section].lockIcon == false {
                         customCell.unLock.isHidden = false
                         customCell.lockOn.isHidden = true
-                        tableView.reloadRows(at: [indexPath], with: .automatic)
                     }
                 }
                 
