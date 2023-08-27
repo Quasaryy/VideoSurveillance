@@ -32,6 +32,7 @@
 		D2D216802A87F10A00068D5C /* Doors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2167F2A87F10A00068D5C /* Doors.swift */; };
 		D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D43AC62A87610D00C4E477 /* UISegmentedControl+extensions.swift */; };
 		D2EC65172A877B89005D597F /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC65162A877B88005D597F /* UIImage+extension.swift */; };
+		D2F56ACF2A9B46D2003EB73A /* UtilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F56ACE2A9B46D2003EB73A /* UtilityManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		D2D2167F2A87F10A00068D5C /* Doors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doors.swift; sourceTree = "<group>"; };
 		D2D43AC62A87610D00C4E477 /* UISegmentedControl+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+extensions.swift"; sourceTree = "<group>"; };
 		D2EC65162A877B88005D597F /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
+		D2F56ACE2A9B46D2003EB73A /* UtilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +144,7 @@
 			children = (
 				D2C2168A2A9675D4000190F4 /* DataManagerForRealm.swift */,
 				D2000F042A9765BE00F60E18 /* Networkmanager.swift */,
+				D2F56ACE2A9B46D2003EB73A /* UtilityManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				D2D43AC72A87610D00C4E477 /* UISegmentedControl+extensions.swift in Sources */,
 				D26390712A89040B00D81059 /* MainViewController.swift in Sources */,
 				D2000F052A9765BE00F60E18 /* Networkmanager.swift in Sources */,
+				D2F56ACF2A9B46D2003EB73A /* UtilityManager.swift in Sources */,
 				D211C4572A87A2B2001DF7C6 /* CustomTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
