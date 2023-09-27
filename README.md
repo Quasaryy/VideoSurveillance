@@ -1,5 +1,10 @@
 # Code Quality
+CodeFactor
+
 [![CodeFactor](https://www.codefactor.io/repository/github/quasaryy/videosurveillance/badge)](https://www.codefactor.io/repository/github/quasaryy/videosurveillance)
+
+SonarCloud
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Quasaryy_VideoSurveillance&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Quasaryy_VideoSurveillance)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Quasaryy_VideoSurveillance&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=Quasaryy_VideoSurveillance)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Quasaryy_VideoSurveillance&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Quasaryy_VideoSurveillance)
