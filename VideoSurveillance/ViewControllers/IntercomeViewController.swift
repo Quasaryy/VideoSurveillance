@@ -50,12 +50,12 @@ class IntercomeViewController: UIViewController {
         hideOrNot.toggle()
     }
     
+    // Идет переход по сгвею при тапе
     @IBAction func upArrowButtonTapped(_ sender: UIButton) {
-        
     }
     
+    // Идет переход по сгвею при тапе
     @IBAction func settingsButtonTapper(_ sender: UIButton) {
-        
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
