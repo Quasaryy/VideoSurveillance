@@ -109,7 +109,7 @@ extension DataManagerForRealm {
                         "room": doorsData.room ?? "",
                         "favorites": doorsData.favorites,
                         "lockIcon": doorsData.lockIcon ?? true
-                    ] as [String : Any])
+                    ] as [String: Any])
                 }, update: .modified)
             }
         } catch let error {
