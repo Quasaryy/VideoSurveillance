@@ -38,7 +38,7 @@ extension UtilityManager {
     
     // Checking current status door lock
     func updateDoorsStatus(_ openOrCloseDoor: Bool, doorOpenLabel: UILabel) {
-        if openOrCloseDoor == false {
+        if !openOrCloseDoor {
             doorOpenLabel.text = "Дверь открыта - (Закрыть)"
         } else {
             doorOpenLabel.text = "Дверь закрыта - (Открыть)"
