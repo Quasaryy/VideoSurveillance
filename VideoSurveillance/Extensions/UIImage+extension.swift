@@ -16,8 +16,9 @@ extension UIImage{
         graphicsContext?.setFillColor(color)
         let rectangle = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
         graphicsContext?.fill(rectangle)
-        let rectangleImage = UIGraphicsGetImageFromCurrentImageContext()
+        let rectangleImage = UIGraphicsGetImageFromCurrentImageContext() ?? UIImage()
         UIGraphicsEndImageContext()
-        return rectangleImage!
+        return rectangleImage
     }
+
 }

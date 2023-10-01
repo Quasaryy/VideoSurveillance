@@ -29,8 +29,10 @@ extension UISegmentedControl {
     
     // Set custom font and font size
     func changeFont() {
-        let attr = NSDictionary(object: UIFont(name: "Circe-regular", size: 17.0)!, forKey: NSAttributedString.Key.font as NSCopying)
-        self.setTitleTextAttributes(attr as? [NSAttributedString.Key: AnyObject] , for: .normal)
+        guard let customFont = UIFont(name: "Circe-regular", size: 17.0) else { return }
+        
+        let attr = NSDictionary(object: customFont, forKey: NSAttributedString.Key.font as NSCopying)
+        self.setTitleTextAttributes(attr as? [NSAttributedString.Key: AnyObject], for: .normal)
     }
     
     func addUnderlineForSelectedSegment(){
