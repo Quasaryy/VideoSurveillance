@@ -46,8 +46,8 @@ class IntercomeViewController: UIViewController {
     }
     
     @IBAction func hideButtonTapped(_ sender: UIButton) {
-        intercomImage.isHidden = hideOrNot ? true : false
-        hideOrNot = !hideOrNot
+        intercomImage.isHidden = hideOrNot
+        hideOrNot.toggle()
     }
     
     @IBAction func upArrowButtonTapped(_ sender: UIButton) {
