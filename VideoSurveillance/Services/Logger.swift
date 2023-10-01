@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-struct Logger {
+enum Logger {
     
     // MARK: - Properties
     
