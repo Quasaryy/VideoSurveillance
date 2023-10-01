@@ -41,13 +41,8 @@ class IntercomeViewController: UIViewController {
     
     // Open or close door
     @IBAction func keyButtonTapped(_ sender: UIButton) {
-        if openOrCloseDoor == true {
-            doorOpenLabel.text = "Дверь открыта - (Закрыть)"
-            openOrCloseDoor = !openOrCloseDoor
-        } else {
-            doorOpenLabel.text = "Дверь закрыта - (Открыть)"
-            openOrCloseDoor = !openOrCloseDoor
-        }
+        openOrCloseDoor.toggle()
+        doorOpenLabel.text = openOrCloseDoor ? "Дверь закрыта - (Открыть)" : "Дверь открыта - (Закрыть)"
     }
     
     @IBAction func hideButtonTapped(_ sender: UIButton) {
