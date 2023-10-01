@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 class EditViewController: UIViewController {
-        
+    
     // MARK: IB Outlets
     
     @IBOutlet weak var editDoorNameTextField: UITextField!
@@ -18,7 +18,7 @@ class EditViewController: UIViewController {
     // MARK: - Properties
     
     var doorId: Int?
-
+    
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class EditViewController: UIViewController {
         // Setup UI
         setupUI()
     }
-
+    
     // MARK: IB Actions
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
@@ -39,11 +39,10 @@ class EditViewController: UIViewController {
         updateSaveButton()
     }
     
-    
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
-
+    
 }
 
 // MARK: Private Methods

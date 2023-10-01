@@ -26,7 +26,6 @@ class DataManagerForRealm {
     // Закрытый инициализатор, чтобы предотвратить создание новых экземпляров класса
     private init() {}
     
-    
 }
 
 // MARK: - Methods
@@ -91,7 +90,7 @@ extension DataManagerForRealm {
                         "roomNameLabel": cameraData.roomNameLabel ?? "",
                         "favorites": cameraData.favorites,
                         "rec": cameraData.rec
-                    ] as [String : Any])
+                    ] as [String: Any])
                 }, update: .modified)
             }
         } catch let error {

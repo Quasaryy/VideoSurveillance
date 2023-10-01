@@ -52,7 +52,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
     }
     
-    
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -301,7 +300,7 @@ extension MainViewController {
     }
     
     // Method to update data via pull-to-refresh
-    @objc 
+    @objc
     private func refreshData(_ sender: UIRefreshControl) {
         if segmentedControl.selectedSegmentIndex == 0 {
             
@@ -334,8 +333,8 @@ extension MainViewController {
         
         // Try loading data from Realm on startup
         NetworkManager.shared.getDoorsDataFromRemoteServerIfNeeded(tableView: self.tableView) { doorsModel in
-                self.doorDataModel = doorsModel
-            }
+            self.doorDataModel = doorsModel
+        }
         NetworkManager.shared.getCamerasDataFromRemoteServerIfNeeded(tableView: tableView) { camsModel in
             self.camDataModel = camsModel
         }
@@ -353,4 +352,3 @@ extension MainViewController {
     }
     
 }
-

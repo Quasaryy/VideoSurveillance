@@ -35,7 +35,7 @@ extension UISegmentedControl {
         self.setTitleTextAttributes(attr as? [NSAttributedString.Key: AnyObject], for: .normal)
     }
     
-    func addUnderlineForSelectedSegment(){
+    func addUnderlineForSelectedSegment() {
         removeBorder()
         changeFont()
         let underlineWidth: CGFloat = self.bounds.size.width / CGFloat(self.numberOfSegments)
@@ -49,11 +49,12 @@ extension UISegmentedControl {
         self.addSubview(underline)
     }
     
-    func changeUnderlinePosition(){
+    func changeUnderlinePosition() {
         guard let underline = self.viewWithTag(1) else {return}
         let underlineFinalXPosition = (self.bounds.width / CGFloat(self.numberOfSegments)) * CGFloat(selectedSegmentIndex)
         UIView.animate(withDuration: 0.1, animations: {
             underline.frame.origin.x = underlineFinalXPosition
         })
     }
+    
 }

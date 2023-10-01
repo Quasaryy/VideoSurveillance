@@ -28,7 +28,6 @@ class NetworkManager {
 
 extension NetworkManager {
     
-    
     // MARK: Doors section
     
     func getDoorsDataFromRemoteServerIfNeeded(tableView: UITableView, completion: @escaping (Doors) -> Void) {
