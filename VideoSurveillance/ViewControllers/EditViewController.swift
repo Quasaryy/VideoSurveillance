@@ -23,12 +23,9 @@ class EditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Background color main screen
-        view.backgroundColor = .systemGray6
         
-        // Updating save button state
-        updateSaveButton()
+        // Setup UI
+        setupUI()
     }
 
     // MARK: IB Actions
@@ -55,6 +52,15 @@ extension EditViewController {
     private func updateSaveButton() {
         let textField = editDoorNameTextField.text ?? ""
         saveButton.isEnabled = !textField.isEmpty
+    }
+    
+    // SetupUI
+    func setupUI() {
+        // Background color main screen
+        view.backgroundColor = .systemGray6
+        
+        // Updating save button state
+        updateSaveButton()
     }
 }
 

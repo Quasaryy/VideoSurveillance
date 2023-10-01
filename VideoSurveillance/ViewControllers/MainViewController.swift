@@ -30,34 +30,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Adding delegates and data source for tableView
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        // Checking Realm location
-        Logger.logRealmLocation(realm)
-        
-        // Adding underline for segmentedControl
-        segmentedControl.addUnderlineForSelectedSegment()
-        
-        // Try loading data from Realm on startup
-        NetworkManager.shared.getDoorsDataFromRemoteServerIfNeeded(tableView: self.tableView) { doorsModel in
-                self.doorDataModel = doorsModel
-            }
-        NetworkManager.shared.getCamerasDataFromRemoteServerIfNeeded(tableView: tableView) { camsModel in
-            self.camDataModel = camsModel
-        }
-        
-        // Adding refresh control for TableView
-        tableView.refreshControl = refreshControl
-        
-        // Configure Refresh Control
-        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
-        refreshControl.tintColor = UIColor(red: 63/255, green: 192/255, blue: 216/255, alpha: 1.0)
-        refreshControl.attributedTitle = NSAttributedString(string: "Updating data from Realm")
-        
-        // Loading room name
-        roomNameLabel.text = camDataModel.data.cameras.first?.roomNameLabel ?? "Название комнаты"
+        // Setup UI
+        setupUI()
     }
     
     // MARK: - IB Actions
@@ -327,7 +301,8 @@ extension MainViewController {
     }
     
     // Method to update data via pull-to-refresh
-    @objc private func refreshData(_ sender: UIRefreshControl) {
+    @objc 
+    private func refreshData(_ sender: UIRefreshControl) {
         if segmentedControl.selectedSegmentIndex == 0 {
             
             let camsFromRealm: [Camera] = DataManagerForRealm.shared.loadFromRealm(CameraRealm.self)
@@ -343,6 +318,38 @@ extension MainViewController {
             tableView.reloadData()
         }
         sender.endRefreshing()
+    }
+    
+    // Setup UI
+    func setupUI() {
+        // Adding delegates and data source for tableView
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        // Checking Realm location
+        Logger.logRealmLocation(realm)
+        
+        // Adding underline for segmentedControl
+        segmentedControl.addUnderlineForSelectedSegment()
+        
+        // Try loading data from Realm on startup
+        NetworkManager.shared.getDoorsDataFromRemoteServerIfNeeded(tableView: self.tableView) { doorsModel in
+                self.doorDataModel = doorsModel
+            }
+        NetworkManager.shared.getCamerasDataFromRemoteServerIfNeeded(tableView: tableView) { camsModel in
+            self.camDataModel = camsModel
+        }
+        
+        // Adding refresh control for TableView
+        tableView.refreshControl = refreshControl
+        
+        // Configure Refresh Control
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshControl.tintColor = UIColor(red: 63/255, green: 192/255, blue: 216/255, alpha: 1.0)
+        refreshControl.attributedTitle = NSAttributedString(string: "Updating data from Realm")
+        
+        // Loading room name
+        roomNameLabel.text = camDataModel.data.cameras.first?.roomNameLabel ?? "Название комнаты"
     }
     
 }

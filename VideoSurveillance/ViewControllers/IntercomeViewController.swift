@@ -8,7 +8,7 @@
 import UIKit
 
 class IntercomeViewController: UIViewController {
-
+    
     // MARK: - IB Outlets
     
     @IBOutlet weak var intercomImage: UIImageView!
@@ -27,14 +27,8 @@ class IntercomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add shadow and borders for the bottom views
-        UtilityManager.shared.configureShadowAndBorders(for: self.bottomView)
-
-        viewWithKey.layer.cornerRadius = 12
-        Logger.logLockStatus(openOrCloseDoor)
-        
-        // Checking current status door lock
-        UtilityManager.shared.updateDoorsStatus(openOrCloseDoor, doorOpenLabel: doorOpenLabel)
+        // Settup UI
+        setupUI()
     }
     
     // MARK: - IB Actions
@@ -61,5 +55,23 @@ class IntercomeViewController: UIViewController {
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
+    
+}
 
+// MARK: - Methods
+
+extension IntercomeViewController {
+    
+    // Settup UI
+    func setupUI() {
+        // Add shadow and borders for the bottom views
+        UtilityManager.shared.configureShadowAndBorders(for: self.bottomView)
+        
+        viewWithKey.layer.cornerRadius = 12
+        Logger.logLockStatus(openOrCloseDoor)
+        
+        // Checking current status door lock
+        UtilityManager.shared.updateDoorsStatus(openOrCloseDoor, doorOpenLabel: doorOpenLabel)
+    }
+    
 }
