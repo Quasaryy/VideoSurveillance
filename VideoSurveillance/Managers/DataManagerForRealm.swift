@@ -11,7 +11,14 @@ class DataManagerForRealm {
     
     // MARK: - Properties
     
-    let realm = try! Realm()
+    lazy var realm: Realm = {
+        do {
+            return try Realm()
+        } catch let error {
+            fatalError("Ошибка при инициализации Realm: \(error)")
+        }
+    }()
+    
     static let shared = DataManagerForRealm()
     
     // MARK: - Init
@@ -136,19 +143,3 @@ extension DataManagerForRealm {
     }
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
