@@ -175,7 +175,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let destinationViewController = segue.destination as? EditViewController {
                 if let indexPath = selectedIndexPath {
                     let id = doorDataModel.data[indexPath.section].id
-                    destinationViewController.DoorId = id
+                    destinationViewController.doorId = id
                 }
             }
         } else if segue.identifier == "toIntercome" {
@@ -195,7 +195,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Saving data from EditViewController to Realm for door name
         if let sourceViewController = segue.source as? EditViewController {
             
-            let id = sourceViewController.DoorId
+            let id = sourceViewController.doorId
             let textField = sourceViewController.editDoorNameTextField.text
             
             // Saving data to Realm for door name

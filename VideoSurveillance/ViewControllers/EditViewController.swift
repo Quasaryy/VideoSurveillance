@@ -17,7 +17,7 @@ class EditViewController: UIViewController {
     
     // MARK: - Properties
     
-    var DoorId: Int?
+    var doorId: Int?
 
     // MARK: - viewDidLoad
     

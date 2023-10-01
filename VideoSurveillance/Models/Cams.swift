@@ -27,5 +27,6 @@ struct Camera: Codable {
     var room: String?
     var roomNameLabel: String?
     let id: Int
-    var favorites, rec: Bool
+    var favorites: Bool
+    var rec: Bool
 }
