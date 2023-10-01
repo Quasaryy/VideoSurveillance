@@ -23,4 +23,3 @@ struct Datum: Codable {
     let snapshot: String?
     var lockIcon: Bool?
 }
-

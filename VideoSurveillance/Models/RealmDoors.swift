@@ -20,4 +20,3 @@ class DoorRealm: Object {
         return "id"
     }
 }
-
