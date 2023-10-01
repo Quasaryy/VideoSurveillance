@@ -134,6 +134,7 @@ extension DataManagerForRealm {
     func getCamsRealms() -> Results<CameraRealm>? {
         return realm.objects(CameraRealm.self)
     }
+    
 }
 
 

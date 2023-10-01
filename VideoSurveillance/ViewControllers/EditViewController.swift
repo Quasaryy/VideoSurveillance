@@ -11,12 +11,15 @@ import RealmSwift
 class EditViewController: UIViewController {
         
     // MARK: IB Outlets
+    
     @IBOutlet weak var editDoorNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     
     // MARK: - Properties
-    var DoorId: Int?
     
+    var DoorId: Int?
+
+    // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +27,12 @@ class EditViewController: UIViewController {
         // Background color main screen
         view.backgroundColor = .systemGray6
         
-        
         // Updating save button state
         updateSaveButton()
     }
 
     // MARK: IB Actions
+    
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         dismiss(animated: true)
     }
@@ -46,7 +49,6 @@ class EditViewController: UIViewController {
 
 }
 
-
 // MARK: Private Methods
 extension EditViewController {
     // Enable save button if text field are not empty
@@ -54,7 +56,6 @@ extension EditViewController {
         let textField = editDoorNameTextField.text ?? ""
         saveButton.isEnabled = !textField.isEmpty
     }
-    
 }
 
 // Hiding keyword

@@ -10,15 +10,19 @@ import UIKit
 class IntercomeViewController: UIViewController {
 
     // MARK: - IB Outlets
+    
     @IBOutlet weak var intercomImage: UIImageView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var viewWithKey: UIView!
     @IBOutlet weak var doorOpenLabel: UILabel!
     
     // MARK: - Properties
+    
     var idOfDoor: Int?
     private var hideOrNot = true
     var openOrCloseDoor = false
+    
+    // MARK: - Properties
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +35,9 @@ class IntercomeViewController: UIViewController {
         
         // Checking current status door lock
         UtilityManager.shared.updateDoorsStatus(openOrCloseDoor, doorOpenLabel: doorOpenLabel)
-
     }
     
+    // MARK: - IB Actions
     
     // Open or close door
     @IBAction func keyButtonTapped(_ sender: UIButton) {

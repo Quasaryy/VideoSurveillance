@@ -17,7 +17,7 @@ class UtilityManager {
     
     // Закрытый инициализатор, чтобы предотвратить создание новых экземпляров класса
     private init() {}
-
+    
 }
 
 // MARK: - Method
@@ -38,11 +38,12 @@ extension UtilityManager {
     
     // Checking current status door lock
     func updateDoorsStatus(_ openOrCloseDoor: Bool, doorOpenLabel: UILabel) {
-            if openOrCloseDoor == false {
-                doorOpenLabel.text = "Дверь открыта - (Закрыть)"
-            } else {
-                doorOpenLabel.text = "Дверь закрыта - (Открыть)"
-            }
+        if openOrCloseDoor == false {
+            doorOpenLabel.text = "Дверь открыта - (Закрыть)"
+        } else {
+            doorOpenLabel.text = "Дверь закрыта - (Открыть)"
         }
+    }
+    
 }
 

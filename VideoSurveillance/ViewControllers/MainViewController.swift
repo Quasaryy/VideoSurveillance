@@ -11,18 +11,21 @@ import RealmSwift
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - IB Outlets
+    
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewConstraintTop: NSLayoutConstraint!
     
     // MARK: - Properties
+    
     private var camDataModel = Cameras.shared // Model for remote data
     private var doorDataModel = Doors.shared // Model for remote data
     private let refreshControl = UIRefreshControl()
     private var selectedIndexPath: IndexPath?
     private let realm = DataManagerForRealm.shared.realm
     
+    // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +58,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Loading room name
         roomNameLabel.text = camDataModel.data.cameras.first?.roomNameLabel ?? "Название комнаты"
-        
     }
     
     // MARK: - IB Actions
+    
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
         sender.changeUnderlinePosition()
         
@@ -77,6 +80,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     // MARK: - Table view data source
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         segmentedControl.selectedSegmentIndex == 0 ? camDataModel.data.cameras.count : doorDataModel.data.count
     }
@@ -104,6 +108,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - TableView delegate
+    
     // Adding trailing swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -164,6 +169,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditSegue" {
             if let destinationViewController = segue.destination as? EditViewController {
@@ -184,6 +190,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     // MARK: Unwind segue
+    
     @IBAction func unwindSegueToMain(segue: UIStoryboardSegue) {
         // Saving data from EditViewController to Realm for door name
         if let sourceViewController = segue.source as? EditViewController {
@@ -259,6 +266,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 }
 
 // MARK: - Private Methods
+
 extension MainViewController {
     
     // Add to favorites cams for trailing swipe for Cams

@@ -12,6 +12,7 @@ import UIKit
 class NetworkManager {
     
     // MARK: - Properties
+    
     static let shared = NetworkManager()
     private let doorsUrl = "https://cars.cprogroup.ru/api/rubetek/doors/"
     private let camerasUrl = "https://cars.cprogroup.ru/api/rubetek/cameras/"
@@ -24,6 +25,7 @@ class NetworkManager {
 }
 
 // MARK: - Methods
+
 extension NetworkManager {
     
     

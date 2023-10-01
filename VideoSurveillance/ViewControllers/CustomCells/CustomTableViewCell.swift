@@ -10,6 +10,7 @@ import UIKit
 class CustomTableViewCell: UITableViewCell {
     
     // MARK: - IB Outlets
+    
     @IBOutlet weak var onlineLabel: UILabel!
     @IBOutlet weak var cameraRecorded: UIImageView!
     @IBOutlet weak var camLabel: UILabel!
@@ -22,8 +23,10 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var lockOnConstraintTop: NSLayoutConstraint!
     
     // MARK: - Properties
+    
     var imageURL: URL?
     
+    // MARK: - awakeFromNib
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,13 +35,14 @@ class CustomTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
 }
 
 // MARK: - Methods
+
 extension CustomTableViewCell {
+    
     // Configuration the cell for images for Cams model
     func configCellVideoImage(imageURL: URL?) {
         guard let imageURL = imageURL else {
@@ -136,6 +140,5 @@ extension CustomTableViewCell {
             configCellForDoorsIfSnapshotIsNotNil(indexPath: indexPath, model: doorsModel)
         }
     }
-    
     
 }
