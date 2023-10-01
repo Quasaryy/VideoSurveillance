@@ -54,10 +54,9 @@ extension CustomTableViewCell {
         videoCam.image = nil
         
         URLSession.shared.dataTask(with: imageURL) { [weak self] data, _, _ in
-            guard let self = self, let dataSource = data, self.imageURL == imageURL else { return }
-            let imageSource = UIImage(data: dataSource)
+            guard let self = self, let data = data, self.imageURL == imageURL else { return }
             DispatchQueue.main.async {
-                self.videoCam.image = imageSource
+                self.videoCam.image = UIImage(data: data)
             }
         }.resume()
     }
