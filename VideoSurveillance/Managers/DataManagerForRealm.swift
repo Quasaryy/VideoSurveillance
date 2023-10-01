@@ -10,16 +10,20 @@ import RealmSwift
 class DataManagerForRealm {
     
     // MARK: - Properties
+    
     let realm = try! Realm()
     static let shared = DataManagerForRealm()
     
     // MARK: - Init
+    
+    // Закрытый инициализатор, чтобы предотвратить создание новых экземпляров класса
     private init() {}
     
     
 }
 
 // MARK: - Methods
+
 extension DataManagerForRealm {
     
     // MARK: Loading from Realm
@@ -40,37 +44,34 @@ extension DataManagerForRealm {
     
     // Method to convert Realm object to model
     private func convertObject<T: Object, U: Decodable>(_ object: T, to objectType: U.Type) -> U? {
-        if objectType == Datum.self {
-            if let doorRealm = object as? DoorRealm {
-                // Конвертируем DoorRealm в модель Door
-                return Datum(
-                    name: doorRealm.name,
-                    room: doorRealm.room,
-                    id: doorRealm.id,
-                    favorites: doorRealm.favorites,
-                    snapshot: doorRealm.snapshot,
-                    lockIcon: doorRealm.lockIcon
-                ) as? U
-            }
-        } else if objectType == Camera.self {
-            if let cameraRealm = object as? CameraRealm {
-                // Конвертируем CameraRealm в модель Camera
-                return Camera(
-                    name: cameraRealm.name,
-                    snapshot: cameraRealm.snapshot,
-                    room: cameraRealm.room,
-                    roomNameLabel: cameraRealm.roomNameLabel,
-                    id: cameraRealm.id,
-                    favorites: cameraRealm.favorites,
-                    rec: cameraRealm.rec
-                ) as? U
-            }
+        if objectType == Datum.self, let doorRealm = object as? DoorRealm {
+            // Конвертируем DoorRealm в модель Door
+            return Datum(
+                name: doorRealm.name,
+                room: doorRealm.room,
+                id: doorRealm.id,
+                favorites: doorRealm.favorites,
+                snapshot: doorRealm.snapshot,
+                lockIcon: doorRealm.lockIcon
+            ) as? U
+        } else if objectType == Camera.self, let cameraRealm = object as? CameraRealm {
+            // Конвертируем CameraRealm в модель Camera
+            return Camera(
+                name: cameraRealm.name,
+                snapshot: cameraRealm.snapshot,
+                room: cameraRealm.room,
+                roomNameLabel: cameraRealm.roomNameLabel,
+                id: cameraRealm.id,
+                favorites: cameraRealm.favorites,
+                rec: cameraRealm.rec
+            ) as? U
         }
         
         return nil
     }
     
     // MARK: Saving to Realm
+    
     func saveCamerasToRealm(_ cameras: [Camera]) {
         do {
             try realm.write {
@@ -123,6 +124,7 @@ extension DataManagerForRealm {
     }
     
     // MARK: Checkings
+    
     // Checking if there is data in the realm for doors
     func getDoorRealms() -> Results<DoorRealm>? {
         return realm.objects(DoorRealm.self)
