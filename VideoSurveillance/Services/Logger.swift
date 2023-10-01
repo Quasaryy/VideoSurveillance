@@ -40,7 +40,6 @@ extension Logger {
         print("Error with Realm: \(error)")
     }
     
-    
     // Method for logging response information
     static func logResponse(_ response: URLResponse) {
         guard isLoggingEnabled else { return }

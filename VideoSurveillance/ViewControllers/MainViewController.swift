@@ -208,7 +208,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             doorDataModel.data[indexPath.section].lockIcon = lockStatus
             Logger.logLockStatus(lockStatus)
             
-            
             if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
                 if doorDataModel.data[indexPath.section].lockIcon ?? true {
                     customCell.unLock.isHidden = true
