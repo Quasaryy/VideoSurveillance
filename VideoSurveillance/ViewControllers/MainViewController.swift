@@ -237,12 +237,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             
             if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
-                if doorDataModel.data[indexPath.section].lockIcon == true {
+                if doorDataModel.data[indexPath.section].lockIcon ?? true {
                     customCell.unLock.isHidden = true
                     customCell.lockOn.isHidden = false
                     
                 } else {
-                    if doorDataModel.data[indexPath.section].lockIcon == false {
+                    if !(doorDataModel.data[indexPath.section].lockIcon ?? false) {
                         customCell.unLock.isHidden = false
                         customCell.lockOn.isHidden = true
                     }
@@ -268,7 +268,7 @@ extension MainViewController {
             do {
                 let realm = try Realm()
                 try realm.write {
-                    self.camDataModel.data.cameras[indexPath.section].favorites = isFavorite ? false : true
+                    self.camDataModel.data.cameras[indexPath.section].favorites = !isFavorite
                     let cameraRealm = realm.object(ofType: CameraRealm.self, forPrimaryKey: self.camDataModel.data.cameras[indexPath.section].id)
                     cameraRealm?.favorites = self.camDataModel.data.cameras[indexPath.section].favorites
                 }
@@ -307,7 +307,7 @@ extension MainViewController {
             do {
                 let realm = try Realm()
                 try realm.write {
-                    self.doorDataModel.data[indexPath.section].favorites = isFavorite ? false : true
+                    self.doorDataModel.data[indexPath.section].favorites = !isFavorite
                     let doorRealm = realm.object(ofType: DoorRealm.self, forPrimaryKey: self.doorDataModel.data[indexPath.section].id)
                     doorRealm?.favorites = self.doorDataModel.data[indexPath.section].favorites
                 }
