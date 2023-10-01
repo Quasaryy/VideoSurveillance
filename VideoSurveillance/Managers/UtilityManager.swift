@@ -10,14 +10,18 @@ import UIKit
 class UtilityManager {
     
     // MARK: - Properties
+    
     static let shared = UtilityManager()
     
     // MARK: - Init
+    
+    // Закрытый инициализатор, чтобы предотвратить создание новых экземпляров класса
     private init() {}
 
 }
 
 // MARK: - Method
+
 extension UtilityManager {
     
     // Add shadow and borders for the bottom view
