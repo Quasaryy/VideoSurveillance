@@ -13,6 +13,8 @@ class NetworkManager {
     
     // MARK: - Properties
     static let shared = NetworkManager()
+    private let doorsUrl = "https://cars.cprogroup.ru/api/rubetek/doors/"
+    private let camerasUrl = "https://cars.cprogroup.ru/api/rubetek/cameras/"
     
     // MARK: - Init
     
@@ -36,7 +38,7 @@ extension NetworkManager {
     }
 
     private func fetchDataFromRemoteServer(tableView: UITableView, completion: @escaping (Doors) -> Void) {
-        guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/doors/") else { return }
+        guard let url = URL(string: doorsUrl) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 Logger.logErrorDescription(error)
@@ -87,7 +89,7 @@ extension NetworkManager {
     }
 
     private func fetchCamerasFromRemoteServer(tableView: UITableView, completion: @escaping (Cameras) -> Void) {
-        guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
+        guard let url = URL(string: camerasUrl) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 Logger.logErrorDescription(error)
