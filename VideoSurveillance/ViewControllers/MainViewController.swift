@@ -171,21 +171,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toEditSegue" {
-            if let destinationViewController = segue.destination as? EditViewController {
-                if let indexPath = selectedIndexPath {
-                    let id = doorDataModel.data[indexPath.section].id
-                    destinationViewController.doorId = id
-                }
-            }
-        } else if segue.identifier == "toIntercome" {
-            if let destinationViewController = segue.destination as? IntercomeViewController {
-                if let indexPath = selectedIndexPath {
-                    let id = doorDataModel.data[indexPath.section].id
-                    destinationViewController.idOfDoor = id
-                    destinationViewController.openOrCloseDoor = doorDataModel.data[indexPath.section].lockIcon ?? true
-                }
-            }
+        if segue.identifier == "toEditSegue", let destinationViewController = segue.destination as? EditViewController, let indexPath = selectedIndexPath {
+            let id = doorDataModel.data[indexPath.section].id
+            destinationViewController.doorId = id
+        } else if segue.identifier == "toIntercome", let destinationViewController = segue.destination as? IntercomeViewController, let indexPath = selectedIndexPath {
+            let id = doorDataModel.data[indexPath.section].id
+            destinationViewController.idOfDoor = id
+            destinationViewController.openOrCloseDoor = doorDataModel.data[indexPath.section].lockIcon ?? true
         }
     }
     
