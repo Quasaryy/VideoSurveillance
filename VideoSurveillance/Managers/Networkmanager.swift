@@ -79,48 +79,52 @@ extension NetworkManager {
     // MARK: Cameras section
     
     func getCamerasDataFromRemoteServerIfNeeded(tableView: UITableView, completion: @escaping (Cameras) -> Void) {
-        
-        // Checking if there is data in the realm
         if let camsDataInRealm = DataManagerForRealm.shared.getCamsRealms(), camsDataInRealm.isEmpty {
-            
-            // If the data is not in Realm, we load it from the server
-            guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                
-                if let error = error {
-                    Logger.logErrorDescription(error)
-                    return
-                }
-                
-                if let response = response {
-                    Logger.logResponse(response)
-                }
-                
-                guard let remoteData = data else { return }
-                
-                do {
-                    let dataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
-                    
-                    // MARK: Saving data to Realm for Doors if data existing
-                    
-                    DispatchQueue.main.async {
-                        DataManagerForRealm.shared.saveCamerasToRealm(dataModel.data.cameras)
-                        let camsModel = Cameras(success: true, data: DataClass(room: [], cameras: dataModel.data.cameras))
-                        completion(camsModel) // Passing an existing model through a closure
-                        tableView.reloadData()
-                    }
-                } catch let error {
-                    Logger.logErrorDescription(error)
-                }
-            }.resume()
-            // MARK: Loading data from Realm from Cameras if data existing
+            fetchCamerasFromRemoteServer(tableView: tableView, completion: completion)
         } else {
-            DispatchQueue.main.async {
-                let loadedData: [Camera] = DataManagerForRealm.shared.loadFromRealm(CameraRealm.self)
-                let camsModel = Cameras(success: true, data: DataClass(room: [], cameras: loadedData))
-                completion(camsModel) // Passing an existing model through a closure
-                tableView.reloadData()
-            }
+            loadCamerasFromRealm(tableView: tableView, completion: completion)
         }
     }
+
+    private func fetchCamerasFromRemoteServer(tableView: UITableView, completion: @escaping (Cameras) -> Void) {
+        guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/cameras/") else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                Logger.logErrorDescription(error)
+                return
+            }
+
+            if let response = response {
+                Logger.logResponse(response)
+            }
+
+            guard let remoteData = data else { return }
+
+            do {
+                let dataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
+                DispatchQueue.main.async {
+                    self.saveAndReloadCamerasData(dataModel: dataModel, tableView: tableView, completion: completion)
+                }
+            } catch let error {
+                Logger.logErrorDescription(error)
+            }
+        }.resume()
+    }
+
+    private func saveAndReloadCamerasData(dataModel: Cameras, tableView: UITableView, completion: @escaping (Cameras) -> Void) {
+        DataManagerForRealm.shared.saveCamerasToRealm(dataModel.data.cameras)
+        let camsModel = Cameras(success: true, data: DataClass(room: [], cameras: dataModel.data.cameras))
+        completion(camsModel)
+        tableView.reloadData()
+    }
+
+    private func loadCamerasFromRealm(tableView: UITableView, completion: @escaping (Cameras) -> Void) {
+        DispatchQueue.main.async {
+            let loadedData: [Camera] = DataManagerForRealm.shared.loadFromRealm(CameraRealm.self)
+            let camsModel = Cameras(success: true, data: DataClass(room: [], cameras: loadedData))
+            completion(camsModel)
+            tableView.reloadData()
+        }
+    }
+    
 }
