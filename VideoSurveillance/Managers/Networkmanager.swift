@@ -15,6 +15,8 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     // MARK: - Init
+    
+    // Закрытый инициализатор, чтобы предотвратить создание новых экземпляров класса
     private init() {}
     
 }
@@ -22,52 +24,59 @@ class NetworkManager {
 // MARK: - Methods
 extension NetworkManager {
     
+    
+    // MARK: Doors section
+    
     func getDoorsDataFromRemoteServerIfNeeded(tableView: UITableView, completion: @escaping (Doors) -> Void) {
-        
-        // Checking if there is data in the realm
         if let doorsDataInRealm = DataManagerForRealm.shared.getDoorRealms(), doorsDataInRealm.isEmpty {
-            
-            // If the data is not in Realm, we load it from the server
-            guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/doors/") else { return }
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                
-                if let error = error {
-                    Logger.logErrorDescription(error)
-                    return
-                }
-                
-                if let response = response {
-                    Logger.logResponse(response)
-                }
-                
-                guard let remoteData = data else { return }
-                
-                do {
-                    let dataModel = try JSONDecoder().decode(Doors.self, from: remoteData)
-                    
-                    // MARK: Saving data to Realm for Doors
-                    
-                    DispatchQueue.main.async {
-                        DataManagerForRealm.shared.saveDoorsToRealm(dataModel.data)
-                        let doorsModel = Doors(success: true, data: dataModel.data)
-                        completion(doorsModel) // Passing an existing model through a closure
-                        tableView.reloadData()
-                    }
-                } catch let error {
-                    Logger.logErrorDescription(error)
-                }
-            }.resume()
-            // MARK: Loading data from Realm for Cameras if data existing
+            fetchDataFromRemoteServer(tableView: tableView, completion: completion)
         } else {
-            DispatchQueue.main.async {
-                let loadedData: [Datum] = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self)
-                let doorsModel = Doors(success: true, data: loadedData)
-                completion(doorsModel) // Passing an existing model through a closure
-                tableView.reloadData()
-            }
+            loadDataFromRealm(tableView: tableView, completion: completion)
         }
     }
-    
+
+    private func fetchDataFromRemoteServer(tableView: UITableView, completion: @escaping (Doors) -> Void) {
+        guard let url = URL(string: "https://cars.cprogroup.ru/api/rubetek/doors/") else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                Logger.logErrorDescription(error)
+                return
+            }
+            
+            if let response = response {
+                Logger.logResponse(response)
+            }
+            
+            guard let remoteData = data else { return }
+            
+            do {
+                let dataModel = try JSONDecoder().decode(Doors.self, from: remoteData)
+                DispatchQueue.main.async {
+                    self.saveAndReloadData(dataModel: dataModel, tableView: tableView, completion: completion)
+                }
+            } catch let error {
+                Logger.logErrorDescription(error)
+            }
+        }.resume()
+    }
+
+    private func saveAndReloadData(dataModel: Doors, tableView: UITableView, completion: @escaping (Doors) -> Void) {
+        DataManagerForRealm.shared.saveDoorsToRealm(dataModel.data)
+        let doorsModel = Doors(success: true, data: dataModel.data)
+        completion(doorsModel)
+        tableView.reloadData()
+    }
+
+    private func loadDataFromRealm(tableView: UITableView, completion: @escaping (Doors) -> Void) {
+        DispatchQueue.main.async {
+            let loadedData: [Datum] = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self)
+            let doorsModel = Doors(success: true, data: loadedData)
+            completion(doorsModel)
+            tableView.reloadData()
+        }
+    }
+
+    // MARK: Cameras section
     
     func getCamerasDataFromRemoteServerIfNeeded(tableView: UITableView, completion: @escaping (Cameras) -> Void) {
         
