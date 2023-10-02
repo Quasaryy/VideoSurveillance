@@ -37,12 +37,18 @@ extension UtilityManager {
     }
     
     // Checking current status door lock
-    func updateDoorsStatus(_ openOrCloseDoor: Bool, doorOpenLabel: UILabel) {
+    func updateDoorsStatus(openOrCloseDoor: Bool, doorOpenLabel: UILabel) {
         if !openOrCloseDoor {
             doorOpenLabel.text = "Дверь открыта - (Закрыть)"
         } else {
             doorOpenLabel.text = "Дверь закрыта - (Открыть)"
         }
+    }
+    
+    // Enable save button if text field are not empty
+    func updateSaveButton(editDoorNameTextField: UITextField, saveButton: UIButton) {
+        let textField = editDoorNameTextField.text ?? ""
+        saveButton.isEnabled = !textField.isEmpty
     }
     
 }

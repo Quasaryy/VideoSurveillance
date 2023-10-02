@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D2000F052A9765BE00F60E18 /* Networkmanager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2000F042A9765BE00F60E18 /* Networkmanager.swift */; };
+		D20235022ACB3B55002CF3C2 /* SwipeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20235012ACB3B55002CF3C2 /* SwipeManager.swift */; };
 		D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A5E2A86856B00E5D94A /* AppDelegate.swift */; };
 		D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2027A602A86856B00E5D94A /* SceneDelegate.swift */; };
 		D2027A662A86856B00E5D94A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2027A642A86856B00E5D94A /* Main.storyboard */; };
@@ -26,6 +27,10 @@
 		D290D2432A8A1299004D3BFF /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = D290D2422A8A1299004D3BFF /* Realm */; };
 		D290D2452A8A1299004D3BFF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D290D2442A8A1299004D3BFF /* RealmSwift */; };
 		D290D2472A8A2DE9004D3BFF /* RealmCams.swift in Sources */ = {isa = PBXBuildFile; fileRef = D290D2462A8A2DE9004D3BFF /* RealmCams.swift */; };
+		D2B393C92ACAC9EB00047B1A /* UIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B393C82ACAC9EB00047B1A /* UIManager.swift */; };
+		D2B393CB2ACB0A8600047B1A /* ActionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B393CA2ACB0A8600047B1A /* ActionManager.swift */; };
+		D2B393CD2ACB1CAE00047B1A /* ActiveSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B393CC2ACB1CAE00047B1A /* ActiveSegment.swift */; };
+		D2B393CF2ACB2EB200047B1A /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B393CE2ACB2EB200047B1A /* NavigationManager.swift */; };
 		D2C216882A967199000190F4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C216872A967199000190F4 /* Logger.swift */; };
 		D2C2168B2A9675D4000190F4 /* DataManagerForRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2168A2A9675D4000190F4 /* DataManagerForRealm.swift */; };
 		D2D2167D2A87F08B00068D5C /* Cams.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D2167C2A87F08B00068D5C /* Cams.swift */; };
@@ -37,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		D2000F042A9765BE00F60E18 /* Networkmanager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networkmanager.swift; sourceTree = "<group>"; };
+		D20235012ACB3B55002CF3C2 /* SwipeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeManager.swift; sourceTree = "<group>"; };
 		D2027A5B2A86856B00E5D94A /* VideoSurveillance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoSurveillance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2027A5E2A86856B00E5D94A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2027A602A86856B00E5D94A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +61,10 @@
 		D28A1BE42A86BBEF002BCEEC /* Circe-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circe-ExtraBold.otf"; sourceTree = "<group>"; };
 		D28A1BE52A86BBEF002BCEEC /* Circle-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Circle-Regular.otf"; sourceTree = "<group>"; };
 		D290D2462A8A2DE9004D3BFF /* RealmCams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCams.swift; sourceTree = "<group>"; };
+		D2B393C82ACAC9EB00047B1A /* UIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManager.swift; sourceTree = "<group>"; };
+		D2B393CA2ACB0A8600047B1A /* ActionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionManager.swift; sourceTree = "<group>"; };
+		D2B393CC2ACB1CAE00047B1A /* ActiveSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveSegment.swift; sourceTree = "<group>"; };
+		D2B393CE2ACB2EB200047B1A /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		D2C216872A967199000190F4 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D2C2168A2A9675D4000190F4 /* DataManagerForRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerForRealm.swift; sourceTree = "<group>"; };
 		D2D2167C2A87F08B00068D5C /* Cams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cams.swift; sourceTree = "<group>"; };
@@ -102,7 +112,7 @@
 				D2C216892A96721B000190F4 /* Services */,
 				D2D2167E2A87F09800068D5C /* Models */,
 				D2EC651A2A877E1D005D597F /* ViewControllers */,
-				D2EC65192A877C05005D597F /* Storyboards */,
+				D2EC65192A877C05005D597F /* Layouts */,
 				D28A1BEB2A86BC0C002BCEEC /* Fonts */,
 				D2EC65182A877B9D005D597F /* Extensions */,
 				D2027A6C2A86856D00E5D94A /* Info.plist */,
@@ -135,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				D2C216872A967199000190F4 /* Logger.swift */,
+				D2B393CC2ACB1CAE00047B1A /* ActiveSegment.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -145,6 +156,10 @@
 				D2C2168A2A9675D4000190F4 /* DataManagerForRealm.swift */,
 				D2000F042A9765BE00F60E18 /* Networkmanager.swift */,
 				D2F56ACE2A9B46D2003EB73A /* UtilityManager.swift */,
+				D2B393C82ACAC9EB00047B1A /* UIManager.swift */,
+				D2B393CA2ACB0A8600047B1A /* ActionManager.swift */,
+				D2B393CE2ACB2EB200047B1A /* NavigationManager.swift */,
+				D20235012ACB3B55002CF3C2 /* SwipeManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -169,13 +184,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		D2EC65192A877C05005D597F /* Storyboards */ = {
+		D2EC65192A877C05005D597F /* Layouts */ = {
 			isa = PBXGroup;
 			children = (
 				D2027A642A86856B00E5D94A /* Main.storyboard */,
 				D2027A692A86856D00E5D94A /* LaunchScreen.storyboard */,
 			);
-			path = Storyboards;
+			path = Layouts;
 			sourceTree = "<group>";
 		};
 		D2EC651A2A877E1D005D597F /* ViewControllers */ = {
@@ -275,10 +290,14 @@
 				D253D6202A8ABEA8001D7467 /* EditViewController.swift in Sources */,
 				D2C216882A967199000190F4 /* Logger.swift in Sources */,
 				D2D2167D2A87F08B00068D5C /* Cams.swift in Sources */,
+				D2B393C92ACAC9EB00047B1A /* UIManager.swift in Sources */,
+				D20235022ACB3B55002CF3C2 /* SwipeManager.swift in Sources */,
 				D253D61E2A8AA089001D7467 /* RealmDoors.swift in Sources */,
 				D2027A5F2A86856B00E5D94A /* AppDelegate.swift in Sources */,
 				D276CA932A8E43A7001DB7C8 /* IntercomeViewController.swift in Sources */,
+				D2B393CD2ACB1CAE00047B1A /* ActiveSegment.swift in Sources */,
 				D290D2472A8A2DE9004D3BFF /* RealmCams.swift in Sources */,
+				D2B393CF2ACB2EB200047B1A /* NavigationManager.swift in Sources */,
 				D2D216802A87F10A00068D5C /* Doors.swift in Sources */,
 				D2027A612A86856B00E5D94A /* SceneDelegate.swift in Sources */,
 				D2C2168B2A9675D4000190F4 /* DataManagerForRealm.swift in Sources */,
@@ -288,6 +307,7 @@
 				D2000F052A9765BE00F60E18 /* Networkmanager.swift in Sources */,
 				D2F56ACF2A9B46D2003EB73A /* UtilityManager.swift in Sources */,
 				D211C4572A87A2B2001DF7C6 /* CustomTableViewCell.swift in Sources */,
+				D2B393CB2ACB0A8600047B1A /* ActionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

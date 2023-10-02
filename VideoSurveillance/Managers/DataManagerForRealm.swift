@@ -120,7 +120,6 @@ extension DataManagerForRealm {
     // Saving any objects in Realm
     func saveObjectsToRealm<T: Object>(_ object: T?, _ updateBlock: (() -> Void)?) {
         do {
-            let realm = try Realm()
             try realm.write {
                 updateBlock?()
             }

@@ -25,7 +25,8 @@ class EditViewController: UIViewController {
         super.viewDidLoad()
         
         // Setup UI
-        setupUI()
+        UIManager.shared.setupUIForEditScreen(editDoorNameTextField: self.editDoorNameTextField, saveButton: self.saveButton, editController: self)
+        
     }
     
     // MARK: IB Actions
@@ -36,7 +37,7 @@ class EditViewController: UIViewController {
     
     // Enable save button if text field are not empty and has been edited
     @IBAction func editDoorNameTextFieldChanged(_ sender: UITextField) {
-        updateSaveButton()
+        UtilityManager.shared.updateSaveButton(editDoorNameTextField: editDoorNameTextField, saveButton: saveButton)
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
@@ -45,23 +46,7 @@ class EditViewController: UIViewController {
     
 }
 
-// MARK: Private Methods
-extension EditViewController {
-    // Enable save button if text field are not empty
-    private func updateSaveButton() {
-        let textField = editDoorNameTextField.text ?? ""
-        saveButton.isEnabled = !textField.isEmpty
-    }
-    
-    // SetupUI
-    func setupUI() {
-        // Background color main screen
-        view.backgroundColor = .systemGray6
-        
-        // Updating save button state
-        updateSaveButton()
-    }
-}
+// MARK: Text field delegate
 
 // Hiding keyword
 extension EditViewController: UITextFieldDelegate {

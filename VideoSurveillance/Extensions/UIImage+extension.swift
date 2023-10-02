@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
-
+    
     class func getColoredRectImageWith(color: CGColor, andSize size: CGSize) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         let graphicsContext = UIGraphicsGetCurrentContext()
@@ -20,5 +20,5 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return rectangleImage
     }
-
+    
 }

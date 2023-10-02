@@ -5,7 +5,6 @@
 //  Created by Yury on 24/08/2023.
 //
 
-import Foundation
 import RealmSwift
 import UIKit
 
@@ -37,7 +36,7 @@ extension NetworkManager {
             loadDataFromRealm(tableView: tableView, completion: completion)
         }
     }
-
+    
     private func fetchDataFromRemoteServer(tableView: UITableView, completion: @escaping (Doors) -> Void) {
         guard let url = URL(string: doorsUrl) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -62,14 +61,14 @@ extension NetworkManager {
             }
         }.resume()
     }
-
+    
     private func saveAndReloadData(dataModel: Doors, tableView: UITableView, completion: @escaping (Doors) -> Void) {
         DataManagerForRealm.shared.saveDoorsToRealm(dataModel.data)
         let doorsModel = Doors(success: true, data: dataModel.data)
         completion(doorsModel)
         tableView.reloadData()
     }
-
+    
     private func loadDataFromRealm(tableView: UITableView, completion: @escaping (Doors) -> Void) {
         DispatchQueue.main.async {
             let loadedData: [Datum] = DataManagerForRealm.shared.loadFromRealm(DoorRealm.self)
@@ -78,7 +77,7 @@ extension NetworkManager {
             tableView.reloadData()
         }
     }
-
+    
     // MARK: Cameras section
     
     func getCamerasDataFromRemoteServerIfNeeded(tableView: UITableView, completion: @escaping (Cameras) -> Void) {
@@ -88,7 +87,7 @@ extension NetworkManager {
             loadCamerasFromRealm(tableView: tableView, completion: completion)
         }
     }
-
+    
     private func fetchCamerasFromRemoteServer(tableView: UITableView, completion: @escaping (Cameras) -> Void) {
         guard let url = URL(string: camerasUrl) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -96,13 +95,13 @@ extension NetworkManager {
                 Logger.logErrorDescription(error)
                 return
             }
-
+            
             if let response = response {
                 Logger.logResponse(response)
             }
-
+            
             guard let remoteData = data else { return }
-
+            
             do {
                 let dataModel = try JSONDecoder().decode(Cameras.self, from: remoteData)
                 DispatchQueue.main.async {
@@ -113,14 +112,14 @@ extension NetworkManager {
             }
         }.resume()
     }
-
+    
     private func saveAndReloadCamerasData(dataModel: Cameras, tableView: UITableView, completion: @escaping (Cameras) -> Void) {
         DataManagerForRealm.shared.saveCamerasToRealm(dataModel.data.cameras)
         let camsModel = Cameras(success: true, data: DataClass(room: [], cameras: dataModel.data.cameras))
         completion(camsModel)
         tableView.reloadData()
     }
-
+    
     private func loadCamerasFromRealm(tableView: UITableView, completion: @escaping (Cameras) -> Void) {
         DispatchQueue.main.async {
             let loadedData: [Camera] = DataManagerForRealm.shared.loadFromRealm(CameraRealm.self)

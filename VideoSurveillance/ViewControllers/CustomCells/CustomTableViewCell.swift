@@ -30,7 +30,7 @@ class CustomTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        configureShadowAndBorders() // For shadow and borders of the cell
+        UIManager.shared.configureShadowAndBordersForCell(cell: self) // For shadow and borders of the cell
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -42,6 +42,8 @@ class CustomTableViewCell: UITableViewCell {
 // MARK: - Methods
 
 extension CustomTableViewCell {
+    
+    // MARK: Cell config
     
     // Configuration the cell for images for Cams model
     func configCellVideoImage(imageURL: URL?) {
@@ -59,18 +61,6 @@ extension CustomTableViewCell {
                 self.videoCam.image = UIImage(data: data)
             }
         }.resume()
-    }
-    
-    // Add shadow and borders for the cell
-    func configureShadowAndBorders() {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 3)
-        self.layer.shadowRadius = 3
-        self.layer.shadowOpacity = 0.5
-        
-        self.layer.borderWidth = 0.3
-        self.layer.borderColor = UIColor(red: 219/255, green: 219/255, blue: 219/255, alpha: 1).cgColor
     }
     
     // Configure the cell for cams

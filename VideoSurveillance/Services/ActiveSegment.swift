@@ -5,4 +5,7 @@
 //  Created by Yury on 02/10/2023.
 //
 
-import Foundation
+enum ActiveSegment: Int {
+    case cameras = 0
+    case doors = 1
+}

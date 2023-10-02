@@ -28,20 +28,18 @@ class IntercomeViewController: UIViewController {
         super.viewDidLoad()
         
         // Settup UI
-        setupUI()
+        UIManager.shared.setupUIForIntercome(bottomView: bottomView, viewWithKey: viewWithKey, openOrCloseDoor: openOrCloseDoor, doorOpenLabel: doorOpenLabel)
     }
     
     // MARK: - IB Actions
     
     // Open or close door
     @IBAction func keyButtonTapped(_ sender: UIButton) {
-        openOrCloseDoor.toggle()
-        doorOpenLabel.text = openOrCloseDoor ? "Дверь закрыта - (Открыть)" : "Дверь открыта - (Закрыть)"
+        ActionManager.shared.toggleDoorState(openOrCloseDoor: &openOrCloseDoor, doorOpenLabel: doorOpenLabel)
     }
     
     @IBAction func hideButtonTapped(_ sender: UIButton) {
-        intercomImage.isHidden = hideOrNot
-        hideOrNot.toggle()
+        ActionManager.shared.toggleIntercomImageVisibility(hideOrNot: &hideOrNot, intercomImage: intercomImage)
     }
     
     // Идет переход по сгвею при тапе
@@ -53,25 +51,7 @@ class IntercomeViewController: UIViewController {
     }
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
-        dismiss(animated: true)
-    }
-    
-}
-
-// MARK: - Methods
-
-extension IntercomeViewController {
-    
-    // Settup UI
-    func setupUI() {
-        // Add shadow and borders for the bottom views
-        UtilityManager.shared.configureShadowAndBorders(for: self.bottomView)
-        
-        viewWithKey.layer.cornerRadius = 12
-        Logger.logLockStatus(openOrCloseDoor)
-        
-        // Checking current status door lock
-        UtilityManager.shared.updateDoorsStatus(openOrCloseDoor, doorOpenLabel: doorOpenLabel)
+        ActionManager.shared.dismissViewController(controller: self)
     }
     
 }
