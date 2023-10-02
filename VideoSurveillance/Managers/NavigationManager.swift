@@ -44,50 +44,59 @@ extension NavigationManager {
     
     // MARK: Unwind
     
+    func updateDoorName(_ id: Int, textField: String?, realm: Realm, doorDataModel: inout Doors, tableView: UITableView, selectedIndexPath: IndexPath?) {
+        guard let textField = textField else { return }
+        
+        if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
+            try? realm.write {
+                doors.name = textField
+            }
+            
+            let doorName = realm.objects(DoorRealm.self).compactMap { $0.name }
+            
+            if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
+                doorDataModel.data[indexPath.section].name = doorName[indexPath.section]
+                DispatchQueue.main.async {
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                }
+            } else {
+                Logger.log("error")
+            }
+        }
+    }
+    
+    func updateLockIcon(_ id: Int, statusLock: Bool, realm: Realm, doorDataModel: inout Doors, tableView: UITableView, selectedIndexPath: IndexPath?) {
+        
+        if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
+            try? realm.write {
+                doors.lockIcon = statusLock
+            }
+            
+            let lockIconStatus = realm.objects(DoorRealm.self).compactMap { $0.lockIcon }
+            
+            if let indexPath = selectedIndexPath, lockIconStatus.indices.contains(indexPath.section) {
+                doorDataModel.data[indexPath.section].lockIcon = lockIconStatus[indexPath.section]
+                Logger.logLockStatus(lockIconStatus[indexPath.section])
+                
+                if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
+                    customCell.unLock.isHidden = doorDataModel.data[indexPath.section].lockIcon ?? true
+                    customCell.lockOn.isHidden = !customCell.unLock.isHidden
+                }
+            } else {
+                Logger.log("error")
+            }
+        }
+    }
+    
     func unwindSegueLogic(segue: UIStoryboardSegue, doorDataModel: inout Doors, tableView: UITableView, realm: Realm, selectedIndexPath: IndexPath?) {
         if let sourceViewController = segue.source as? EditViewController {
-            let id = sourceViewController.doorId
-            let textField = sourceViewController.editDoorNameTextField.text
-            
-            if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
-                try? realm.write {
-                    doors.name = textField ?? ""
-                }
-                
-                let doorName = realm.objects(DoorRealm.self).compactMap { $0.name }
-                
-                if let indexPath = selectedIndexPath, doorName.indices.contains(indexPath.section) {
-                    doorDataModel.data[indexPath.section].name = doorName[indexPath.section]
-                    DispatchQueue.main.async {
-                        tableView.reloadRows(at: [indexPath], with: .automatic)
-                    }
-                } else {
-                    Logger.log("error")
-                }
+            if let id = sourceViewController.doorId, let textField = sourceViewController.editDoorNameTextField.text {
+                updateDoorName(id, textField: textField, realm: realm, doorDataModel: &doorDataModel, tableView: tableView, selectedIndexPath: selectedIndexPath)
             }
         } else if let sourceViewController = segue.source as? IntercomeViewController {
-            let id = sourceViewController.idOfDoor
+            guard let id = sourceViewController.idOfDoor else { return }
             let statusLock = sourceViewController.openOrCloseDoor
-            
-            if let doors = realm.object(ofType: DoorRealm.self, forPrimaryKey: id) {
-                try? realm.write {
-                    doors.lockIcon = statusLock
-                }
-                
-                let lockIconStatus = realm.objects(DoorRealm.self).compactMap { $0.lockIcon }
-                
-                if let indexPath = selectedIndexPath, lockIconStatus.indices.contains(indexPath.section) {
-                    doorDataModel.data[indexPath.section].lockIcon = lockIconStatus[indexPath.section]
-                    Logger.logLockStatus(lockIconStatus[indexPath.section])
-                    
-                    if let customCell = tableView.cellForRow(at: indexPath) as? CustomTableViewCell {
-                        customCell.unLock.isHidden = doorDataModel.data[indexPath.section].lockIcon ?? true
-                        customCell.lockOn.isHidden = !customCell.unLock.isHidden
-                    }
-                } else {
-                    Logger.log("error")
-                }
-            }
+            updateLockIcon(id, statusLock: statusLock, realm: realm, doorDataModel: &doorDataModel, tableView: tableView, selectedIndexPath: selectedIndexPath)
         }
     }
     
