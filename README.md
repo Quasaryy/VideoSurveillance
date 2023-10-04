@@ -8,7 +8,8 @@
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Quasaryy_VideoSurveillance&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Quasaryy_VideoSurveillance)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Quasaryy_VideoSurveillance&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Quasaryy_VideoSurveillance)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Quasaryy_VideoSurveillance&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Quasaryy_VideoSurveillance)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d50f1b79454499fb8250f29f89ec565)](https://app.codacy.com/gh/Quasaryy/VideoSurveillance/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)[![CodeFactor](https://www.codefactor.io/repository/github/quasaryy/videosurveillance/badge)](https://www.codefactor.io/repository/github/quasaryy/videosurveillance)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3d50f1b79454499fb8250f29f89ec565)](https://app.codacy.com/gh/Quasaryy/VideoSurveillance/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![CodeFactor](https://www.codefactor.io/repository/github/quasaryy/videosurveillance/badge)](https://www.codefactor.io/repository/github/quasaryy/videosurveillance)
 [![DeepSource](https://app.deepsource.com/gh/Quasaryy/VideoSurveillance.svg/?label=active+issues&show_trend=false&token=ITH8Qf10L8qjmN61BlC4d2tT)](https://app.deepsource.com/gh/Quasaryy/VideoSurveillance/)
 
 # Tech Stack
