@@ -75,13 +75,30 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     // Adding trailing swipe
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-            
+                
         if segmentedControl.selectedSegmentIndex == 0 {
-            let addToFavoritesCam = SwipeManager.shared.addToFavoritesCams(at: indexPath, using: camDataModel, for: tableView)
+            let addToFavoritesCam = SwipeManager.shared.addToFavoritesCams(at: indexPath, using: camDataModel, for: tableView) { updatedModel in
+                if let model = updatedModel {
+                    self.camDataModel = model
+                    DispatchQueue.main.async {
+                        tableView.reloadRows(at: [indexPath], with: .right)
+                    }
+                }
+            }
+
             return UISwipeActionsConfiguration(actions: [addToFavoritesCam])
         } else {
             let editMode = SwipeManager.shared.editMode(at: indexPath, using: self)
-            let addToFavoritesDoor = SwipeManager.shared.addToFavoritesDoors(at: indexPath, using: doorDataModel, for: tableView)
+            
+            let addToFavoritesDoor = SwipeManager.shared.addToFavoritesDoors(at: indexPath, using: doorDataModel, for: tableView) { updatedModel in
+                if let model = updatedModel {
+                    self.doorDataModel = model
+                    DispatchQueue.main.async {
+                        tableView.reloadRows(at: [indexPath], with: .right)
+                    }
+                }
+            }
+
             return UISwipeActionsConfiguration(actions: [addToFavoritesDoor, editMode])
         }
     }
